@@ -38,6 +38,70 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Create Root NextMove package.json With npm Workspaces",
+      "description": "Create the root package.json for the NextMove monorepo declaring name nextmove, private true, workspaces over apps/*, packageManager pinned to npm@10, and engines.node 22.x.",
+      "acceptanceCriteria": [
+        "Root package.json exists with name nextmove, private true, and workspaces array containing apps/*",
+        "packageManager is pinned to npm@10 and engines.node is 22.x"
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "model": "deepseek",
+      "notes": "package.json may already exist and match; verify idempotently instead of rewriting it."
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Add Turbo 2.x devDependency to Root package.json",
+      "description": "Add turbo 2.x to the root package.json devDependencies so the monorepo pins a Turbo 2.x series version.",
+      "acceptanceCriteria": [
+        "Root package.json devDependencies pin turbo in the 2.x series (e.g. ^2.5.0)"
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "model": "deepseek",
+      "notes": "Entry may already be present; verify idempotently."
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Add Turbo Run Scripts to Root package.json",
+      "description": "Define the root package.json scripts build, test, and lint as turbo run build, turbo run test, and turbo run lint.",
+      "acceptanceCriteria": [
+        "Root package.json scripts define build, test, lint as turbo run build, turbo run test, turbo run lint"
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "model": "deepseek",
+      "notes": "Scripts may already be present; verify idempotently."
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Commit NextMove Scaffold Files to Git",
+      "description": "Commit the NextMove scaffold files to the existing git repository using non-interactive git commands that exit 0.",
+      "acceptanceCriteria": [
+        "git add and git commit for the scaffold files exit 0",
+        "git log shows a commit containing the root package.json scaffold"
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "model": "deepseek",
+      "notes": "Only create a new commit if scaffold files are actually uncommitted."
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Scaffold root package.json with base fields",
       "description": "Create root package.json with name nextmove, private true, workspaces apps/*, packageManager npm@10, and engines.node 22.x.",
       "acceptanceCriteria": [

@@ -39,6 +39,56 @@
     {
       "id": "STORY-setup-001aa",
       "title": "Verify Root package.json Workspace Declaration",
+      "description": "Verify the committed root package.json declares the NextMove monorepo: name nextmove, private true, workspaces apps/*, packageManager npm@10, engines node 22.x. Fix only if a field is missing or wrong.",
+      "acceptanceCriteria": [
+        "Node assertions on package.json confirm name nextmove, private true, workspaces contains apps/*, packageManager npm@10, engines.node 22.x, exiting 0",
+        "git ls-files shows package.json tracked and git status --porcelain package.json is empty"
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Manifest fields already committed in 6cc5d66; this is a verification gate. model inherited: deepseek",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify Turbo 2.x devDependency With turbo run Scripts",
+      "description": "Verify the committed root package.json pins turbo 2.x in devDependencies and defines build, test, lint scripts as turbo run commands. Fix only if missing or wrong.",
+      "acceptanceCriteria": [
+        "npm pkg get devDependencies.turbo exits 0 and outputs a 2.x range",
+        "npm pkg get scripts shows build, test, lint exactly as turbo run build, turbo run test, turbo run lint",
+        "package.json stays committed clean after verification"
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Already satisfied by commit 6cc5d66; verification gate only. model inherited: deepseek",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify Installed Turbo 2.x Version From Lockfile",
+      "description": "Verify turbo 2.x is actually installed from the committed lockfile and that package-lock.json is tracked with no pending changes.",
+      "acceptanceCriteria": [
+        "npm ls turbo --depth=0 exits 0 and reports a 2.x version matching the lockfile entry",
+        "package-lock.json is tracked and git status --porcelain package-lock.json is empty"
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Lockfile already pins turbo 2.10.11 and is committed; verification gate only. model inherited: deepseek",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Verify Root package.json Workspace Declaration",
       "description": "Verify the root package.json declares name nextmove, private true, workspaces apps/*, packageManager npm@10, engines.node 22.x. Already committed in 6cc5d66; verify only, edit only if a field differs.",
       "acceptanceCriteria": [
         "Root package.json contains name nextmove, private true, workspaces array with apps/*",

@@ -39,6 +39,90 @@
     {
       "id": "STORY-setup-001aa",
       "title": "Verify base root package.json with workspaces",
+      "description": "Verify the committed root package.json declares name nextmove, private true, workspaces containing apps/*, and parses as valid JSON in the existing git repository.",
+      "acceptanceCriteria": [
+        "Root package.json exists at the repository root and parses as valid JSON",
+        "package.json declares name nextmove, private true, and workspaces array containing apps/*",
+        "git show HEAD:package.json exits 0, confirming the file is tracked in the repository"
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Commit 6cc5d66 already created package.json with these fields; this sub-story verifies the committed state rather than re-creating the file.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify npm@10 packageManager pin in package.json",
+      "description": "Verify the root package.json declares packageManager pinned to npm@10 so the monorepo npm version stays fixed for the NextMove workspace.",
+      "acceptanceCriteria": [
+        "Root package.json declares packageManager equal to npm@10",
+        "package.json still parses as valid JSON after inspection"
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "npm@10 is the declared default; commit 6cc5d66 already sets this field, so verify the existing pin instead of duplicating work.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify Node 22.x engines field in package.json",
+      "description": "Verify the root package.json declares engines.node as 22.x so the monorepo pins its required Node major version for the NextMove workspace.",
+      "acceptanceCriteria": [
+        "Root package.json declares engines.node as 22.x",
+        "package.json still parses as valid JSON after inspection"
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Node 22.x is the declared default; commit 6cc5d66 already sets engines.node, so verify the existing value.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Verify turbo 2.x devDependency pin in package.json",
+      "description": "Verify the root package.json devDependencies pin turbo to a 2.x range as the monorepo task runner for the NextMove workspace.",
+      "acceptanceCriteria": [
+        "Root package.json devDependencies include turbo at a 2.x range such as ^2.5.0",
+        "package.json still parses as valid JSON after inspection"
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "notes": "Turborepo 2.x is the declared default; turbo ^2.5.0 already exists in commit 6cc5d66, so verify rather than re-add.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ae",
+      "title": "Verify committed turbo run scripts in package.json",
+      "description": "Verify scripts build, test, lint map to turbo run commands and that the final scaffold state is committed to the existing git repository.",
+      "acceptanceCriteria": [
+        "scripts.build is turbo run build, scripts.test is turbo run test, scripts.lint is turbo run lint",
+        "package.json is committed to the existing git repository with git status and git log commands exiting 0"
+      ],
+      "priority": 60.5,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ad"
+      ],
+      "notes": "Scripts were already committed at 6cc5d66; verifying them closes out the original story's commit acceptance criterion.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Verify base root package.json with workspaces",
       "description": "Verify the committed root package.json declares name nextmove, private true, workspaces containing apps/*, and that the file parses as valid JSON.",
       "acceptanceCriteria": [
         "Root package.json exists at the repository root and parses as valid JSON",

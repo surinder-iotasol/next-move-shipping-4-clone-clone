@@ -33,8 +33,57 @@
       "effort": "low",
       "passes": true,
       "dependsOn": [],
-      "notes": "auto-split into 4 sub-stories",
+      "notes": "auto-split into 3 sub-stories",
       "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Create Root NextMove package.json Workspace Manifest",
+      "description": "Create root package.json with name nextmove, private true, workspaces apps/*, packageManager npm@10, engines.node 22.x.",
+      "acceptanceCriteria": [
+        "Root package.json exists with name nextmove and private true.",
+        "workspaces contains apps/*, packageManager is npm@10, engines.node is 22.x."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "model": "deepseek",
+      "notes": "root package.json already exists and is committed; verify fields and exit if correct."
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Add Turbo DevDependency to Root package.json",
+      "description": "Ensure package.json devDependencies pin turbo 2.x and scripts build, test, lint invoke turbo run.",
+      "acceptanceCriteria": [
+        "devDependencies contains turbo ^2.x.",
+        "scripts define build, test, lint as turbo run build, turbo run test, turbo run lint."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "model": "deepseek",
+      "notes": "file already committed; verify turbo 2.x pin and turbo run scripts, no-op if correct."
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify Scaffold Commit in Git",
+      "description": "Confirm the scaffold files are committed to the existing git repository with clean status.",
+      "acceptanceCriteria": [
+        "git status shows package.json committed, no uncommitted scaffold changes.",
+        "git log and git diff commands exit 0."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "model": "deepseek",
+      "notes": "work already committed in prior commits; run git status/log to confirm, no-op if clean."
     },
     {
       "id": "STORY-setup-001aa",

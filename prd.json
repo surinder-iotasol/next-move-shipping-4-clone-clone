@@ -17,35 +17,119 @@
       "passes": true,
       "dependsOn": [],
       "notes": "auto-split into 4 sub-stories",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
       "id": "STORY-setup-001a",
-      "title": "Create the root package.json for the NextMove monorepo",
-      "description": "Create the root package.json for the NextMove monorepo with npm workspaces, a pinned npm@10 package manager, Node 22 engines, the turbo 2.x dev dependency, and turbo-run build, test, lint scripts.",
+      "title": "Create Root NextMove package.json With Workspaces",
+      "description": "Create the root package.json for the NextMove monorepo declaring npm workspaces over apps/*, pinned npm and Node 22.x versions, turbo 2.x devDependency, and turbo run scripts.",
       "acceptanceCriteria": [
-        "Root package.json exists with name nextmove, private true, and workspaces containing apps/*",
-        "packageManager is pinned to npm@10 and engines.node specifies 22.x",
-        "devDependencies pin turbo 2.x and scripts define build, test, lint as turbo run build, turbo run test, turbo run lint"
+        "Root package.json exists with name nextmove, private true, workspaces array containing apps/*, packageManager pinned to npm@10, and engines.node 22.x.",
+        "devDependencies pin turbo 2.x and scripts define build, test, and lint as turbo run build, turbo run test, turbo run lint.",
+        "The scaffold files are committed to the existing git repository with git commands exiting 0."
       ],
-      "priority": 10.1,
+      "priority": 60,
       "effort": "low",
-      "passes": false,
+      "passes": true,
       "dependsOn": [],
-      "notes": "git init and the initial commit (8776521) already exist; do not re-initialize the repo. npm on Node 22.x and Turborepo 2.x are the declared defaults.",
+      "notes": "auto-split into 5 sub-stories",
       "model": "deepseek"
     },
     {
-      "id": "STORY-setup-001b",
-      "title": "Create the turbo.json pipeline configuration",
-      "description": "Add the root turbo.json defining the Turborepo 2.x task pipeline with correct dependsOn ordering and dist output caching.",
+      "id": "STORY-setup-001aa",
+      "title": "Create root package.json with npm workspaces",
+      "description": "Create the root NextMove package.json declaring name nextmove, private true, and workspaces array containing apps/* in the existing git repository without re-initializing it.",
       "acceptanceCriteria": [
-        "Root turbo.json defines tasks build, test, and lint using the Turborepo 2.x schema",
-        "build task declares dependsOn ^build and caches outputs under dist/**",
-        "test and lint tasks are cacheable tasks without dist output caching"
+        "Root package.json exists with name nextmove, private true, and workspaces array containing apps/*",
+        "The file parses as valid JSON",
+        "package.json is committed to the existing git repository with git commands exiting 0"
       ],
-      "priority": 10.2,
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "model": "deepseek",
+      "notes": "git init and initial commit 8776521 already exist; package.json was already committed at 6cc5d66, so verify the committed state rather than re-creating it."
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Pin npm@10 packageManager in root package.json",
+      "description": "Declare packageManager npm@10 in the root package.json so the npm version is pinned for the monorepo.",
+      "acceptanceCriteria": [
+        "Root package.json declares packageManager npm@10",
+        "package.json still parses as valid JSON"
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "model": "deepseek",
+      "notes": "npm@10 is the declared default; commit 6cc5d66 already sets this field, so verify the existing pin instead of duplicating work."
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Set Node 22.x engines in root package.json",
+      "description": "Declare engines node 22.x in the root package.json so the monorepo pins its required Node major version.",
+      "acceptanceCriteria": [
+        "Root package.json declares engines.node as 22.x",
+        "package.json still parses as valid JSON"
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "model": "deepseek",
+      "notes": "Node 22.x is the declared default; commit 6cc5d66 already sets engines.node, so verify the existing value."
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Add turbo 2.x devDependency to root package.json",
+      "description": "Add turbo 2.x to devDependencies in the root package.json as the monorepo task runner.",
+      "acceptanceCriteria": [
+        "Root package.json devDependencies include turbo at a 2.x range",
+        "package.json still parses as valid JSON"
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "model": "deepseek",
+      "notes": "Turborepo 2.x is the declared default; turbo ^2.5.0 already exists in commit 6cc5d66, so verify rather than re-add."
+    },
+    {
+      "id": "STORY-setup-001ae",
+      "title": "Define turbo run scripts in root package.json",
+      "description": "Define scripts build, test, lint in the root package.json as turbo run build, turbo run test, turbo run lint.",
+      "acceptanceCriteria": [
+        "scripts.build is turbo run build, scripts.test is turbo run test, scripts.lint is turbo run lint",
+        "The final package.json is committed to the existing git repository with git commands exiting 0"
+      ],
+      "priority": 60.5,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ad"
+      ],
+      "model": "deepseek",
+      "notes": "Scripts were already committed at 6cc5d66; verifying them closes out the original story's commit acceptance criterion."
+    },
+    {
+      "id": "STORY-setup-001b",
+      "title": "Define Turborepo Pipeline in turbo.json",
+      "description": "Create turbo.json at the repository root defining the build, test, and lint tasks with correct dependsOn ordering and dist output caching.",
+      "acceptanceCriteria": [
+        "turbo.json exists at the root with tasks build, test, and lint defined.",
+        "build uses dependsOn ^build with dist/** outputs for caching and test and lint declare correct dependsOn.",
+        "npm install at the root exits 0 and npx turbo --version reports a 2.x version."
+      ],
+      "priority": 70,
       "effort": "low",
       "passes": false,
       "dependsOn": [
@@ -56,14 +140,14 @@
     },
     {
       "id": "STORY-setup-001c",
-      "title": "Scaffold the root README and .editorconfig",
-      "description": "Create the root README.md and .editorconfig files to complete the monorepo scaffold alongside the existing .gitignore.",
+      "title": "Add Root README for NextMove",
+      "description": "Create README.md at the repository root documenting the NextMove monorepo layout, npm and Node 22.x defaults, and the available turbo scripts.",
       "acceptanceCriteria": [
-        "Root README.md exists and documents the NextMove monorepo layout plus the turbo run build, test, lint scripts",
-        "Root .editorconfig exists with standard root settings for 2-space indent, UTF-8, LF line endings, and final newline",
-        ".gitignore, README.md, and .editorconfig all exist at the repository root and are committed to git"
+        "README.md exists at the repository root.",
+        "It documents the monorepo layout, the npm on Node 22.x defaults, and the turbo build, test, and lint scripts.",
+        "README.md is committed to git."
       ],
-      "priority": 10.3,
+      "priority": 80,
       "effort": "low",
       "passes": false,
       "dependsOn": [
@@ -74,14 +158,14 @@
     },
     {
       "id": "STORY-setup-001d",
-      "title": "Install the monorepo root dependencies",
-      "description": "Run npm install at the monorepo root to generate package-lock.json and node_modules, and confirm the installed turbo CLI reports 2.x.",
+      "title": "Add Root .editorconfig for NextMove",
+      "description": "Create .editorconfig at the repository root with baseline editor settings for the NextMove monorepo.",
       "acceptanceCriteria": [
-        "npm install at the root completes with exit code 0 and package-lock.json is committed",
-        "npx turbo --version reports a 2.x version matching the pinned devDependency",
-        "All scaffold files (package.json, turbo.json, README.md, .editorconfig, package-lock.json) are committed to git history"
+        ".editorconfig exists at the repository root with root=true declared.",
+        "It sets baseline charset, end-of-line, indent, and trim-trailing-whitespace rules.",
+        ".editorconfig is committed to git."
       ],
-      "priority": 10.4,
+      "priority": 90,
       "effort": "low",
       "passes": false,
       "dependsOn": [
@@ -99,7 +183,7 @@
         "devDependencies pin turbo 2.x and scripts define build, test, and lint as turbo run build, turbo run test, turbo run lint.",
         "The scaffold files are committed to the existing git repository with git commands exiting 0."
       ],
-      "priority": 20,
+      "priority": 60,
       "passes": false,
       "dependsOn": [],
       "notes": "",
@@ -115,7 +199,7 @@
         "build uses dependsOn ^build with dist/** outputs for caching and test and lint declare correct dependsOn.",
         "npm install at the root exits 0 and npx turbo --version reports a 2.x version."
       ],
-      "priority": 30,
+      "priority": 70,
       "passes": false,
       "dependsOn": [
         "STORY-setup-001a"
@@ -133,7 +217,7 @@
         "It documents the monorepo layout, the npm on Node 22.x defaults, and the turbo build, test, and lint scripts.",
         "README.md is committed to git."
       ],
-      "priority": 40,
+      "priority": 80,
       "passes": false,
       "dependsOn": [
         "STORY-setup-001b"
@@ -151,7 +235,7 @@
         "It sets baseline charset, end-of-line, indent, and trim-trailing-whitespace rules.",
         ".editorconfig is committed to git."
       ],
-      "priority": 50,
+      "priority": 90,
       "passes": false,
       "dependsOn": [
         "STORY-setup-001c"
@@ -173,7 +257,7 @@
         "Unknown routes return 404 and unhandled errors return 500, both with the {success: false, message, data: null} envelope and never a raw stack trace or Prisma error object in the response body.",
         "Integration test with supertest asserts GET /health status 200 and the exact envelope keys success, message, data."
       ],
-      "priority": 60,
+      "priority": 100,
       "passes": false,
       "dependsOn": [
         "STORY-setup-001"
@@ -193,13 +277,13 @@
         "npm run build in apps/api still completes exit 0 after the installs and the root package-lock.json reflects the new tree.",
         "Node runtime check: require('express'), require('@prisma/client'), require('jsonwebtoken'), require('bcrypt'), and require('@azure/storage-blob') all resolve from apps/api."
       ],
-      "priority": 70,
+      "priority": 110,
       "passes": false,
       "dependsOn": [
         "STORY-setup-002"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -214,7 +298,7 @@
         "npm run build in apps/web (ng build) completes exit 0 and emits dist/web/index.html plus compiled JS/CSS assets.",
         "npm run start in apps/web serves the default Angular page on the dev port and the page loads in a headless browser check without console errors."
       ],
-      "priority": 80,
+      "priority": 120,
       "passes": false,
       "dependsOn": [
         "STORY-setup-003"
@@ -234,13 +318,13 @@
         "A layout utility story-check: a test page using the bootstrap classes container, row, and col renders as a responsive grid (verified by the built CSS containing the .container and .row rules).",
         "npm run build in apps/web completes exit 0 and the emitted dist/web CSS bundle contains the Bootstrap grid classes."
       ],
-      "priority": 90,
+      "priority": 130,
       "passes": false,
       "dependsOn": [
         "STORY-setup-004"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -254,7 +338,7 @@
         "npx prisma migrate dev --name init completes exit 0, creating the nextmove database and prisma/migrations with the initial migration applied.",
         "npx prisma generate completes exit 0 and a node -e check confirms @prisma/client PrismaClient instantiates and can connect (prisma.$connect resolves)."
       ],
-      "priority": 100,
+      "priority": 140,
       "passes": false,
       "dependsOn": [
         "STORY-setup-003"
@@ -275,7 +359,7 @@
         "Unit tests cover the sign/verify round-trip, the wrong-type rejection, and the expired-token rejection for both token kinds.",
         "Integration tests with supertest cover all three /health-protected outcomes listed above."
       ],
-      "priority": 110,
+      "priority": 150,
       "passes": false,
       "dependsOn": [
         "STORY-setup-006"
@@ -294,13 +378,13 @@
         "The 404 and 500 error handlers from the API scaffold log the error with the request requestId before responding, so every failed request is traceable in the log.",
         "Unit test asserts the logger emits parseable JSON and that a simulated request through the middleware produces a log line containing requestId, method, path, statusCode, and durationMs."
       ],
-      "priority": 120,
+      "priority": 160,
       "passes": false,
       "dependsOn": [
         "STORY-setup-007"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -313,7 +397,7 @@
         "apps/web has a passing Jasmine/Karma spec and npm test in apps/web (ng test --watch=false --browsers=ChromeHeadless) completes exit 0.",
         "The root turbo.json test task runs the test scripts of both apps and npx turbo run test from the repository root completes exit 0."
       ],
-      "priority": 130,
+      "priority": 170,
       "passes": false,
       "dependsOn": [
         "STORY-setup-008"
@@ -332,13 +416,13 @@
         "The test job starts a postgres:16 service container and exports DATABASE_URL matching the local convention so Prisma-based tests can run.",
         "The workflow file parses as valid YAML (verified with a YAML parse check) and every script it invokes exists in a package.json of the repo."
       ],
-      "priority": 140,
+      "priority": 180,
       "passes": false,
       "dependsOn": [
         "STORY-setup-009"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -351,13 +435,13 @@
         "npm run lint from the root completes exit 0 with zero errors on the scaffolded code.",
         "npm run format:check from the root completes exit 0, confirming the whole tree is Prettier-clean."
       ],
-      "priority": 150,
+      "priority": 190,
       "passes": false,
       "dependsOn": [
         "STORY-setup-010"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -370,13 +454,13 @@
         ".gitignore excludes .env files but not .env.example.",
         "A Node script scripts/check-env-coverage.ts scans apps/api/src for process.env.<VAR> reads and fails (exit 1) if any read is missing from .env.example; the script runs and passes under the apps/api test suite."
       ],
-      "priority": 160,
+      "priority": 200,
       "passes": false,
       "dependsOn": [
         "STORY-setup-011"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -389,13 +473,13 @@
         "Unit tests cover successful construction with a well-formed test connection string and the ConfigError path for each of the two missing-variable cases.",
         "The container client exposes the block-blob upload surface (createBlockBlob / uploadBlockFromStream) that later multipart upload endpoints will call, verified by a unit test asserting the methods exist on the returned client."
       ],
-      "priority": 170,
+      "priority": 210,
       "passes": false,
       "dependsOn": [
         "STORY-setup-012"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -408,7 +492,7 @@
         "A spec that serves dist/web through a static server implementing the vercel.json rewrite rule asserts GET /login (a future client-side route) responds 200 with the index.html body instead of a 404.",
         "The production build summary shows zero template or AOT compilation errors and the emitted index.html references only hashed build assets under dist/web."
       ],
-      "priority": 180,
+      "priority": 220,
       "passes": false,
       "dependsOn": [
         "STORY-setup-013"
@@ -429,13 +513,13 @@
         "Running `npx prisma migrate dev --name add_tenant_user` from apps/api completes with exit code 0 and `npx prisma generate` succeeds.",
         "Integration test in apps/api (Jest, Prisma client) creates a Tenant and a User, then asserts that inserting a second User with the same email throws a Prisma P2002 unique-constraint error."
       ],
-      "priority": 190,
+      "priority": 230,
       "passes": false,
       "dependsOn": [
         "STORY-setup-006"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -451,7 +535,7 @@
         "Integration test (Jest, Prisma client) creates a Tenant, a User, a TenantUser with role SALES_PERSON, and a Customer with salesPersonId set, then asserts the composite unique constraint rejects a second TenantUser with the same (tenantId, userId) via a P2002 error.",
         "All DateTime fields on TenantUser, Customer, and CustomerDocument (createdAt/updatedAt) carry `@db.Timestamptz(3)`."
       ],
-      "priority": 200,
+      "priority": 240,
       "passes": false,
       "dependsOn": [
         "STORY-data-001"
@@ -471,13 +555,13 @@
         "Integration test (Jest, Prisma client) issues two RefreshTokens for the same User, revokes the first (isRevoked = true), and asserts a query for active tokens (isRevoked = false) returns exactly the second token - the persistence contract behind dual-token rotation.",
         "`npx prisma migrate dev --name add_refresh_token` completes with exit code 0 and `npx prisma generate` succeeds."
       ],
-      "priority": 210,
+      "priority": 250,
       "passes": false,
       "dependsOn": [
         "STORY-data-002"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -491,13 +575,13 @@
         "Integration test asserts a Job created without an explicit status persists with status OPEN and isConfidential false.",
         "`npx prisma migrate dev --name add_job` completes with exit code 0 and `npx prisma generate` succeeds."
       ],
-      "priority": 220,
+      "priority": 260,
       "passes": false,
       "dependsOn": [
         "STORY-data-003"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek"
     },
     {
@@ -511,7 +595,7 @@
         "Nesting is expressed only via the recursive `parentId` - JobFolder has no materialized-path, slug-path, or ancestors-array column.",
         "`npx prisma migrate dev --name add_job_folder_file` completes with exit code 0 and `npx prisma generate` succeeds."
       ],
-      "priority": 230,
+      "priority": 270,
       "passes": false,
       "dependsOn": [
         "STORY-data-004"
@@ -531,7 +615,7 @@
         "`npx prisma migrate status` reports all migrations applied with no pending changes against the PostgreSQL database.",
         "`npm test` in apps/api runs the data-model integration suite with exit code 0."
       ],
-      "priority": 240,
+      "priority": 280,
       "passes": false,
       "dependsOn": [
         "STORY-data-005"
@@ -552,7 +636,7 @@
         "Layout convention is pinned to Bootstrap 5 `.row`/`.col` structural grid only: no Bootstrap text-color utilities (`.text-*`) and no Tailwind classes, and no unstyled default browser inputs.",
         "A unit test asserts design-tokens.scss compiles (Sass) without errors and that the `.glass-surface` rule contains `backdrop-filter: blur(16px)`."
       ],
-      "priority": 250,
+      "priority": 290,
       "passes": false,
       "dependsOn": [
         "STORY-setup-005"
@@ -586,7 +670,7 @@
         "The component is standalone and directly importable by feature pages; it is not wrapped in a second NgModule, and it calls no backend endpoint.",
         "Unit test in auth-shell.component.spec.ts verifies the component renders, projects a child node into the slot, and applies the `.mesh-bg` and `.glass-surface` classes."
       ],
-      "priority": 260,
+      "priority": 300,
       "passes": false,
       "dependsOn": [
         "STORY-design-001"
@@ -621,7 +705,7 @@
         "Playwright asserts both buttons carry the exact labels \"Return to Login\" and \"Return to Dashboard\"; clicking each updates the router URL to /login and /dashboard respectively, proving the buttons are wired.",
         "UI matches the approved design for /404 (animated mesh gradient background, 404 message/illustration, Return to Dashboard button, Return to Login button)."
       ],
-      "priority": 270,
+      "priority": 310,
       "passes": false,
       "dependsOn": [
         "STORY-design-001"
@@ -655,13 +739,13 @@
         "A single themed entry point (e.g. an `AlertService` re-exporting `Swal.fire`) is provided so feature code calls one themed API instead of importing SweetAlert2 directly per component.",
         "A unit test asserts the override CSS is present: the `.swal2-popup` rule includes `backdrop-filter: blur(16px)`, references the brand color variables, and the override SCSS is imported into the global styles."
       ],
-      "priority": 280,
+      "priority": 320,
       "passes": false,
       "dependsOn": [
         "STORY-design-001"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek",
       "designRefs": [
         {
@@ -688,13 +772,13 @@
         "ng-select theme SCSS overrides are imported so selects match the NextMove brand, with no default browser dropdown styling and no Tailwind classes.",
         "A unit test renders a minimal `<ng-select>` in a host and asserts its dropdown container is appended to document.body (not inline), proving `appendTo=\"body\"` is enforced."
       ],
-      "priority": 290,
+      "priority": 330,
       "passes": false,
       "dependsOn": [
         "STORY-design-001"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek",
       "designRefs": [
         {
@@ -724,7 +808,7 @@
         "Prisma P2002 (unique constraint violation) and other Prisma errors are caught and mapped to a 400 (or safe 500) uniform envelope response — never a raw untyped 500 trace leak.",
         "Unit tests in apps/api/src/customers/customers.service.test.ts cover the active-only filter, tenant scoping, search matching, and the CUSTOMER-role ownership filter."
       ],
-      "priority": 300,
+      "priority": 340,
       "passes": false,
       "dependsOn": [
         "STORY-setup-007",
@@ -760,7 +844,7 @@
         "A request without a Bearer token or with an invalid token returns 401 with the uniform envelope.",
         "Unit tests cover tenant scoping, the CUSTOMER-role ownership filter, and all 404 paths in customers.service.test.ts."
       ],
-      "priority": 310,
+      "priority": 350,
       "passes": false,
       "dependsOn": [
         "STORY-customer-001"
@@ -795,7 +879,7 @@
         "A CUSTOMER-role token receives 403 on this endpoint (customer creation is limited to SUPER_ADMIN, OFFICE_ADMIN, and STAFF roles); a request without or with an invalid token receives 401.",
         "All errors use the uniform envelope; Prisma errors including P2002 are mapped to 400-safe responses with no raw 500 trace leak; unit tests cover valid creation, empty-field rejection, and cross-tenant salesPersonEmail rejection."
       ],
-      "priority": 320,
+      "priority": 360,
       "passes": false,
       "dependsOn": [
         "STORY-customer-002"
@@ -830,7 +914,7 @@
         "An unknown id, a customer with isDeleted = true, or a customer from another tenant returns 404 with the uniform envelope.",
         "A CUSTOMER-role token receives 403; no/invalid token receives 401; Prisma errors including P2002 map to 400-safe uniform envelope responses with no raw trace leak; unit tests cover partial update, empty-patch rejection, and cross-tenant 404."
       ],
-      "priority": 330,
+      "priority": 370,
       "passes": false,
       "dependsOn": [
         "STORY-customer-003"
@@ -865,7 +949,7 @@
         "A soft-deleted customer no longer appears in GET /api/customers results (asserted in the same integration test as criterion 1).",
         "Unit tests cover the job-count conflict check (jobs present blocks, jobs absent allows) and the soft-delete path; no Prisma error, including P2002, ever leaks a raw 500 trace."
       ],
-      "priority": 340,
+      "priority": 380,
       "passes": false,
       "dependsOn": [
         "STORY-customer-004"
@@ -902,7 +986,7 @@
         "While the request is in flight the table shows a loading state; on 4xx/5xx the response envelope's message is displayed; when nm_access_token is absent the table area shows 'Sign in to load customers' with a 'Sign In' link to /login.",
         "The sidebar, search/filter bar, paginated table, and Add Customer trigger match the approved design for /customers (the Delete row action is added by STORY-customer-008); Karma unit tests cover row rendering from the API payload and page/search param changes; the Playwright spec e2e/tests/customers.spec.ts seeds nm_access_token and asserts /customers renders the table and the name link navigates to /customers/:id."
       ],
-      "priority": 350,
+      "priority": 390,
       "passes": false,
       "dependsOn": [
         "STORY-customer-001",
@@ -939,7 +1023,7 @@
         "The 'Cancel' button closes the modal with no request fired and no data change.",
         "Karma unit tests cover required-field validation and the disabled state during an in-flight request; the Playwright spec e2e/tests/customers.spec.ts creates a customer via the modal and asserts the POST /api/customers request fires, the modal closes, and the new company appears in the refetched table."
       ],
-      "priority": 360,
+      "priority": 400,
       "passes": false,
       "dependsOn": [
         "STORY-customer-006",
@@ -976,7 +1060,7 @@
         "On any other 4xx/5xx the response envelope's message is displayed; no error is swallowed.",
         "Karma unit tests cover the confirm/cancel branches and the in-flight disabled state; the Playwright spec e2e/tests/customers.spec.ts deletes a jobless customer and asserts the DELETE /api/customers/:id request fires and the row disappears from the table."
       ],
-      "priority": 370,
+      "priority": 410,
       "passes": false,
       "dependsOn": [
         "STORY-customer-007",
@@ -1013,7 +1097,7 @@
         "For a 404 response (unknown, deleted, or other-tenant id) the page renders 'Customer not found' with a 'Back to Customers' link to /customers.",
         "The company info form, Sales Person field, View Jobs button, and Save button match the approved design for /customers/:id (document list and upload control deferred to the customer-documents section); Karma unit tests cover form prefill from the API payload and the 404 state; the Playwright spec e2e/tests/customer-detail.spec.ts loads a seeded customer at /customers/:id, edits the company name, clicks 'Save', and asserts the PUT fires and 'Customer updated' is shown."
       ],
-      "priority": 380,
+      "priority": 420,
       "passes": false,
       "dependsOn": [
         "STORY-customer-002",
@@ -1051,7 +1135,7 @@
         "Cross-page navigation works: the sidebar 'Customers' link lands on /customers, and a bogus /customers/<uuid> shows 'Customer not found' with a working 'Back to Customers' link — no dead links and no wrong-component routes.",
         "Running the spec without a seeded nm_access_token shows the 'Sign in to load customers' state with a 'Sign In' link to /login; the entire spec runs as one runnable Playwright file with zero skipped checks."
       ],
-      "priority": 390,
+      "priority": 430,
       "passes": false,
       "dependsOn": [
         "STORY-customer-005",
@@ -1089,7 +1173,7 @@
         "When the caller's role is STAFF, SALES_PERSON, PRICING_COURIER, PRICING_AIR_SEA, CS_COURIER, or CS_AIR_SEA, then data includes customerCount, activeJobCount, and activeJobs[] only — no staff metrics — the Staff payload arrays.",
         "All values are computed live via Prisma count/findMany (no hardcoded or mocked numbers); an integration test calls GET /api/dashboard/summary with a seeded tenant (3 active customers, 2 OPEN jobs, 4 non-CUSTOMER TenantUser rows) and asserts 200 with the exact {success: true, message, data} envelope and expected counts/arrays, and a forced DB failure returns the uniform envelope with a 5xx status and no raw Prisma error or stack text in the body (sec-006)."
       ],
-      "priority": 400,
+      "priority": 440,
       "passes": false,
       "dependsOn": [],
       "notes": "",
@@ -1115,11 +1199,11 @@
         "The /dashboard route is registered in the app's single shared router config rendering DashboardComponent and appears in the route guard's allowlist (prefix matching); no second router or duplicate /dashboard entry exists.",
         "Unit tests in dashboard.service.spec.ts cover the happy path (envelope -> DashboardSummary), the 401-replay path, and the malformed-envelope error case."
       ],
-      "priority": 410,
+      "priority": 450,
       "passes": false,
       "dependsOn": [],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek",
       "designRefs": [
         {
@@ -1144,7 +1228,7 @@
         "The sidebar navigation renders routerLinks \"Dashboard\" -> /dashboard (visually marked active when the current route is /dashboard), \"Staff\" -> /staff, and \"Profile\" -> /profile.",
         "The UI matches the approved design for /dashboard (sidebar navigation, stat cards, role-based widget grid, top header with user menu, tenant name indicator); a Playwright spec in e2e/tests/dashboard.spec.ts covers the Admin grid rendering live API values, the Staff-scoped grid, and the error banner on a failed GET /api/dashboard/summary, and component unit tests cover role switching and the loading state."
       ],
-      "priority": 420,
+      "priority": 460,
       "passes": false,
       "dependsOn": [
         "STORY-dashboard-001",
@@ -1174,7 +1258,7 @@
         "Auth persistence (sec-004): with a stored session, a full page reload of /dashboard leaves the user authenticated — tokens are rehydrated from storage on startup, there is no redirect back to /login, and no second login request fires (no double-login).",
         "Unauthenticated: visiting /dashboard with no stored session redirects to /login; after a successful login, /dashboard is reachable and renders the stat cards from GET /api/dashboard/summary."
       ],
-      "priority": 430,
+      "priority": 470,
       "passes": false,
       "dependsOn": [
         "STORY-dashboard-001",
@@ -1204,7 +1288,7 @@
         "A customerId belonging to another tenant is rejected with 400 { success: false, message } and no row is created (tenant isolation).",
         "Integration tests POST /api/jobs with a valid payload (assert 201 and the { success, message, data.job } shape) and with a duplicate jobCode (assert 400 envelope with no stack text in the body)."
       ],
-      "priority": 440,
+      "priority": 480,
       "passes": false,
       "dependsOn": [],
       "notes": "",
@@ -1235,11 +1319,11 @@
         "An unauthenticated request returns 401; a CUSTOMER user whose TenantUser.customerId does not match the job's customer returns 403, while staff/admin roles receive 200 (sec-004 role containment).",
         "Integration tests: GET /api/jobs/<seeded code> asserts 200 and the data.job shape including customer.companyName; GET with an unseeded code asserts 404; GET without a token asserts 401."
       ],
-      "priority": 450,
+      "priority": 490,
       "passes": false,
       "dependsOn": [],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek",
       "designRefs": [
         {
@@ -1268,7 +1352,7 @@
         "All timestamps (e.g. file uploadedAt) serialize as ISO-8601 UTC with millisecond precision from the @db.Timestamptz(3) columns.",
         "Unit tests build the nested tree from flat seeded rows (assert parent/child links and fileCount) and assert the builder terminates safely on malformed or cyclic parentId data instead of looping forever."
       ],
-      "priority": 460,
+      "priority": 500,
       "passes": false,
       "dependsOn": [],
       "notes": "",
@@ -1302,7 +1386,7 @@
         "Unauthenticated requests return 401; a CUSTOMER-role user returns 403 — uploads are restricted to staff/admin roles (sec-004).",
         "Integration tests upload a small file (assert 201 + data.file shape, JobFile row persisted with correct sizeBytes/mimeType) and assert the missing-file and oversized-file error envelopes."
       ],
-      "priority": 470,
+      "priority": 510,
       "passes": false,
       "dependsOn": [],
       "notes": "",
@@ -1333,7 +1417,7 @@
         "Unit test: the RBAC guard allows a STAFF-role session on /jobs-workspace/ABC123 and redirects an unauthenticated session to /login.",
         "All jobsApi requests attach Authorization: Bearer <accessToken> via the shared HTTP interceptor, and on a 401 the interceptor refreshes via the token storage and replays the request exactly once (sec-004 RxJS interceptor replay constraint) — unit-tested with a mocked 401-then-200 exchange."
       ],
-      "priority": 480,
+      "priority": 520,
       "passes": false,
       "dependsOn": [
         "STORY-jobs-001",
@@ -1372,7 +1456,7 @@
         "Unit tests (component + tree-state service): selecting a child folder binds its files to the table, and the inspector count computation matches fixture-tree expectations.",
         "Playwright spec e2e/tests/jobs-workspace-layout.spec.ts: with a seeded job (two-level folders + files), visit /jobs-workspace/<code>, expand a folder node, select it, and assert the table rows and inspector counts render."
       ],
-      "priority": 490,
+      "priority": 530,
       "passes": false,
       "dependsOn": [
         "STORY-jobs-005"
@@ -1408,7 +1492,7 @@
         "Unit tests (component with mocked jobsApi): upload success updates the table state, upload error sets the banner text to the backend message, and an empty folder name prevents the request call.",
         "Playwright spec e2e/tests/jobs-workspace-upload.spec.ts: choose a file via the file chooser, assert the network request POST /api/upload fires (multipart), the success toast appears, and the uploaded file row renders in the table."
       ],
-      "priority": 500,
+      "priority": 540,
       "passes": false,
       "dependsOn": [
         "STORY-jobs-004",
@@ -1443,7 +1527,7 @@
         "Submitting 'New Folder' with a name asserts POST /api/upload with createFolderName fires and the new folder node appears in the left tree.",
         "Error path: uploading with a session lacking the role (CUSTOMER) renders the backend error message in the banner — not a raw stack or a silent failure (sec-006)."
       ],
-      "priority": 510,
+      "priority": 550,
       "passes": false,
       "dependsOn": [
         "STORY-jobs-004",
@@ -1478,7 +1562,7 @@
         "Primary user flow in one uninterrupted script: login → dashboard renders → open /jobs → click a job row → /jobs-workspace/<code> renders and the folder tree loads from GET /api/folders/:jobId with the seeded file visible in the table.",
         "No console errors on any route visit: the spec asserts zero error-level console entries across the entire walk."
       ],
-      "priority": 520,
+      "priority": 560,
       "passes": false,
       "dependsOn": [
         "STORY-verify-dashboard-001",
@@ -1516,7 +1600,7 @@
         "All responses use the uniform { success, message, data } envelope (sec-006); every Prisma/validation failure maps to a 400/401 envelope with no raw stack traces.",
         "Integration tests in apps/api/src/auth/auth.controller.test.ts cover login success/failure, refresh rotation + reuse detection, logout revocation, and me (Jest + supertest against a seeded user)."
       ],
-      "priority": 530,
+      "priority": 570,
       "passes": false,
       "dependsOn": [
         "STORY-setup-007",
@@ -1564,7 +1648,7 @@
         "Every protected route appears in the guard allowlist; a route registered in the router but missing from the allowlist fails a completeness unit test in router-guard.spec.ts.",
         "Karma unit tests cover unauthenticated redirect to /login, role-deny redirect, prefix-match allowance, and the route-inventory completeness check."
       ],
-      "priority": 540,
+      "priority": 580,
       "passes": false,
       "dependsOn": [
         "STORY-setup-004",
@@ -1613,7 +1697,7 @@
         "The login request flows through the shared HttpClient but is exempt from the 401 refresh-replay interceptor to avoid a redirect loop on failed credentials.",
         "Karma unit tests cover validation, success storage + redirect, and server-error rendering."
       ],
-      "priority": 550,
+      "priority": 590,
       "passes": false,
       "dependsOn": [
         "STORY-auth-001",
@@ -1662,7 +1746,7 @@
         "A CUSTOMER-role token receives 403 (the staff directory is admin/staff-only); a missing or invalid token receives 401 with the uniform envelope.",
         "All responses use the uniform envelope (sec-006); Prisma errors including P2002 map to 400-safe responses with no raw stack trace; unit tests cover tenant scoping, role filtering, search, and pagination in staff.service.test.ts."
       ],
-      "priority": 560,
+      "priority": 600,
       "passes": false,
       "dependsOn": [
         "STORY-auth-001",
@@ -1692,7 +1776,7 @@
         "The page matches the approved design for /staff (table, role badges, filter bar, shared layout shell with sidebar).",
         "Karma unit tests cover row rendering from a mocked listStaff response, the role-filter param, and the error banner state."
       ],
-      "priority": 570,
+      "priority": 610,
       "passes": false,
       "dependsOn": [
         "STORY-staff-001",
@@ -1722,7 +1806,7 @@
         "The layout matches the approved design for /profile (identity card inside the shared layout shell).",
         "Karma unit tests cover rendering from the me() payload and the 401 → redirect path."
       ],
-      "priority": 580,
+      "priority": 620,
       "passes": false,
       "dependsOn": [
         "STORY-auth-001",
@@ -1730,7 +1814,7 @@
         "STORY-dashboard-003"
       ],
       "notes": "",
-      "effort": "low",
+      "effort": "small",
       "model": "deepseek",
       "designRefs": [
         {
@@ -1771,7 +1855,7 @@
         "A CUSTOMER-role token only sees jobs whose customer matches their TenantUser.customerId (ownership isolation); staff/admin roles see the full tenant set.",
         "All responses use the uniform envelope (sec-006) with no raw Prisma stack traces; unit tests cover tenant scoping, filters, search, pagination, and CUSTOMER ownership in jobs.service.test.ts."
       ],
-      "priority": 590,
+      "priority": 630,
       "passes": false,
       "dependsOn": [
         "STORY-auth-001",
@@ -1809,7 +1893,7 @@
         "Loading, empty, and error states render per the accessibility baseline; the table matches the approved design for /jobs.",
         "Karma unit tests cover row rendering, customerId pre-fill from query params, and create-modal validation + success refetch."
       ],
-      "priority": 600,
+      "priority": 640,
       "passes": false,
       "dependsOn": [
         "STORY-jobs-list-001",
@@ -1849,7 +1933,7 @@
         "A seeded RefreshToken row exists for at least one user so refresh-rotation integration tests can run without an API login.",
         "Every table in the schema (Tenant, User, TenantUser, Customer, CustomerDocument, Job, JobFolder, JobFile, RefreshToken) receives at least one row; a post-seed verification query asserts a non-zero count per table."
       ],
-      "priority": 610,
+      "priority": 650,
       "passes": false,
       "dependsOn": [
         "STORY-data-006",
@@ -1871,7 +1955,7 @@
         "Visiting a protected route with no session redirects to /login with the return URL preserved; after login the original route renders.",
         "The spec runs as one runnable Playwright file with zero skipped checks and asserts zero error-level console entries across the whole walk."
       ],
-      "priority": 620,
+      "priority": 660,
       "passes": false,
       "dependsOn": [
         "STORY-auth-002",
@@ -1918,7 +2002,7 @@
         "A CUSTOMER-role session visiting /staff is redirected by the guard or renders the 403 envelope message — no staff data leaks.",
         "The spec asserts zero error-level console entries."
       ],
-      "priority": 630,
+      "priority": 670,
       "passes": false,
       "dependsOn": [
         "STORY-staff-002",
@@ -1947,7 +2031,7 @@
         "Clicking a job row navigates to /jobs-workspace/<jobCode> and the workspace 3-panel layout renders.",
         "The spec asserts zero error-level console entries."
       ],
-      "priority": 640,
+      "priority": 680,
       "passes": false,
       "dependsOn": [
         "STORY-jobs-list-002",

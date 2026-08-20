@@ -1,0 +1,13 @@
+{
+  "name": "nextmove",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "packageManager": "npm@10",
+  "engines": { "node": "22.x" },
+  "devDependencies": { "turbo": "^2.5.0" },
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint"
+  }
+}

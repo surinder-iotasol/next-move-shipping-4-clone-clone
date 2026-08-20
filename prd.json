@@ -14,10 +14,80 @@
         "npm install at the root completes with exit code 0 and npx turbo --version reports a 2.x version."
       ],
       "priority": 10,
+      "passes": true,
+      "dependsOn": [],
+      "notes": "auto-split into 4 sub-stories",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001a",
+      "title": "Create the root package.json for the NextMove monorepo",
+      "description": "Create the root package.json for the NextMove monorepo with npm workspaces, a pinned npm@10 package manager, Node 22 engines, the turbo 2.x dev dependency, and turbo-run build, test, lint scripts.",
+      "acceptanceCriteria": [
+        "Root package.json exists with name nextmove, private true, and workspaces containing apps/*",
+        "packageManager is pinned to npm@10 and engines.node specifies 22.x",
+        "devDependencies pin turbo 2.x and scripts define build, test, lint as turbo run build, turbo run test, turbo run lint"
+      ],
+      "priority": 10.1,
+      "effort": "low",
       "passes": false,
       "dependsOn": [],
-      "notes": "",
+      "notes": "git init and the initial commit (8776521) already exist; do not re-initialize the repo. npm on Node 22.x and Turborepo 2.x are the declared defaults.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001b",
+      "title": "Create the turbo.json pipeline configuration",
+      "description": "Add the root turbo.json defining the Turborepo 2.x task pipeline with correct dependsOn ordering and dist output caching.",
+      "acceptanceCriteria": [
+        "Root turbo.json defines tasks build, test, and lint using the Turborepo 2.x schema",
+        "build task declares dependsOn ^build and caches outputs under dist/**",
+        "test and lint tasks are cacheable tasks without dist output caching"
+      ],
+      "priority": 10.2,
       "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001a"
+      ],
+      "notes": "Use the Turborepo 2.x turbo.json schema with a top-level tasks key. No app workspaces exist yet, so the pipeline is defined with no member packages.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001c",
+      "title": "Scaffold the root README and .editorconfig",
+      "description": "Create the root README.md and .editorconfig files to complete the monorepo scaffold alongside the existing .gitignore.",
+      "acceptanceCriteria": [
+        "Root README.md exists and documents the NextMove monorepo layout plus the turbo run build, test, lint scripts",
+        "Root .editorconfig exists with standard root settings for 2-space indent, UTF-8, LF line endings, and final newline",
+        ".gitignore, README.md, and .editorconfig all exist at the repository root and are committed to git"
+      ],
+      "priority": 10.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001b"
+      ],
+      "notes": ".gitignore is already committed at the root (78 bytes); only README.md and .editorconfig are new in this story.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001d",
+      "title": "Install the monorepo root dependencies",
+      "description": "Run npm install at the monorepo root to generate package-lock.json and node_modules, and confirm the installed turbo CLI reports 2.x.",
+      "acceptanceCriteria": [
+        "npm install at the root completes with exit code 0 and package-lock.json is committed",
+        "npx turbo --version reports a 2.x version matching the pinned devDependency",
+        "All scaffold files (package.json, turbo.json, README.md, .editorconfig, package-lock.json) are committed to git history"
+      ],
+      "priority": 10.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001c"
+      ],
+      "notes": "No source code changes; node_modules is gitignored. Verifies the full original story: git history present, configs in place, toolchain working.",
       "model": "deepseek"
     },
     {

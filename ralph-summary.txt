@@ -1,0 +1,133 @@
+Ralph Summary - Thu Aug 20 11:13:33 PM AEST 2026
+Mode: fresh-context | Context: 200K (default) | Effort: medium | Cost: ~$1.50
+Iterations: 15 | Stories: 2/128 | Runtime: 2h 33m
+Models: Opus=15 Sonnet=0 Haiku=0 | Quota pauses: 0 (0m)
+Auto-splits: 6 | Smart saves: 0 | Idle kills: 0
+[done] STORY-setup-001: Initialize Turborepo Monorepo Workspace And Git
+[done] STORY-setup-001a: Create Root NextMove package.json With Workspaces
+[todo] STORY-setup-001aa: Create Root NextMove package.json
+[todo] STORY-setup-001ab: Pin turbo 2.x devDependency
+[todo] STORY-setup-001ac: Add turbo run scripts
+[todo] STORY-setup-001ad: Commit scaffold files to git
+[todo] STORY-setup-001aa: Create Root NextMove package.json With npm Workspaces
+[todo] STORY-setup-001ab: Add Turbo 2.x devDependency to Root package.json
+[todo] STORY-setup-001ac: Add Turbo Run Scripts to Root package.json
+[todo] STORY-setup-001ad: Commit NextMove Scaffold Files to Git
+[todo] STORY-setup-001aa: Scaffold root package.json with base fields
+[todo] STORY-setup-001ab: Add turbo devDependency to root package.json
+[todo] STORY-setup-001ac: Add turbo run scripts to root package.json
+[todo] STORY-setup-001ad: Commit scaffolded root package.json
+[todo] STORY-setup-001aa: Verify committed package.json identity fields
+[todo] STORY-setup-001ab: Verify committed toolchain version pins
+[todo] STORY-setup-001ac: Verify committed turbo dependency wiring
+[todo] STORY-setup-001ad: Verify scaffold files are committed
+[todo] STORY-setup-001aa: Verify root package.json identity
+[todo] STORY-setup-001ab: Verify workspaces declaration
+[todo] STORY-setup-001ac: Verify toolchain pins
+[todo] STORY-setup-001ad: Verify turbo devDependency wiring
+[todo] STORY-setup-001ae: Verify scaffold committed to git
+[todo] STORY-setup-001aa: Verify root package.json identity fields
+[todo] STORY-setup-001ab: Pin npm and Node 22 in root package.json
+[todo] STORY-setup-001ac: Add turbo 2.x devDependency with turbo run scripts
+[todo] STORY-setup-001ad: Commit scaffold files to git repository
+[todo] STORY-setup-001aa: Verify Committed Root package.json Manifest
+[todo] STORY-setup-001ab: Verify turbo 2.x DevDependency In package.json
+[todo] STORY-setup-001ac: Verify turbo run Scripts In package.json
+[todo] STORY-setup-001ad: Restore Story Completion Marker File
+[todo] STORY-setup-001ae: Verify Committed Scaffold State In Git
+[todo] STORY-setup-001aa: Verify root package.json workspace manifest
+[todo] STORY-setup-001ab: Verify turbo 2.x devDependency pin
+[todo] STORY-setup-001ac: Verify turbo run build, test, lint scripts
+[todo] STORY-setup-001ad: Wire npm test to node test runner
+[todo] STORY-setup-001ae: Verify committed root manifest state
+[todo] STORY-setup-001aa: Verify Root package.json Workspaces Fields
+[todo] STORY-setup-001ab: Verify packageManager npm@10 Pin
+[todo] STORY-setup-001ac: Verify Node 22.x Engines Field
+[todo] STORY-setup-001ad: Verify turbo 2.x DevDependency With Scripts
+[todo] STORY-setup-001ae: Restore Story Completion Marker
+[todo] STORY-setup-001aa: Verify base root package.json with workspaces
+[todo] STORY-setup-001ab: Verify npm@10 packageManager pin in package.json
+[todo] STORY-setup-001ac: Verify Node 22.x engines field in package.json
+[todo] STORY-setup-001ad: Verify turbo 2.x devDependency pin in package.json
+[todo] STORY-setup-001ae: Verify committed turbo run scripts in package.json
+[todo] STORY-setup-001aa: Verify base root package.json with workspaces
+[todo] STORY-setup-001ab: Verify npm@10 packageManager pin in package.json
+[todo] STORY-setup-001ac: Verify Node 22.x engines field in package.json
+[todo] STORY-setup-001ad: Verify turbo 2.x devDependency in package.json
+[todo] STORY-setup-001ae: Verify turbo run scripts in package.json
+[todo] STORY-setup-001aa: Verify base root package.json with workspaces
+[todo] STORY-setup-001ab: Verify npm@10 packageManager pin in package.json
+[todo] STORY-setup-001ac: Verify Node 22.x engines field in package.json
+[todo] STORY-setup-001ad: Verify turbo 2.x devDependency in package.json
+[todo] STORY-setup-001ae: Verify turbo run scripts in package.json
+[todo] STORY-setup-001aa: Create root package.json with npm workspaces
+[todo] STORY-setup-001ab: Pin npm@10 packageManager in root package.json
+[todo] STORY-setup-001ac: Set Node 22.x engines in root package.json
+[todo] STORY-setup-001ad: Add turbo 2.x devDependency to root package.json
+[todo] STORY-setup-001ae: Define turbo run scripts in root package.json
+[todo] STORY-setup-001b: Define Turborepo Pipeline in turbo.json
+[todo] STORY-setup-001c: Add Root README for NextMove
+[todo] STORY-setup-001d: Add Root .editorconfig for NextMove
+[todo] STORY-setup-001a: Create Root NextMove package.json With Workspaces
+[todo] STORY-setup-001b: Define Turborepo Pipeline in turbo.json
+[todo] STORY-setup-001c: Add Root README for NextMove
+[todo] STORY-setup-001d: Add Root .editorconfig for NextMove
+[todo] STORY-setup-002: Scaffold Express TypeScript API Under Apps Api
+[todo] STORY-setup-003: Install Backend Runtime ORM And Auth Dependencies
+[todo] STORY-setup-004: Scaffold Angular 17 Standalone Web App
+[todo] STORY-setup-005: Install Frontend Dependencies And Wire Bootstrap Grid
+[todo] STORY-setup-006: Initialize Prisma Schema And PostgreSQL Migration Baseline
+[todo] STORY-setup-007: Wire JWT Dual Token Bootstrap And Guard Middleware
+[todo] STORY-setup-008: Wire Structured JSON Request Logging With Baseline Fields
+[todo] STORY-setup-009: Wire Jest And Karma Test Frameworks Across Apps
+[todo] STORY-setup-010: Create CI Pipeline With Lint Build Test Stages
+[todo] STORY-setup-011: Add ESLint And Prettier Linting And Formatting
+[todo] STORY-setup-012: Create Environment Template Listing Every Required Variable
+[todo] STORY-setup-013: Wire Azure Blob Storage Client Factory
+[todo] STORY-setup-014: Configure Vercel SPA Fallback And Production Build
+[todo] STORY-data-001: Define Tenant And User Models In Prisma Schema
+[todo] STORY-data-002: Define TenantUser Role Enum And Customer Models
+[todo] STORY-data-003: Define RefreshToken Model For Dual Token Rotation
+[todo] STORY-data-004: Define Job Model With Sequence And Status
+[todo] STORY-data-005: Define Recursive JobFolder And JobFile Models
+[todo] STORY-data-006: Run Full Schema Migration And Constraint Verification
+[todo] STORY-design-001: Establish Global SCSS Design Tokens And Frosted-Glass Theme
+[todo] STORY-design-002: Build Reusable Auth-Shell Component With Animated Mesh Gradient
+[todo] STORY-design-003: Build 404 Not-Found Page With Mesh-Gradient Background
+[todo] STORY-design-004: Configure SweetAlert2 Themed Overrides For Thematic Blending
+[todo] STORY-design-005: Configure Global Ng-Select AppendTo-Body Dropdown Behavior
+[todo] STORY-customer-001: Implement Customer List Endpoint With Server-Side Pagination
+[todo] STORY-customer-002: Implement Customer Detail Fetch Endpoint With Ownership Isolation
+[todo] STORY-customer-003: Implement Customer Create Endpoint With Sales Person Resolution
+[todo] STORY-customer-004: Implement Customer Update Endpoint With Partial Patch Validation
+[todo] STORY-customer-005: Implement Customer Delete Endpoint With Job Conflict Check
+[todo] STORY-customer-006: Build Customer Directory Page With Paginated Table And Search
+[todo] STORY-customer-007: Build Add Customer Modal With Create Endpoint Binding
+[todo] STORY-customer-008: Build Delete Customer Row Action With Conflict Display
+[todo] STORY-customer-009: Build Customer Detail Page With Edit And Save Flow
+[todo] STORY-verify-customers-001: Verify Customer Directory And Detail End-To-End Wiring
+[todo] STORY-dashboard-001: Implement tenant-scoped GET /api/dashboard/summary aggregation endpoint
+[todo] STORY-dashboard-002: Create dashboard API service and register /dashboard route
+[todo] STORY-dashboard-003: Build role-based dashboard page with stat cards and widget grid
+[todo] STORY-verify-dashboard-001: Verify dashboard page wiring to summary endpoint end to end
+[todo] STORY-jobs-001: Implement POST /api/jobs with manual unique alphanumeric job code
+[todo] STORY-jobs-002: Implement GET /api/jobs/:jobCode job header detail endpoint
+[todo] STORY-jobs-003: Implement GET /api/folders/:jobId recursive folder tree endpoint
+[todo] STORY-jobs-004: Implement POST /api/upload Azure Blob multipart file upload
+[todo] STORY-jobs-005: Create jobsApi service module and register workspace route
+[todo] STORY-jobs-006: Build 3-panel JobsWorkspaceComponent tree table and inspector
+[todo] STORY-jobs-007: Wire Upload File and New Folder controls to API
+[todo] STORY-verify-jobs-001: Verify jobs workspace pages are wired to endpoints
+[todo] STORY-smoke-001: Smoke test full app routes and session contract
+[todo] STORY-auth-001: Implement auth login refresh logout and me endpoints
+[todo] STORY-router-001: Create shared router config with RBAC guard and living route inventory
+[todo] STORY-auth-002: Build login page with token storage and session redirect
+[todo] STORY-staff-001: Implement GET api staff directory endpoint
+[todo] STORY-staff-002: Build staff directory page with role filter
+[todo] STORY-profile-001: Build profile page from authenticated user payload
+[todo] STORY-jobs-list-001: Implement GET api jobs list endpoint
+[todo] STORY-jobs-list-002: Build jobs list page with add job modal and customer prefill
+[todo] STORY-seed-001: Create baseline seed script covering every schema table
+[todo] STORY-verify-auth-001: Verify login flow and session contract end to end
+[todo] STORY-verify-staff-001: Verify staff page wiring to directory endpoint
+[todo] STORY-verify-jobslist-001: Verify jobs list page wiring end to end

@@ -33,8 +33,56 @@
       "effort": "low",
       "passes": true,
       "dependsOn": [],
-      "notes": "auto-split into 4 sub-stories",
+      "notes": "auto-split into 3 sub-stories",
       "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Create Base Root package.json With Workspaces",
+      "description": "Create the root package.json for the NextMove monorepo with name nextmove, private true, workspaces containing apps/*, packageManager pinned to npm@10, and engines.node set to 22.x.",
+      "acceptanceCriteria": [
+        "Root package.json exists with name nextmove and private true.",
+        "workspaces array contains apps/*, packageManager is npm@10, and engines.node is 22.x."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "model": "deepseek",
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Add Turbo DevDependency With Run Scripts",
+      "description": "Add turbo 2.x as a devDependency to the root package.json and define build, test, and lint scripts that invoke turbo run.",
+      "acceptanceCriteria": [
+        "devDependencies pin turbo 2.x.",
+        "scripts define build, test, and lint as turbo run build, turbo run test, turbo run lint."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "model": "deepseek",
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Commit Root package.json Scaffold To Git",
+      "description": "Commit the scaffolded root package.json to the existing git repository so the scaffold is persisted with git commands exiting 0.",
+      "acceptanceCriteria": [
+        "Scaffold files are committed to the existing git repository with git commands exiting 0."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "model": "deepseek",
+      "notes": ""
     },
     {
       "id": "STORY-setup-001aa",

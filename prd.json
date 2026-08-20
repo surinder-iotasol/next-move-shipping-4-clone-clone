@@ -33,7 +33,75 @@
       "effort": "low",
       "passes": true,
       "dependsOn": [],
-      "notes": "auto-split into 5 sub-stories",
+      "notes": "auto-split into 4 sub-stories",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Verify committed package.json identity fields",
+      "description": "Confirm the committed root package.json declares name nextmove, private true, workspaces containing apps/* by reading the file and asserting each field. No new files; the manifest was committed in 6cc5d66.",
+      "acceptanceCriteria": [
+        "Root package.json parses as valid JSON with the name field equal to nextmove.",
+        "The private field is true.",
+        "The workspaces array contains the entry apps/*."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Work already committed in 6cc5d66; verify the committed state rather than re-creating the file.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify committed toolchain version pins",
+      "description": "Confirm the committed root package.json pins packageManager to npm@10 and engines.node to 22.x by asserting both fields. No new files; the pins were committed in 6cc5d66.",
+      "acceptanceCriteria": [
+        "The packageManager field equals npm@10.",
+        "The engines.node field equals 22.x."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Both pins already committed in 6cc5d66; verify-only, no file changes expected.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify committed turbo dependency wiring",
+      "description": "Confirm the committed root package.json pins turbo as a 2.x devDependency and that build, test, lint scripts run turbo run commands. No new files; committed in 6cc5d66.",
+      "acceptanceCriteria": [
+        "devDependencies.turbo is a 2.x range such as ^2.5.0.",
+        "scripts.build, scripts.test, scripts.lint equal turbo run build, turbo run test, turbo run lint."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Turbo pin and scripts already committed in 6cc5d66; verify-only, no file changes expected.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Verify scaffold files are committed",
+      "description": "Confirm the scaffold files package.json, package-lock.json, test/package.test.cjs are tracked with no uncommitted changes, the test suite passes, and git commands exit 0. No new files.",
+      "acceptanceCriteria": [
+        "git ls-files lists package.json, package-lock.json, test/package.test.cjs and git status exits 0.",
+        "node --test test/package.test.cjs exits 0 with all tests passing.",
+        "git show HEAD:package.json exits 0, confirming the manifest is in HEAD."
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "notes": "Scaffold committed in 6cc5d66; the .story-updates marker is harness bookkeeping outside this story.",
       "model": "deepseek"
     },
     {

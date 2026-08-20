@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jobs List - B2B Enterprise Portal</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#302f39",
+                    "surface-container": "#f0ecf8",
+                    "surface-bright": "#fcf8ff",
+                    "primary-container": "#473bce",
+                    "outline-variant": "#c7c4d7",
+                    "secondary": "#5a5894",
+                    "on-background": "#1b1b23",
+                    "surface-container-high": "#eae6f3",
+                    "tertiary": "#6d2700",
+                    "secondary-fixed": "#e3dfff",
+                    "on-secondary-fixed": "#16124c",
+                    "surface": "#fcf8ff",
+                    "tertiary-container": "#933700",
+                    "surface-dim": "#dcd8e4",
+                    "secondary-container": "#bebafe",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "on-tertiary-fixed": "#360f00",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#42407a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#c4c0ff",
+                    "primary": "#2e19b7",
+                    "surface-container-highest": "#e4e1ed",
+                    "surface-container-low": "#f6f2fe",
+                    "outline": "#777586",
+                    "surface-variant": "#e4e1ed",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffdbcd",
+                    "primary-fixed": "#e3dfff",
+                    "on-secondary-container": "#4b4883",
+                    "surface-tint": "#5147d8",
+                    "on-tertiary-container": "#ffb99c",
+                    "on-primary-fixed-variant": "#3829c0",
+                    "inverse-primary": "#c4c0ff",
+                    "inverse-on-surface": "#f3effb",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#110068",
+                    "on-error": "#ffffff",
+                    "background": "#fcf8ff",
+                    "secondary-fixed-dim": "#c4c0ff",
+                    "on-primary-container": "#c7c3ff",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#464554",
+                    "on-surface": "#1b1b23",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#ffb596"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Inter"
+                    ],
+                    "display": [
+                            "Inter"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {}
+        },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex">
+<!-- SideNavBar (from JSON) -->
+<nav class="bg-surface-container-low h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col h-full py-4 z-40 hidden md:flex">
+<!-- Header -->
+<div class="px-6 mb-8 flex items-center gap-3">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container-highest shadow-sm" data-alt="A clean, modern corporate logo icon for Acme Corp, featuring sharp geometric shapes in deep blue and crisp white colors, suitable for a professional B2B software environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_HRhxscj-lNLCxlPpYNnt3JporrxhSAvEa-1nP1Xpr1s_q7Fym1-zcjoPfH2gauH3KxgHsKrg3IBzpgiWZ3j-P6UIjY91yKMYm8AqdpXlvNu9t6Aj1cT1fEVVSST9gC2ttQCw9FfG-kgwsRKtLozXgUeVDeKG0ByIkgzxhlJEgJTyFTXtHai_X1Uq1lu3GAtJ-YsoK-g4QzUNwoH-1d9uyXy9DQifTxWE68uvwNGt6Kz5EA7Eq-VnTcka0I2Ga0BQYDqYk-nycjw"/>
+<div>
+<h2 class="text-lg font-bold text-on-surface font-headline leading-tight">Acme Corp</h2>
+<p class="text-sm text-on-surface-variant font-label">Standard Tenant</p>
+</div>
+</div>
+<!-- Main Tabs -->
+<div class="flex-1 flex flex-col gap-1 px-2 font-label text-sm">
+<!-- Dashboard (Inactive) -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 transition-all hover:bg-surface-container-highest scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                Dashboard
+            </a>
+<!-- Customer Directory (Inactive) -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 transition-all hover:bg-surface-container-highest scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+                Customer Directory
+            </a>
+<!-- Jobs List (Active) -->
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container font-bold rounded-lg px-4 py-3 mx-2 my-1 hover:bg-surface-container-highest transition-all scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">work</span>
+                Jobs List
+            </a>
+<!-- Staff Directory (Inactive) -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 transition-all hover:bg-surface-container-highest scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+                Staff Directory
+            </a>
+</div>
+<!-- Footer Tabs -->
+<div class="flex flex-col gap-1 px-2 mt-auto font-label text-sm border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 transition-all hover:bg-surface-container-highest scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 transition-all hover:bg-surface-container-highest scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">contact_support</span>
+                Support
+            </a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 md:ml-64 bg-surface">
+<!-- TopNavBar (from JSON) -->
+<header class="bg-surface-container-lowest shadow-sm border-b border-outline-variant flex justify-between items-center w-full px-6 py-3 sticky top-0 z-50 font-body text-sm">
+<!-- Left: Brand / Title -->
+<div class="flex items-center gap-4">
+<h1 class="text-xl font-black text-primary font-headline tracking-tight">B2B Enterprise Portal</h1>
+</div>
+<!-- Middle: Search (on_left context relative to actions) -->
+<div class="hidden lg:flex items-center flex-1 max-w-md ml-8 mr-4">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors text-[20px]">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-full py-2 pl-10 pr-4 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Right: Actions & Profile -->
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:bg-surface-container p-2 rounded-full transition-colors cursor-pointer active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container p-2 rounded-full transition-colors cursor-pointer active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-px h-6 bg-outline-variant mx-1"></div>
+<button class="bg-primary text-on-primary font-semibold px-4 py-2 rounded-full hover:bg-primary/90 transition-colors shadow-sm text-sm cursor-pointer active:opacity-80 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Create New
+                </button>
+<button class="ml-2 hover:opacity-80 transition-opacity rounded-full ring-2 ring-transparent hover:ring-primary-container focus:ring-primary outline-none">
+<img class="w-9 h-9 rounded-full object-cover" data-alt="A professional headshot of a corporate user, brightly lit against a neutral grey background, exuding approachability and competence suitable for a high-end enterprise software portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzUjU-j8VZpe7nRUHjHG9hsrMJQtV4gMcLAznGtnTKHrHywwFtJy3sbof_pDnS2A7W4izmDx4wNHXImZCqOqZl9iTFPNZ7HnxMr_TnzYnUIKZ7Nnu-YqJO_eu9JGIkgiJXbj06lv9Jbi5s_Laua6BFQlOuIVgos35S0GkXtTDRlXEVCEYoApLMRRIgMQnrTSKvkdfuvK5WCmJZZO9DIyE0usaIbJqFY1yVU_V7UjeGllNuDVe4VspjtCdB-JcZIVPfoYSNsTAToFg"/>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 overflow-y-auto p-6 lg:p-10">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-headline font-extrabold text-on-surface tracking-tight mb-1">Jobs List</h1>
+<p class="text-on-surface-variant text-sm max-w-xl">Manage ongoing projects, track statuses, and access individual job workspaces.</p>
+</div>
+<button class="bg-primary text-on-primary hover:bg-primary/90 font-semibold px-5 py-2.5 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">add_task</span>
+                    Add New Job
+                </button>
+</div>
+<!-- Filters Bar (Glassmorphic style container) -->
+<div class="bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant rounded-xl p-4 mb-8 flex flex-col md:flex-row gap-4 items-center justify-between shadow-sm">
+<div class="flex flex-wrap gap-4 w-full md:w-auto">
+<!-- Customer Filter -->
+<div class="flex-1 min-w-[200px]">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5 ml-1">Customer</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low border border-outline-variant text-on-surface text-sm rounded-lg py-2.5 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow cursor-pointer">
+<option value="">All Customers</option>
+<option value="1">Global Tech Industries</option>
+<option value="2">Apex Logistics</option>
+<option value="3">Stark Solutions</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Status Filter -->
+<div class="flex-1 min-w-[200px]">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5 ml-1">Status</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-low border border-outline-variant text-on-surface text-sm rounded-lg py-2.5 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-shadow cursor-pointer">
+<option value="">Any Status</option>
+<option value="active">Active</option>
+<option value="planning">In Planning</option>
+<option value="review">Under Review</option>
+<option value="completed">Completed</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- View Toggles -->
+<div class="flex bg-surface-container-high rounded-lg p-1">
+<button class="p-2 rounded bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+</button>
+<button class="p-2 rounded text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">view_list</span>
+</button>
+</div>
+</div>
+<!-- Jobs Grid (Bento/Card Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group bg-surface-container-lowest border border-outline-variant hover:border-primary-container rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col relative">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-mono font-semibold text-primary bg-primary-container/20 px-2.5 py-1 rounded-md tracking-tight">JOB-8291</span>
+<span class="inline-flex items-center gap-1 text-xs font-semibold text-[#110068] bg-[#e3dfff] px-2.5 py-1 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2e19b7]"></span> Active
+                            </span>
+</div>
+<h3 class="text-lg font-bold text-on-surface font-headline leading-snug mb-1 group-hover:text-primary transition-colors">Enterprise Cloud Migration</h3>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Moving legacy on-premise infrastructure to AWS for the core manufacturing division.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant/50 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-xs font-bold text-on-surface-variant border-2 border-surface-container-lowest z-10">GT</div>
+<span class="text-sm font-medium text-on-surface truncate max-w-[120px]">Global Tech Ind.</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transform group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container-lowest border border-outline-variant hover:border-primary-container rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col relative">
+<div class="absolute top-0 left-0 w-full h-1 bg-secondary"></div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-mono font-semibold text-secondary bg-secondary-container/20 px-2.5 py-1 rounded-md tracking-tight">JOB-8304</span>
+<span class="inline-flex items-center gap-1 text-xs font-semibold text-[#360f00] bg-[#ffdbcd] px-2.5 py-1 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-[#933700]"></span> Planning
+                            </span>
+</div>
+<h3 class="text-lg font-bold text-on-surface font-headline leading-snug mb-1 group-hover:text-primary transition-colors">Supply Chain Optimization Portal</h3>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Custom dashboard development for tracking international freight and warehouse inventory.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant/50 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-xs font-bold text-on-surface-variant border-2 border-surface-container-lowest z-10">AL</div>
+<span class="text-sm font-medium text-on-surface truncate max-w-[120px]">Apex Logistics</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transform group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container-lowest border border-outline-variant hover:border-primary-container rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col relative">
+<div class="absolute top-0 left-0 w-full h-1 bg-outline"></div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-mono font-semibold text-outline bg-surface-variant px-2.5 py-1 rounded-md tracking-tight">JOB-8142</span>
+<span class="inline-flex items-center gap-1 text-xs font-semibold text-on-surface-variant bg-surface-container-high px-2.5 py-1 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Review
+                            </span>
+</div>
+<h3 class="text-lg font-bold text-on-surface font-headline leading-snug mb-1 group-hover:text-primary transition-colors">Security Audit Q3</h3>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Comprehensive penetration testing and compliance review for financial systems.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant/50 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-xs font-bold text-on-surface-variant border-2 border-surface-container-lowest z-10">SS</div>
+<span class="text-sm font-medium text-on-surface truncate max-w-[120px]">Stark Solutions</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transform group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-surface-container-lowest border border-outline-variant hover:border-primary-container rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col relative opacity-75">
+<div class="absolute top-0 left-0 w-full h-1 bg-surface-container-highest"></div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<span class="text-xs font-mono font-semibold text-outline bg-surface-variant px-2.5 py-1 rounded-md tracking-tight">JOB-7990</span>
+<span class="inline-flex items-center gap-1 text-xs font-semibold text-[#1b1b23] bg-[#dcd8e4] px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[12px]">check</span> Completed
+                            </span>
+</div>
+<h3 class="text-lg font-bold text-on-surface font-headline leading-snug mb-1 group-hover:text-primary transition-colors">Phase 1 Onboarding</h3>
+<p class="text-sm text-on-surface-variant mb-6 line-clamp-2">Initial setup, user provisioning, and basic training completed successfully.</p>
+<div class="mt-auto pt-4 border-t border-outline-variant/50 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-xs font-bold text-on-surface-variant border-2 border-surface-container-lowest z-10">GT</div>
+<span class="text-sm font-medium text-on-surface truncate max-w-[120px]">Global Tech Ind.</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transform group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More (mock) -->
+<div class="mt-10 flex justify-center">
+<button class="px-6 py-2.5 border border-outline-variant text-on-surface-variant font-medium rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors shadow-sm">
+                    Load More Jobs
+                </button>
+</div>
+</main>
+</div>
+</body></html>

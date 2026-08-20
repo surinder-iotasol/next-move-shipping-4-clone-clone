@@ -1,0 +1,1905 @@
+{
+  "branchName": "iotahub/phase-1",
+  "userStories": [
+    {
+      "id": "STORY-setup-001",
+      "title": "Initialize Turborepo Monorepo Workspace And Git",
+      "description": "Initialize the NextMove monorepo at the repository root: git init, npm workspaces over apps/*, and the Turborepo pipeline config. The package manager is npm on Node 22.x and the Turborepo major is 2.x; these defaults are declared here so no later story improvises them.",
+      "acceptanceCriteria": [
+        "git init at the repository root completes with exit code 0 and the scaffold files are committed as the initial commit.",
+        "Root package.json exists with name nextmove, private true, workspaces array containing apps/*, a packageManager field pinned to npm@10, and engines.node 22.x.",
+        "Root package.json devDependencies pin turbo 2.x and scripts define build, test, and lint as turbo run build / turbo run test / turbo run lint.",
+        "turbo.json defines tasks build, test, and lint with correct dependsOn and output caching for dist artifacts.",
+        ".gitignore, README.md, and .editorconfig all exist at the repository root.",
+        "npm install at the root completes with exit code 0 and npx turbo --version reports a 2.x version."
+      ],
+      "priority": 10,
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001a",
+      "title": "Create Root NextMove package.json With Workspaces",
+      "description": "Create the root package.json for the NextMove monorepo declaring npm workspaces over apps/*, pinned npm and Node 22.x versions, turbo 2.x devDependency, and turbo run scripts.",
+      "acceptanceCriteria": [
+        "Root package.json exists with name nextmove, private true, workspaces array containing apps/*, packageManager pinned to npm@10, and engines.node 22.x.",
+        "devDependencies pin turbo 2.x and scripts define build, test, and lint as turbo run build, turbo run test, turbo run lint.",
+        "The scaffold files are committed to the existing git repository with git commands exiting 0."
+      ],
+      "priority": 20,
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001b",
+      "title": "Define Turborepo Pipeline in turbo.json",
+      "description": "Create turbo.json at the repository root defining the build, test, and lint tasks with correct dependsOn ordering and dist output caching.",
+      "acceptanceCriteria": [
+        "turbo.json exists at the root with tasks build, test, and lint defined.",
+        "build uses dependsOn ^build with dist/** outputs for caching and test and lint declare correct dependsOn.",
+        "npm install at the root exits 0 and npx turbo --version reports a 2.x version."
+      ],
+      "priority": 30,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001a"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001c",
+      "title": "Add Root README for NextMove",
+      "description": "Create README.md at the repository root documenting the NextMove monorepo layout, npm and Node 22.x defaults, and the available turbo scripts.",
+      "acceptanceCriteria": [
+        "README.md exists at the repository root.",
+        "It documents the monorepo layout, the npm on Node 22.x defaults, and the turbo build, test, and lint scripts.",
+        "README.md is committed to git."
+      ],
+      "priority": 40,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001b"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001d",
+      "title": "Add Root .editorconfig for NextMove",
+      "description": "Create .editorconfig at the repository root with baseline editor settings for the NextMove monorepo.",
+      "acceptanceCriteria": [
+        ".editorconfig exists at the repository root with root=true declared.",
+        "It sets baseline charset, end-of-line, indent, and trim-trailing-whitespace rules.",
+        ".editorconfig is committed to git."
+      ],
+      "priority": 50,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001c"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-002",
+      "title": "Scaffold Express TypeScript API Under Apps Api",
+      "description": "Create the canonical Express + TypeScript backend skeleton at apps/api with a response helper that enforces the strict {success, message, data} envelope and a GET /health endpoint. No business logic; this is the foundation every later API story builds on.",
+      "acceptanceCriteria": [
+        "apps/api/package.json exists with name @nextmove/api and scripts dev (tsx watch src/server.ts), build (tsc), start (node dist/server.js), and test (jest).",
+        "apps/api/tsconfig.json enables strict true with outDir dist and compiles src/ to dist/ with npm run build exit code 0.",
+        "src/server.ts binds the app to the PORT env var (default 3001) and src/app.ts assembles the express app and middleware.",
+        "src/lib/respond.ts exports helpers ok(res, message, data) and fail(res, status, message) that emit ONLY the shape {success: boolean, message: string, data: unknown|null} for every controller response.",
+        "GET /health returns 200 with body {success: true, message: 'OK', data: {status: 'ok'}}.",
+        "Unknown routes return 404 and unhandled errors return 500, both with the {success: false, message, data: null} envelope and never a raw stack trace or Prisma error object in the response body.",
+        "Integration test with supertest asserts GET /health status 200 and the exact envelope keys success, message, data."
+      ],
+      "priority": 60,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-003",
+      "title": "Install Backend Runtime ORM And Auth Dependencies",
+      "description": "Install every package the Technology Stack section declares for apps/api in three logical groups: runtime middleware, data/auth/azure, and dev tooling. All later feature stories assume these packages are present and versioned in package.json.",
+      "acceptanceCriteria": [
+        "npm install express cors dotenv pino multer jsonwebtoken bcrypt @azure/storage-blob in apps/api completes exit 0 and all eight appear in package.json dependencies.",
+        "npm install prisma @prisma/client completes exit 0 and both appear in package.json.",
+        "npm install -D typescript tsx jest ts-jest supertest @types/express @types/node @types/jest @types/jsonwebtoken @types/multer @types/bcrypt completes exit 0 and all appear in devDependencies.",
+        "npm run build in apps/api still completes exit 0 after the installs and the root package-lock.json reflects the new tree.",
+        "Node runtime check: require('express'), require('@prisma/client'), require('jsonwebtoken'), require('bcrypt'), and require('@azure/storage-blob') all resolve from apps/api."
+      ],
+      "priority": 70,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-002"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-004",
+      "title": "Scaffold Angular 17 Standalone Web App",
+      "description": "Use the Angular CLI to scaffold the frontend at apps/web: Angular 17.3.0, TypeScript 5.4+, standalone components only, SCSS styles, no SSR. The generated tree is relocated into the monorepo apps/web workspace so turbo and npm workspaces own it.",
+      "acceptanceCriteria": [
+        "npx @angular/cli@17.3.0 new web --standalone --style=scss --ssr=false --skip-git completes with exit code 0 and the generated tree is moved into apps/web so the root workspaces pattern apps/* covers it.",
+        "apps/web/package.json declares @angular/core at ^17.3.0 and typescript at ~5.4.",
+        "No file named app.module.ts exists anywhere under apps/web and AppComponent is declared standalone; every component in the app is standalone.",
+        "angular.json defines a production build configuration with outputPath dist/web.",
+        "npm run build in apps/web (ng build) completes exit 0 and emits dist/web/index.html plus compiled JS/CSS assets.",
+        "npm run start in apps/web serves the default Angular page on the dev port and the page loads in a headless browser check without console errors."
+      ],
+      "priority": 80,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-003"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-005",
+      "title": "Install Frontend Dependencies And Wire Bootstrap Grid",
+      "description": "Install Bootstrap and wire the structural SCSS foundation in apps/web so the Bootstrap grid is the only styling system. Tailwind is explicitly absent per the stack section.",
+      "acceptanceCriteria": [
+        "npm install bootstrap @popperjs/core in apps/web completes exit 0 and both appear in package.json dependencies.",
+        "apps/web/src/styles.scss imports the Bootstrap stylesheet and compiles cleanly with ng build exit 0.",
+        "No tailwindcss dependency exists in any package.json in the repo and no @tailwind directive appears in any .scss file under apps/web.",
+        "A layout utility story-check: a test page using the bootstrap classes container, row, and col renders as a responsive grid (verified by the built CSS containing the .container and .row rules).",
+        "npm run build in apps/web completes exit 0 and the emitted dist/web CSS bundle contains the Bootstrap grid classes."
+      ],
+      "priority": 90,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-004"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-006",
+      "title": "Initialize Prisma Schema And PostgreSQL Migration Baseline",
+      "description": "Initialize Prisma in apps/api against PostgreSQL and create the migration baseline that every later data-model story extends. The @db.Timestamptz(3) rule for all timestamp columns is pinned as an enforced convention now, not left to inference.",
+      "acceptanceCriteria": [
+        "npx prisma init --datasource-provider postgresql in apps/api completes exit 0; prisma/schema.prisma declares generator client (prisma-client-js) and datasource db with url env(\"DATABASE_URL\").",
+        "prisma/schema.prisma documents the convention that every DateTime field must be annotated @db.Timestamptz(3), and a Node script scripts/check-timestamptz.ts parses the schema and fails (exit 1) if any DateTime field lacks a @db. native annotation.",
+        "apps/api/.env defines DATABASE_URL pointing at a local PostgreSQL 16 instance (started via docker) on database nextmove, and .env.example lists DATABASE_URL.",
+        "npx prisma migrate dev --name init completes exit 0, creating the nextmove database and prisma/migrations with the initial migration applied.",
+        "npx prisma generate completes exit 0 and a node -e check confirms @prisma/client PrismaClient instantiates and can connect (prisma.$connect resolves)."
+      ],
+      "priority": 100,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-003"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-007",
+      "title": "Wire JWT Dual Token Bootstrap And Guard Middleware",
+      "description": "Wire the minimum authentication foundation in apps/api: a token service issuing the access + refresh dual-token pair and a requireAuth middleware protecting routes. This establishes the dual-rotation strategy before any auth endpoint or page exists.",
+      "acceptanceCriteria": [
+        "src/auth/token.service.ts exposes signAccessToken(userId, role, tenantId) and signRefreshToken(userId); access tokens are signed with JWT_ACCESS_SECRET (default TTL 15m) and refresh tokens with JWT_REFRESH_SECRET (default TTL 30d), each carrying a type claim of access or refresh and a unique jti.",
+        "The two token streams are enforced distinct: requireAuth accepts ONLY type=access tokens, and a refresh token presented to a protected route is rejected with 401.",
+        "requireAuth middleware attaches req.user (userId, role, tenantId) on success and rejects missing, malformed, expired, or wrong-type tokens with 401 body {success: false, message: 'Unauthorized', data: null}.",
+        "A protected test route GET /health-protected guarded by requireAuth returns 401 with no token, 200 with the success envelope for a valid access token, and 401 for a valid refresh token.",
+        "Unit tests cover the sign/verify round-trip, the wrong-type rejection, and the expired-token rejection for both token kinds.",
+        "Integration tests with supertest cover all three /health-protected outcomes listed above."
+      ],
+      "priority": 110,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-006"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-008",
+      "title": "Wire Structured JSON Request Logging With Baseline Fields",
+      "description": "Configure pino as the app-wide structured logger in apps/api with a JSON sink and per-request baseline fields. Every request and every error response is logged with a correlated requestId.",
+      "acceptanceCriteria": [
+        "src/lib/logger.ts exports a pino instance whose level is read from the LOG_LEVEL env var (default info) and whose output is JSON lines.",
+        "A request-logging middleware attached in src/app.ts emits one JSON line per request containing requestId, method, path, statusCode, and durationMs.",
+        "The 404 and 500 error handlers from the API scaffold log the error with the request requestId before responding, so every failed request is traceable in the log.",
+        "Unit test asserts the logger emits parseable JSON and that a simulated request through the middleware produces a log line containing requestId, method, path, statusCode, and durationMs."
+      ],
+      "priority": 120,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-007"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-009",
+      "title": "Wire Jest And Karma Test Frameworks Across Apps",
+      "description": "Configure the test harness for both apps: Jest with ts-jest and supertest for apps/api, and the Angular Karma/Jasmine harness for apps/web running headless. The root turbo test task runs both.",
+      "acceptanceCriteria": [
+        "apps/api has jest.config.js targeting src/**/*.test.ts with ts-jest and npm test in apps/api completes exit 0.",
+        "A supertest spec asserts GET /health returns 200 with envelope keys success and message, proving the API harness runs against the real app.",
+        "apps/web has a passing Jasmine/Karma spec and npm test in apps/web (ng test --watch=false --browsers=ChromeHeadless) completes exit 0.",
+        "The root turbo.json test task runs the test scripts of both apps and npx turbo run test from the repository root completes exit 0."
+      ],
+      "priority": 130,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-008"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-010",
+      "title": "Create CI Pipeline With Lint Build Test Stages",
+      "description": "Create the initial CI pipeline at .github/workflows/ci.yml with install, lint, build, and test stages for the whole monorepo, including a PostgreSQL service for the API tests.",
+      "acceptanceCriteria": [
+        ".github/workflows/ci.yml triggers on push to main and on pull_request, uses Node 22, and runs npm ci at the repository root with npm cache enabled.",
+        "The workflow has distinct steps for lint (npx turbo run lint), build (npx turbo run build), and test (npx turbo run test), each failing the run on non-zero exit.",
+        "The test job starts a postgres:16 service container and exports DATABASE_URL matching the local convention so Prisma-based tests can run.",
+        "The workflow file parses as valid YAML (verified with a YAML parse check) and every script it invokes exists in a package.json of the repo."
+      ],
+      "priority": 140,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-009"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-011",
+      "title": "Add ESLint And Prettier Linting And Formatting",
+      "description": "Add ESLint with typescript-eslint and Prettier at the monorepo root covering both apps, and wire the lint and format scripts. The scaffolded codebase must be lint-clean and format-clean at the end of this story.",
+      "acceptanceCriteria": [
+        "An ESLint flat config (eslint.config.js) at the root applies the typescript-eslint recommended ruleset to all TS files under apps/*, and a .prettierrc exists pinning singleQuote true and printWidth 100.",
+        "Root package.json defines lint (turbo run lint), format (prettier --write .), and format:check (prettier --check .), and each app has a lint script running eslint over its src.",
+        "npm run lint from the root completes exit 0 with zero errors on the scaffolded code.",
+        "npm run format:check from the root completes exit 0, confirming the whole tree is Prettier-clean."
+      ],
+      "priority": 150,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-010"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-012",
+      "title": "Create Environment Template Listing Every Required Variable",
+      "description": "Create the canonical .env.example at the repository root listing every environment variable any later story reads, with safe placeholder secrets and a consumer note per variable. A check script guarantees no env var is read in code without being documented.",
+      "acceptanceCriteria": [
+        ".env.example lists NODE_ENV, PORT, DATABASE_URL, JWT_ACCESS_SECRET, JWT_REFRESH_SECRET, ACCESS_TOKEN_TTL, REFRESH_TOKEN_TTL, LOG_LEVEL, AZURE_STORAGE_CONNECTION_STRING, AZURE_BLOB_CONTAINER, and API_BASE_URL.",
+        "Each variable line carries a comment naming the module that reads it, and every secret value is an explicit change-me- placeholder with no real credentials committed.",
+        ".gitignore excludes .env files but not .env.example.",
+        "A Node script scripts/check-env-coverage.ts scans apps/api/src for process.env.<VAR> reads and fails (exit 1) if any read is missing from .env.example; the script runs and passes under the apps/api test suite."
+      ],
+      "priority": 160,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-011"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-013",
+      "title": "Wire Azure Blob Storage Client Factory",
+      "description": "Wire the @azure/storage-blob client factory in apps/api for the multipart file streams the platform will upload. No upload endpoints yet; later file stories consume this factory.",
+      "acceptanceCriteria": [
+        "src/lib/blob.client.ts exports getBlobContainerClient() which constructs a BlobServiceClient from AZURE_STORAGE_CONNECTION_STRING and returns a container client for AZURE_BLOB_CONTAINER.",
+        "Missing or malformed configuration makes the factory throw a typed ConfigError whose message names the exact missing variable, so misconfiguration fails fast at first use.",
+        "Unit tests cover successful construction with a well-formed test connection string and the ConfigError path for each of the two missing-variable cases.",
+        "The container client exposes the block-blob upload surface (createBlockBlob / uploadBlockFromStream) that later multipart upload endpoints will call, verified by a unit test asserting the methods exist on the returned client."
+      ],
+      "priority": 170,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-012"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-014",
+      "title": "Configure Vercel SPA Fallback And Production Build",
+      "description": "Add the Vercel rewrite pipeline for apps/web that hooks every unmatched route to /index.html for absolute SPA fallback, and pin the strictly compiled production build Vercel serves.",
+      "acceptanceCriteria": [
+        "apps/web/vercel.json declares the SPA fallback rewrite with source /(.*) and destination /index.html, plus the Angular production build command and the dist/web output directory.",
+        "npm run build in apps/web invokes ng build --configuration production and completes exit 0, emitting the strictly compiled static output under dist/web.",
+        "A spec that serves dist/web through a static server implementing the vercel.json rewrite rule asserts GET /login (a future client-side route) responds 200 with the index.html body instead of a 404.",
+        "The production build summary shows zero template or AOT compilation errors and the emitted index.html references only hashed build assets under dist/web."
+      ],
+      "priority": 180,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-013"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-data-001",
+      "title": "Define Tenant And User Models In Prisma Schema",
+      "description": "Extend the Prisma schema in apps/api (initialized by STORY-setup-006) with the Tenant and User models exactly as the data-model dictionary specifies. Tenant holds a UUID primary key and a name; User holds a UUID primary key, unique email, unique username, passwordHash, firstName, lastName, isActive (default true), isDeleted (default false), requirePasswordChange, and Timestamptz(3) audit timestamps. No cross-model relations are declared in this story; relations arrive with the later model stories.",
+      "acceptanceCriteria": [
+        "The Prisma schema defines model Tenant with `id String @id @default(uuid())`, `name String`, `createdAt DateTime @default(now()) @db.Timestamptz(3)`, and `updatedAt DateTime @updatedAt @db.Timestamptz(3)`.",
+        "The Prisma schema defines model User with `id String @id @default(uuid())`, `email String @unique`, `username String @unique`, `passwordHash String`, `firstName String`, `lastName String`, `isActive Boolean @default(true)`, `isDeleted Boolean @default(false)`, `requirePasswordChange Boolean`, plus Timestamptz(3) createdAt/updatedAt.",
+        "No relations to other models are declared on Tenant or User in this story, keeping the contract exactly as specified.",
+        "Running `npx prisma validate` from apps/api completes with exit code 0.",
+        "Running `npx prisma migrate dev --name add_tenant_user` from apps/api completes with exit code 0 and `npx prisma generate` succeeds.",
+        "Integration test in apps/api (Jest, Prisma client) creates a Tenant and a User, then asserts that inserting a second User with the same email throws a Prisma P2002 unique-constraint error."
+      ],
+      "priority": 190,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-006"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-data-002",
+      "title": "Define TenantUser Role Enum And Customer Models",
+      "description": "Add the Role enum and the tenancy plus CRM domain to the Prisma schema: TenantUser (tenant membership with role and the composite unique [tenantId, userId]), Customer (tenant-scoped CRM record with optional sales person), and CustomerDocument (customer file references). The optional mutual TenantUser.customerId to Customer and Customer.salesPersonId to TenantUser relation is circular by design and is resolved inside this single schema change and migration.",
+      "acceptanceCriteria": [
+        "The Prisma schema declares `enum Role` with exactly nine values: SUPER_ADMIN, OFFICE_ADMIN, STAFF, SALES_PERSON, PRICING_COURIER, PRICING_AIR_SEA, CS_COURIER, CS_AIR_SEA, CUSTOMER.",
+        "model TenantUser has `id String @id @default(uuid())`, `tenantId` FK to Tenant, `userId` FK to User, `role Role`, nullable `customerId String?` FK to Customer, and `@@unique([tenantId, userId])`.",
+        "model Customer has `id String @id @default(uuid())`, `tenantId` FK to Tenant, `companyName String`, `contactPerson String`, nullable `email String?`, nullable `salesPersonId String?` FK to TenantUser, and `isDeleted Boolean`.",
+        "model CustomerDocument has `id String @id @default(uuid())`, `customerId` FK to Customer, `type String`, and `fileUrl String`.",
+        "The circular optional TenantUser.customerId / Customer.salesPersonId relation compiles: `npx prisma validate` exits 0 and `npx prisma migrate dev --name add_membership_and_customers` completes with exit code 0 followed by `npx prisma generate`.",
+        "Integration test (Jest, Prisma client) creates a Tenant, a User, a TenantUser with role SALES_PERSON, and a Customer with salesPersonId set, then asserts the composite unique constraint rejects a second TenantUser with the same (tenantId, userId) via a P2002 error.",
+        "All DateTime fields on TenantUser, Customer, and CustomerDocument (createdAt/updatedAt) carry `@db.Timestamptz(3)`."
+      ],
+      "priority": 200,
+      "passes": false,
+      "dependsOn": [
+        "STORY-data-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-data-003",
+      "title": "Define RefreshToken Model For Dual Token Rotation",
+      "description": "Add the RefreshToken model that persists the state behind the project's access/refresh dual-token strategy: a unique hashed (never plaintext) token, its owning User, a revocation flag, an optional anti-collision jti, and an expiry timestamp. This model is what lets rotation issue, revoke, and validate refresh tokens against the database instead of in memory.",
+      "acceptanceCriteria": [
+        "model RefreshToken has `id String @id @default(uuid())`, `hashedToken String @unique`, `userId` FK to User, `isRevoked Boolean @default(false)`, nullable `jti String?` (UUID), and `expiresAt DateTime @db.Timestamptz(3)`.",
+        "The refresh token is persisted only as `hashedToken` - the model has no plaintext token column, so raw tokens never reach the database.",
+        "`jti` is nullable and serves anti-collision tracking of issued tokens, so a reissued or colliding token can be detected.",
+        "Integration test (Jest, Prisma client) issues two RefreshTokens for the same User, revokes the first (isRevoked = true), and asserts a query for active tokens (isRevoked = false) returns exactly the second token - the persistence contract behind dual-token rotation.",
+        "`npx prisma migrate dev --name add_refresh_token` completes with exit code 0 and `npx prisma generate` succeeds."
+      ],
+      "priority": 210,
+      "passes": false,
+      "dependsOn": [
+        "STORY-data-002"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-data-004",
+      "title": "Define Job Model With Sequence And Status",
+      "description": "Add the Job model: a tenant-scoped logistics job with an autoincrementing jobSequence, a globally unique jobCode, an owning Customer, a name, a status that defaults to OPEN, and an isConfidential flag. The tenantId foreign key is the multi-tenant binding that isolates Jobs per Tenant.",
+      "acceptanceCriteria": [
+        "model Job has `id String @id @default(uuid())`, `tenantId` FK to Tenant, `jobSequence Int @default(autoincrement())`, `jobCode String @unique`, `customerId` FK to Customer, `name String`, `status String @default(\"OPEN\")`, `isConfidential Boolean @default(false)`, plus Timestamptz(3) createdAt/updatedAt.",
+        "Every Job row carries a `tenantId` foreign key to its owning Tenant - the multi-tenant binding that isolates Jobs per tenant.",
+        "Integration test (Jest, Prisma client) creates a Job for a Customer under a Tenant, then asserts that inserting a second Job with the same jobCode throws a P2002 unique-constraint error.",
+        "Integration test asserts a Job created without an explicit status persists with status OPEN and isConfidential false.",
+        "`npx prisma migrate dev --name add_job` completes with exit code 0 and `npx prisma generate` succeeds."
+      ],
+      "priority": 220,
+      "passes": false,
+      "dependsOn": [
+        "STORY-data-003"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-data-005",
+      "title": "Define Recursive JobFolder And JobFile Models",
+      "description": "Add the nested file structure: JobFolder with a self-referential nullable parentId (recursive OS-style nesting, no materialized path) and JobFile linking to an optional folder and job. A root folder has parentId null; child folders point at their parent, and files hang off any folder or the job itself.",
+      "acceptanceCriteria": [
+        "model JobFolder has `id String @id @default(uuid())`, `name String`, `jobId` FK to Job, `folderSequence Int`, `folderCode String`, and a nullable self-referential `parentId String?` FK to JobFolder declared under an explicit relation name (e.g. `@relation(\"FolderParent\")`).",
+        "model JobFile has `id String @id @default(uuid())`, `name String`, `blobUrl String`, `sizeBytes Int`, `mimeType String`, nullable `jobId String?` FK to Job, and nullable `folderId String?` FK to JobFolder.",
+        "Integration test (Jest, Prisma client) creates a root JobFolder under a Job (parentId null), a child JobFolder (parentId = root id), and a JobFile (folderId = child id), then asserts a nested Prisma include from the root resolves root to child to file.",
+        "Nesting is expressed only via the recursive `parentId` - JobFolder has no materialized-path, slug-path, or ancestors-array column.",
+        "`npx prisma migrate dev --name add_job_folder_file` completes with exit code 0 and `npx prisma generate` succeeds."
+      ],
+      "priority": 230,
+      "passes": false,
+      "dependsOn": [
+        "STORY-data-004"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-data-006",
+      "title": "Run Full Schema Migration And Constraint Verification",
+      "description": "Final data-model gate: run the full migration and client generation against PostgreSQL and prove the complete dictionary is applied - all 9 models, the Role enum, every unique constraint, and @db.Timestamptz(3) on every DateTime field. Integration tests re-assert each unique constraint's P2002 violation path, which the API layer will map to HTTP 400 per the error-handling convention.",
+      "acceptanceCriteria": [
+        "`npx prisma migrate dev` and `npx prisma generate` from apps/api complete with exit code 0, and the generated client exposes all 9 models (Tenant, User, TenantUser, RefreshToken, Customer, CustomerDocument, Job, JobFolder, JobFile) plus the Role enum.",
+        "Every `DateTime` field in prisma/schema.prisma carries `@db.Timestamptz(3)` - grepping the schema for `DateTime` shows no field missing the attribute.",
+        "Integration test (Jest, Prisma client) asserts each unique constraint rejects a duplicate with P2002: User.email, User.username, TenantUser [tenantId,userId], RefreshToken.hashedToken, Job.jobCode - the raw violations the API layer maps to HTTP 400.",
+        "`npx prisma migrate status` reports all migrations applied with no pending changes against the PostgreSQL database.",
+        "`npm test` in apps/api runs the data-model integration suite with exit code 0."
+      ],
+      "priority": 240,
+      "passes": false,
+      "dependsOn": [
+        "STORY-data-005"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-design-001",
+      "title": "Establish Global SCSS Design Tokens And Frosted-Glass Theme",
+      "description": "Create the global SCSS design-token layer for apps/web: a `.glass-surface` class applying `backdrop-filter: blur(16px)` over a semi-transparent background (the frosted-glass boundary for modals and floating cards) and a `.mesh-bg` class applying an animated `radial-gradient()` mesh background reusable by the auth-shell and 404 views, plus CSS custom properties for brand colors and blur values. This is the visual foundation every later feature page (login, change-password, staff, profile, 404) consumes. Layout uses Bootstrap 5 `.row`/`.col` structural grid only; no Tailwind, no Bootstrap text-color utilities, no default browser input styling. It calls no backend endpoint.",
+      "acceptanceCriteria": [
+        "apps/web/src/styles/design-tokens.scss exists and is imported into the global styles.scss; running `npm run build` in apps/web completes with exit code 0.",
+        "A `.glass-surface` SCSS class applies `backdrop-filter: blur(16px)` (and `-webkit-backdrop-filter: blur(16px)`) over a semi-transparent background (e.g. rgba(255,255,255,0.65)), defining the frosted-glass boundary for modals and floating cards.",
+        "A `.mesh-bg` SCSS class applies an animated `radial-gradient()` mesh (multiple radial-gradient layers plus a keyframe animation on background-position/background-size) that is reusable by the auth-shell and 404 views.",
+        "CSS custom properties (e.g. `--glass-blur: 16px`, `--brand-*` color tokens) are defined so components reference tokens instead of hard-coded values.",
+        "Layout convention is pinned to Bootstrap 5 `.row`/`.col` structural grid only: no Bootstrap text-color utilities (`.text-*`) and no Tailwind classes, and no unstyled default browser inputs.",
+        "A unit test asserts design-tokens.scss compiles (Sass) without errors and that the `.glass-surface` rule contains `backdrop-filter: blur(16px)`."
+      ],
+      "priority": 250,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-005"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-design-002",
+      "title": "Build Reusable Auth-Shell Component With Animated Mesh Gradient",
+      "description": "Build a standalone Angular `AuthShellComponent` (selector `app-auth-shell`) in apps/web that renders the cinematic auth-shell: an animated `radial-gradient()` mesh background filling the `.auth-shell` viewport plus a centered frosted-glass card (`.glass-surface`, `backdrop-filter: blur(16px)`) that child auth forms slot into via an `ng-content` slot and optional `title`/`subtitle` `@Input`s. It is the shared visual shell the /login and /change-password forms (built in later batches) live inside, and it is the background element of the approved designs for /login and /change-password. It consumes the tokens from STORY-design-001 and calls no backend endpoint.",
+      "acceptanceCriteria": [
+        "AuthShellComponent (standalone, selector `app-auth-shell`) exists under apps/web/src/app/shared/auth-shell/ and `npm run build` in apps/web completes with exit code 0.",
+        "The `.auth-shell` root element applies the `.mesh-bg` class (animated radial-gradient mesh) from STORY-design-001 and the inner form container applies the `.glass-surface` class (backdrop-filter: blur(16px)) as the frosted-glass boundary.",
+        "The component exposes an `ng-content` slot plus optional `@Input() title` and `@Input() subtitle` so the /login and /change-password forms can be slotted in without duplicating the shell.",
+        "The component is standalone and directly importable by feature pages; it is not wrapped in a second NgModule, and it calls no backend endpoint.",
+        "Unit test in auth-shell.component.spec.ts verifies the component renders, projects a child node into the slot, and applies the `.mesh-bg` and `.glass-surface` classes."
+      ],
+      "priority": 260,
+      "passes": false,
+      "dependsOn": [
+        "STORY-design-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-design-003",
+      "title": "Build 404 Not-Found Page With Mesh-Gradient Background",
+      "description": "Build the `NotFoundComponent` (selector `app-not-found`) at the wildcard router route in apps/web so any unregistered path (e.g. /does-not-exist) renders the 404 screen instead of a blank page. The page shows an animated `radial-gradient()` mesh background (reusing `.mesh-bg` from STORY-design-001), a 404 message/illustration, and two buttons: \"Return to Login\" (routerLink /login) and \"Return to Dashboard\" (routerLink /dashboard). It calls no backend endpoint; the buttons are pure client-side router navigations. UI matches the approved design for /404.",
+      "acceptanceCriteria": [
+        "NotFoundComponent (standalone, selector `app-not-found`) exists under apps/web/src/app/pages/not-found/ and the wildcard route `**` is registered in the shared Angular router config (the same router the later auth routing/guard story will extend — no second router is created); `npm run build` in apps/web exits 0.",
+        "The 404 root applies the `.mesh-bg` animated radial-gradient background and the message container uses `.glass-surface` from STORY-design-001 (component test asserts both classes are present in the rendered DOM).",
+        "The page displays a 404 message/illustration plus a \"Return to Login\" button (routerLink /login) and a \"Return to Dashboard\" button (routerLink /dashboard), each bound to its exact destination.",
+        "Playwright spec in e2e/tests/404.spec.ts (using a NotFoundPage page object) covers navigating to an unregistered route (e.g. /definitely-missing) and asserts the 404 message renders (not a blank/white page).",
+        "Playwright asserts both buttons carry the exact labels \"Return to Login\" and \"Return to Dashboard\"; clicking each updates the router URL to /login and /dashboard respectively, proving the buttons are wired.",
+        "UI matches the approved design for /404 (animated mesh gradient background, 404 message/illustration, Return to Dashboard button, Return to Login button)."
+      ],
+      "priority": 270,
+      "passes": false,
+      "dependsOn": [
+        "STORY-design-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-design-004",
+      "title": "Configure SweetAlert2 Themed Overrides For Thematic Blending",
+      "description": "Configure SweetAlert2 in apps/web and define global override styles so its default overlays blend with the NextMove theme: the `.swal2-popup` adopts the `.glass-surface` frosted-glass treatment (backdrop-filter: blur(16px) + semi-transparent background) and brand tokens from STORY-design-001 are applied to titles and buttons. A single themed entry point is exposed so feature code calls one API instead of importing SweetAlert2 per component. It calls no backend endpoint.",
+      "acceptanceCriteria": [
+        "`sweetalert2` is installed in apps/web (`npm install sweetalert2`) and present in apps/web/package.json dependencies; `npm run build` in apps/web exits 0.",
+        "A global SweetAlert2 override (sweetalert2.theme.scss) styles `.swal2-popup` with the `.glass-surface` frosted-glass treatment (backdrop-filter: blur(16px) + semi-transparent background).",
+        "Brand tokens from STORY-design-001 (CSS custom properties) are applied to `.swal2-title`, `.swal2-confirm`, and `.swal2-cancel` for thematic blending.",
+        "A single themed entry point (e.g. an `AlertService` re-exporting `Swal.fire`) is provided so feature code calls one themed API instead of importing SweetAlert2 directly per component.",
+        "A unit test asserts the override CSS is present: the `.swal2-popup` rule includes `backdrop-filter: blur(16px)`, references the brand color variables, and the override SCSS is imported into the global styles."
+      ],
+      "priority": 280,
+      "passes": false,
+      "dependsOn": [
+        "STORY-design-001"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-design-005",
+      "title": "Configure Global Ng-Select AppendTo-Body Dropdown Behavior",
+      "description": "Configure ng-select globally in apps/web so every `<ng-select>` appends its dropdown to the DOM body (`appendTo=\"body\"`), guaranteeing correct z-index stacking and preventing scrollbar clipping inside dense panels and modals. A shared default enforces the binding so per-form selects do not repeat it, and ng-select theme SCSS overrides match the NextMove brand (no default browser dropdown, no Tailwind). It calls no backend endpoint.",
+      "acceptanceCriteria": [
+        "`@ng-select/ng-select` is installed in apps/web (`npm install @ng-select/ng-select`) and present in apps/web/package.json dependencies; `npm run build` in apps/web exits 0.",
+        "A shared ng-select default (e.g. a `NgSelectDefaults` service or documented shared wrapper) enforces `appendTo=\"body\"` so every select's dropdown appends to document.body rather than rendering inline.",
+        "ng-select theme SCSS overrides are imported so selects match the NextMove brand, with no default browser dropdown styling and no Tailwind classes.",
+        "A unit test renders a minimal `<ng-select>` in a host and asserts its dropdown container is appended to document.body (not inline), proving `appendTo=\"body\"` is enforced."
+      ],
+      "priority": 290,
+      "passes": false,
+      "dependsOn": [
+        "STORY-design-001"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-customer-001",
+      "title": "Implement Customer List Endpoint With Server-Side Pagination",
+      "description": "Implement GET /api/customers in the Express API (apps/api) as the Customer controller and customers router, returning server-side paginated active customers in the uniform {success, message, data} envelope. Query parameters: page (int >= 1, default 1), pageSize (int 1-100, default 25), search (optional case-insensitive companyName substring). data shape is { items: CustomerDto[], total: number, page: number, pageSize: number } where CustomerDto is { id, tenantId, companyName, contactPerson, email, salesPersonId, salesPerson: { id, firstName, lastName, email } | null, isDeleted }. Consumed by the Customer Directory page at /customers (STORY-customer-006) via apps/web/src/services/customerApi.ts listCustomers().",
+      "acceptanceCriteria": [
+        "Integration test: GET /api/customers with a valid Bearer access token and page=1&pageSize=25 returns 200 with body { success: true, message: string, data: { items, total, page, pageSize } } where each item has the CustomerDto shape and salesPerson is null or an object with id, firstName, lastName, email.",
+        "Only customers with isDeleted = false and tenantId equal to the token's tenant are returned; a seeded customer belonging to a second tenant never appears.",
+        "For a CUSTOMER-role token, the response is filtered to the single customer whose id equals that TenantUser.customerId (User ownership constraint); other tenant customers are invisible.",
+        "Missing or invalid page/pageSize fall back to page=1, pageSize=25; pageSize > 100 is clamped to 100 without an error response.",
+        "A request with no Bearer token or an invalid/expired token returns 401 with the uniform envelope and no raw stack trace.",
+        "Prisma P2002 (unique constraint violation) and other Prisma errors are caught and mapped to a 400 (or safe 500) uniform envelope response — never a raw untyped 500 trace leak.",
+        "Unit tests in apps/api/src/customers/customers.service.test.ts cover the active-only filter, tenant scoping, search matching, and the CUSTOMER-role ownership filter."
+      ],
+      "priority": 300,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-007",
+        "STORY-data-006"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-customer-002",
+      "title": "Implement Customer Detail Fetch Endpoint With Ownership Isolation",
+      "description": "Add GET /api/customers/:id to the customers controller created in STORY-customer-001, returning one active customer by uuid id for the Customer Detail page at /customers/:id. The response data is the full CustomerDto (including the resolved salesPerson object when assigned). Unknown ids, soft-deleted customers, and cross-tenant ids return 404; CUSTOMER-role tokens may only fetch the customer they are mapped to via TenantUser.customerId. Consumed by apps/web/src/services/customerApi.ts getCustomer(id) from CustomerDetailComponent.",
+      "acceptanceCriteria": [
+        "Integration test: GET /api/customers/:id with a valid token for an existing active customer in the token's tenant returns 200 with { success: true, message, data } where data has id, tenantId, companyName, contactPerson, email, salesPersonId, salesPerson, and isDeleted.",
+        "When a sales person is assigned, data.salesPerson is { id, firstName, lastName, email } resolved through TenantUser.userId; when unassigned it is null.",
+        "An unknown uuid, a customer with isDeleted = true, or a customer from another tenant returns 404 with the uniform envelope — never 500 and never a cross-tenant record.",
+        "A CUSTOMER-role token receives 404 unless TenantUser.customerId equals the requested id (ownership isolation).",
+        "A request without a Bearer token or with an invalid token returns 401 with the uniform envelope.",
+        "Unit tests cover tenant scoping, the CUSTOMER-role ownership filter, and all 404 paths in customers.service.test.ts."
+      ],
+      "priority": 310,
+      "passes": false,
+      "dependsOn": [
+        "STORY-customer-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-customer-003",
+      "title": "Implement Customer Create Endpoint With Sales Person Resolution",
+      "description": "Add POST /api/customers to the customers controller. Request body: { companyName: string (required, min 1), contactPerson: string (required, min 1), email: string (optional), salesPersonEmail: string (optional) }. The sec-009 section declares no staff-list endpoint, so the sales person is assigned by email: salesPersonEmail must exactly match an active non-CUSTOMER TenantUser in the token's tenant, whose id is stored in salesPersonId; a blank/omitted value leaves salesPersonId null; no match is a 400. The created customer is scoped to the token's tenant with isDeleted = false and returned in the uniform envelope with 201. Consumed by apps/web/src/services/customerApi.ts createCustomer() from the Add Customer modal (STORY-customer-007).",
+      "acceptanceCriteria": [
+        "Integration test: POST /api/customers with { companyName, contactPerson } and a SUPER_ADMIN/OFFICE_ADMIN/STAFF token returns 201 with { success: true, message, data } where data is the created CustomerDto with isDeleted = false and a generated uuid id.",
+        "Missing or empty companyName or contactPerson returns 400 with success: false and a message naming the offending field; no record is created.",
+        "A salesPersonEmail that does not match an active non-CUSTOMER TenantUser in the token's tenant returns 400 with message 'Sales person email not found in this tenant'; no record is created and nothing is partially written.",
+        "A matching salesPersonEmail sets salesPersonId to that TenantUser's id and data.salesPerson resolves to that user's { id, firstName, lastName, email }.",
+        "A CUSTOMER-role token receives 403 on this endpoint (customer creation is limited to SUPER_ADMIN, OFFICE_ADMIN, and STAFF roles); a request without or with an invalid token receives 401.",
+        "All errors use the uniform envelope; Prisma errors including P2002 are mapped to 400-safe responses with no raw 500 trace leak; unit tests cover valid creation, empty-field rejection, and cross-tenant salesPersonEmail rejection."
+      ],
+      "priority": 320,
+      "passes": false,
+      "dependsOn": [
+        "STORY-customer-002"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-customer-004",
+      "title": "Implement Customer Update Endpoint With Partial Patch Validation",
+      "description": "Add PUT /api/customers/:id to the customers controller for editing an existing customer from the detail page at /customers/:id. Request body is a partial patch: { companyName?, contactPerson?, email?, salesPersonEmail? } with at least one non-empty field required; any provided companyName or contactPerson must be non-empty. salesPersonEmail follows the STORY-customer-003 resolution rules, and an explicit blank value clears the assignment (salesPersonId = null). Only the provided fields change; the response is the updated CustomerDto with 200 in the uniform envelope. Consumed by apps/web/src/services/customerApi.ts updateCustomer(id, patch) from the detail page Save button (STORY-customer-009).",
+      "acceptanceCriteria": [
+        "Integration test: PUT /api/customers/:id with { companyName: 'New Name' } and an admin token returns 200 with the updated CustomerDto; contactPerson, email, and salesPersonId are unchanged.",
+        "An empty body or a body whose fields are all empty/whitespace returns 400 with success: false and a message; nothing is updated.",
+        "A provided empty companyName or contactPerson returns 400; a salesPersonEmail that fails resolution returns 400 with 'Sales person email not found in this tenant' and no partial mutation occurs.",
+        "A blank or omitted salesPersonEmail that is explicitly sent as an empty string sets salesPersonId to null (assignment cleared); a matching email updates salesPersonId accordingly.",
+        "An unknown id, a customer with isDeleted = true, or a customer from another tenant returns 404 with the uniform envelope.",
+        "A CUSTOMER-role token receives 403; no/invalid token receives 401; Prisma errors including P2002 map to 400-safe uniform envelope responses with no raw trace leak; unit tests cover partial update, empty-patch rejection, and cross-tenant 404."
+      ],
+      "priority": 330,
+      "passes": false,
+      "dependsOn": [
+        "STORY-customer-003"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-customer-005",
+      "title": "Implement Customer Delete Endpoint With Job Conflict Check",
+      "description": "Add DELETE /api/customers/:id to the customers controller. Per sec-009, deletions trigger strict conflict testing that prevents cascade obliteration: if the customer has one or more Job records, deletion is blocked with 409 and nothing changes; otherwise the customer is soft-deleted (isDeleted = true — the row is never physically removed and no cascade fires on Jobs, CustomerDocuments, or folders/files). The success response is 200 with the uniform envelope and data = { id }. Consumed by apps/web/src/services/customerApi.ts deleteCustomer(id) from the Delete row action on /customers (STORY-customer-008).",
+      "acceptanceCriteria": [
+        "Integration test: DELETE /api/customers/:id with an admin token for a customer with no Jobs returns 200 with { success: true, message, data: { id } } and the customer's isDeleted flag becomes true while the row still exists in the database.",
+        "A customer with one or more Job records receives 409 with success: false and message 'Cannot delete customer: existing jobs reference it.'; the customer and its jobs remain unchanged.",
+        "An unknown id, an already soft-deleted customer, or a customer from another tenant returns 404 with the uniform envelope.",
+        "A CUSTOMER-role token receives 403; a request without or with an invalid token receives 401.",
+        "A soft-deleted customer no longer appears in GET /api/customers results (asserted in the same integration test as criterion 1).",
+        "Unit tests cover the job-count conflict check (jobs present blocks, jobs absent allows) and the soft-delete path; no Prisma error, including P2002, ever leaks a raw 500 trace."
+      ],
+      "priority": 340,
+      "passes": false,
+      "dependsOn": [
+        "STORY-customer-004"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-customer-006",
+      "title": "Build Customer Directory Page With Paginated Table And Search",
+      "description": "Build the Customer Directory page as Angular standalone component CustomersComponent at route /customers in apps/web, per the approved design for /customers (sidebar navigation, search/filter bar, server-paginated customer table, Add Customer modal trigger, customer name link to detail). Create the canonical service module apps/web/src/services/customerApi.ts with listCustomers({ page, pageSize, search }) → GET /api/customers, attaching the Bearer token read from the localStorage key 'nm_access_token'. The page also hosts the shared layout shell with the sidebar, which later feature stories extend. The Delete row action is added by STORY-customer-008 and the Add Customer modal by STORY-customer-007.",
+      "acceptanceCriteria": [
+        "Route '/customers' is registered in the app's shared router config (apps/web/src/app/app.routes.ts) mapped to CustomersComponent; visiting /customers renders the page, not a 404 or blank screen. No second router is created.",
+        "The page renders inside the shared layout shell at apps/web/src/app/layout/layout.component.ts; if that shell does not exist yet, create it with a sidebar containing a 'Customers' link (href /customers) — later feature stories add their links to this same sidebar, never a second shell.",
+        "customerApi.ts exposes listCustomers({ page, pageSize, search }) calling GET /api/customers with query params page, pageSize, search and the Authorization header 'Bearer <nm_access_token>'.",
+        "On load the table fetches page 1 (pageSize 25) and renders one row per customer with columns 'Company' (name link), 'Contact Person', and 'Email'.",
+        "The companyName cell is a link that navigates to /customers/:id in the same tab; each row also renders a 'Jobs' anchor with target=\"_blank\" and href=\"/jobs?customerId=<customer id>\".",
+        "The search/filter bar sends search=<text> and resets to page 1; 'Prev' and 'Next' pagination buttons change the page param and refetch; the 'Add Customer' button (exact label) is rendered in the toolbar above the table.",
+        "While the request is in flight the table shows a loading state; on 4xx/5xx the response envelope's message is displayed; when nm_access_token is absent the table area shows 'Sign in to load customers' with a 'Sign In' link to /login.",
+        "The sidebar, search/filter bar, paginated table, and Add Customer trigger match the approved design for /customers (the Delete row action is added by STORY-customer-008); Karma unit tests cover row rendering from the API payload and page/search param changes; the Playwright spec e2e/tests/customers.spec.ts seeds nm_access_token and asserts /customers renders the table and the name link navigates to /customers/:id."
+      ],
+      "priority": 350,
+      "passes": false,
+      "dependsOn": [
+        "STORY-customer-001",
+        "STORY-design-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-customer-007",
+      "title": "Build Add Customer Modal With Create Endpoint Binding",
+      "description": "Build the Add Customer modal opened by the 'Add Customer' button on /customers. The modal collects Company Name (required), Contact Person (required), Email (optional), and Sales Person (optional email text) and creates the customer by calling the existing canonical module apps/web/src/services/customerApi.ts createCustomer({ companyName, contactPerson, email, salesPersonEmail }) → POST /api/customers. The sec-009 section declares no staff-list endpoint, so Sales Person is an email text input that the API resolves to a same-tenant staff member server-side.",
+      "acceptanceCriteria": [
+        "Clicking the 'Add Customer' button on /customers opens the modal with fields labeled 'Company Name' (required), 'Contact Person' (required), 'Email' (optional), and 'Sales Person' (optional email text).",
+        "Submitting with an empty required field shows an inline error under that field ('Company Name is required' / 'Contact Person is required') and fires no request; the 'Create Customer' button is disabled while the request is in flight.",
+        "The 'Create Customer' button calls customerApi.createCustomer({ companyName, contactPerson, email, salesPersonEmail }) → POST /api/customers with the Bearer token from nm_access_token.",
+        "On 201 the modal closes, the /customers table refetches page 1, and the success message 'Customer created' is displayed.",
+        "On 4xx (e.g. 400 'Sales person email not found in this tenant') the modal stays open and displays the backend's message verbatim in an inline error banner at the top of the form.",
+        "The 'Cancel' button closes the modal with no request fired and no data change.",
+        "Karma unit tests cover required-field validation and the disabled state during an in-flight request; the Playwright spec e2e/tests/customers.spec.ts creates a customer via the modal and asserts the POST /api/customers request fires, the modal closes, and the new company appears in the refetched table."
+      ],
+      "priority": 360,
+      "passes": false,
+      "dependsOn": [
+        "STORY-customer-006",
+        "STORY-customer-003"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-customer-008",
+      "title": "Build Delete Customer Row Action With Conflict Display",
+      "description": "Add the Delete row action to the /customers table. Each row renders a 'Delete' action that opens a SweetAlert2 confirmation dialog (using the themed SweetAlert2 overrides from the design stories); confirming calls the existing canonical module apps/web/src/services/customerApi.ts deleteCustomer(id) → DELETE /api/customers/:id and refetches the current table page. A 409 conflict response is surfaced to the user with the backend's message instead of silently failing.",
+      "acceptanceCriteria": [
+        "Each table row on /customers renders a 'Delete' action; clicking it opens a SweetAlert2 confirmation dialog with text 'Delete <companyName>?' and 'Delete' / 'Cancel' buttons, themed per the existing SweetAlert2 overrides.",
+        "Clicking 'Cancel' in the dialog closes it and fires no request; the table is unchanged.",
+        "Clicking 'Delete' calls customerApi.deleteCustomer(id) → DELETE /api/customers/:id; the row's Delete action is disabled while the request is in flight.",
+        "On 200 the list refetches the current page and the deleted row is gone, and the success message 'Customer deleted' is displayed.",
+        "On 409 the table is unchanged and the backend's message ('Cannot delete customer: existing jobs reference it.') is displayed in a SweetAlert2 error dialog.",
+        "On any other 4xx/5xx the response envelope's message is displayed; no error is swallowed.",
+        "Karma unit tests cover the confirm/cancel branches and the in-flight disabled state; the Playwright spec e2e/tests/customers.spec.ts deletes a jobless customer and asserts the DELETE /api/customers/:id request fires and the row disappears from the table."
+      ],
+      "priority": 370,
+      "passes": false,
+      "dependsOn": [
+        "STORY-customer-007",
+        "STORY-customer-005"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-customer-009",
+      "title": "Build Customer Detail Page With Edit And Save Flow",
+      "description": "Build the Customer Detail page as Angular standalone component CustomerDetailComponent at route /customers/:id, reached via the customer name link on /customers. It loads the customer via the existing customerApi.ts getCustomer(id) → GET /api/customers/:id and renders an editable company info form (Company Name, Contact Person, Email) plus the 'Sales Person' email field prefilled from data.salesPerson.email. The 'Save' button calls customerApi.updateCustomer(id, { companyName, contactPerson, email, salesPersonEmail }) → PUT /api/customers/:id and the 'View Jobs' button opens /jobs?customerId=<id> in a new tab. Per the approved design for /customers/:id, this batch ships the company info form, sales person assignment field, View Jobs button, and Save button; the document list and upload document control belong to the customer-documents feature (a later section) and are not built here.",
+      "acceptanceCriteria": [
+        "Route '/customers/:id' is registered in the shared router config (apps/web/src/app/app.routes.ts) mapped to CustomerDetailComponent; clicking a name link on /customers lands on this page, not a 404.",
+        "On load the page calls getCustomer(id) → GET /api/customers/:id, shows a loading state while in flight, and prefills the form: 'Company Name' (companyName), 'Contact Person' (contactPerson), 'Email' (email), 'Sales Person' (salesPerson.email, empty when unassigned).",
+        "The 'Save' button calls customerApi.updateCustomer(id, { companyName, contactPerson, email, salesPersonEmail }) → PUT /api/customers/:id; while in flight the 'Save' button is disabled and the form fields are not editable.",
+        "On 200 the form retains the saved values and the success message 'Customer updated' is displayed; on 4xx the backend's message is shown in an inline error banner and the form keeps the user's edits.",
+        "The 'View Jobs' button opens /jobs?customerId=<customer id> with target=\"_blank\" (new tab), leaving the detail page state intact.",
+        "For a 404 response (unknown, deleted, or other-tenant id) the page renders 'Customer not found' with a 'Back to Customers' link to /customers.",
+        "The company info form, Sales Person field, View Jobs button, and Save button match the approved design for /customers/:id (document list and upload control deferred to the customer-documents section); Karma unit tests cover form prefill from the API payload and the 404 state; the Playwright spec e2e/tests/customer-detail.spec.ts loads a seeded customer at /customers/:id, edits the company name, clicks 'Save', and asserts the PUT fires and 'Customer updated' is shown."
+      ],
+      "priority": 380,
+      "passes": false,
+      "dependsOn": [
+        "STORY-customer-002",
+        "STORY-customer-004",
+        "STORY-customer-006"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-verify-customers-001",
+      "title": "Verify Customer Directory And Detail End-To-End Wiring",
+      "description": "Dedicated Playwright end-to-end verification proving the customers frontend (apps/web pages /customers and /customers/:id) is actually wired to the customers backend (apps/api endpoints GET/POST /api/customers and GET/PUT/DELETE /api/customers/:id). The spec e2e/tests/verify-customers.spec.ts seeds a test tenant with users and customers, obtains a valid access token for a seeded user via the API's JWT signing utility, stores it in localStorage under nm_access_token, and asserts every control on both pages fires its real endpoint and the flows complete. Depends on the last backend story (STORY-customer-005) and the last frontend story (STORY-customer-009) of the customers feature area.",
+      "acceptanceCriteria": [
+        "The /customers route resolves to the Customer Directory component (not a 404 or blank screen) and its table rows render from a real GET /api/customers network request — assert the request fires and the rendered row values match the response items.",
+        "Clicking a row's companyName link lands on /customers/:id, which renders that customer's company info from a real GET /api/customers/:id network request — assert the request fires and the rendered companyName matches the response.",
+        "The 'Add Customer' button opens the modal; filling the fields and clicking 'Create Customer' fires POST /api/customers, the modal closes, and the new company appears in the refetched table; a 400 (unmatched salesPersonEmail) surfaces the backend's message in the modal's inline error banner.",
+        "On /customers/:id, editing the company name and clicking 'Save' fires PUT /api/customers/:id and shows 'Customer updated'; the updated value is still rendered after a full page reload.",
+        "The per-row 'Jobs' anchor and the detail page 'View Jobs' button both carry target=\"_blank\" and href=\"/jobs?customerId=<customer id>\"; deleting a jobless customer fires DELETE /api/customers/:id and removes the row, while a customer with jobs surfaces 'Cannot delete customer: existing jobs reference it.' from the 409 response.",
+        "Cross-page navigation works: the sidebar 'Customers' link lands on /customers, and a bogus /customers/<uuid> shows 'Customer not found' with a working 'Back to Customers' link — no dead links and no wrong-component routes.",
+        "Running the spec without a seeded nm_access_token shows the 'Sign in to load customers' state with a 'Sign In' link to /login; the entire spec runs as one runnable Playwright file with zero skipped checks."
+      ],
+      "priority": 390,
+      "passes": false,
+      "dependsOn": [
+        "STORY-customer-005",
+        "STORY-customer-009"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Customer Directory",
+          "route": "/customers",
+          "htmlFile": "designs/customers.html",
+          "screenshotFile": "designs/customers.png"
+        },
+        {
+          "pageName": "Customer Detail",
+          "route": "/customers/:id",
+          "htmlFile": "designs/customers-id.html",
+          "screenshotFile": "designs/customers-id.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-dashboard-001",
+      "title": "Implement tenant-scoped GET /api/dashboard/summary aggregation endpoint",
+      "description": "Add dashboard.controller.ts to the Express API exposing GET /api/dashboard/summary. The endpoint computes tenant-scoped aggregate counts (Customers, Active Jobs, Staff) with Prisma, strictly constrained to the authenticated user's tenantId, and returns role-conditional payload arrays: Admin roles (SUPER_ADMIN, OFFICE_ADMIN) receive full metrics with recentCustomers, activeJobs, and staffByRole arrays while Staff roles receive a reduced payload. All responses use the uniform {success, message, data} envelope and every value is computed live from the database — never mocked.",
+      "acceptanceCriteria": [
+        "Given no Bearer token or an invalid/expired JWT, when a client calls GET /api/dashboard/summary, then the response is 401 with the uniform envelope {success: false, message, data: null} and no aggregation logic executes (route is mounted behind the app's JWT Bearer guard).",
+        "All Prisma queries filter by the authenticated user's tenantId: when a second tenant with seeded Customers, Jobs, and TenantUsers exists, then tenant-1's summary counts are unchanged by tenant-2's data.",
+        "customerCount equals the number of Customer rows with the tenant's id and isDeleted = false.",
+        "activeJobCount equals the number of Job rows with the tenant's id and status = 'OPEN' (the documented default active state).",
+        "staffCount equals the number of TenantUser rows with the tenant's id and role != CUSTOMER.",
+        "When the caller's role is SUPER_ADMIN or OFFICE_ADMIN, then data includes customerCount, activeJobCount, staffCount, recentCustomers[] (top 5 Customers by createdAt desc, each {id, companyName}), activeJobs[] (top 5 OPEN Jobs by jobSequence desc, each {id, jobCode, name, status}), and staffByRole (count per role value) — the Admin payload arrays.",
+        "When the caller's role is STAFF, SALES_PERSON, PRICING_COURIER, PRICING_AIR_SEA, CS_COURIER, or CS_AIR_SEA, then data includes customerCount, activeJobCount, and activeJobs[] only — no staff metrics — the Staff payload arrays.",
+        "All values are computed live via Prisma count/findMany (no hardcoded or mocked numbers); an integration test calls GET /api/dashboard/summary with a seeded tenant (3 active customers, 2 OPEN jobs, 4 non-CUSTOMER TenantUser rows) and asserts 200 with the exact {success: true, message, data} envelope and expected counts/arrays, and a forced DB failure returns the uniform envelope with a 5xx status and no raw Prisma error or stack text in the body (sec-006)."
+      ],
+      "priority": 400,
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Dashboard",
+          "route": "/dashboard",
+          "htmlFile": "designs/dashboard.html",
+          "screenshotFile": "designs/dashboard.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-dashboard-002",
+      "title": "Create dashboard API service and register /dashboard route",
+      "description": "Create the canonical dashboard API service dashboard.service.ts in apps/web exposing getSummary(): Observable<DashboardSummary> that issues GET /api/dashboard/summary through the app's shared HttpClient with the RxJS auth interceptor. Register the /dashboard route in the app's single shared router config to render DashboardComponent and add /dashboard to the route guard's allowlist. This wiring is what the /dashboard page (STORY-dashboard-003) and the verification story consume.",
+      "acceptanceCriteria": [
+        "dashboard.service.ts is the single dashboard API module in apps/web; it exposes getSummary() which issues GET /api/dashboard/summary via the shared HttpClient and no second dashboard API module is created.",
+        "The DashboardSummary interface mirrors the GET /api/dashboard/summary data payload (customerCount, activeJobCount, staffCount, activeJobs[] of {id, jobCode, name, status}, plus Admin-only recentCustomers[] and staffByRole) and a malformed envelope (missing success or data) is rejected with a typed error carrying the backend message (sec-006).",
+        "Service requests flow through the app-wide RxJS interceptor that attaches the Bearer access token and, on HTTP 401, refreshes the token and replays the original request (sec-004 dual-token replay constraint); a unit test stubs the 401 -> refresh -> replay sequence and asserts the original request is retried once with the new token.",
+        "The /dashboard route is registered in the app's single shared router config rendering DashboardComponent and appears in the route guard's allowlist (prefix matching); no second router or duplicate /dashboard entry exists.",
+        "Unit tests in dashboard.service.spec.ts cover the happy path (envelope -> DashboardSummary), the 401-replay path, and the malformed-envelope error case."
+      ],
+      "priority": 410,
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Dashboard",
+          "route": "/dashboard",
+          "htmlFile": "designs/dashboard.html",
+          "screenshotFile": "designs/dashboard.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-dashboard-003",
+      "title": "Build role-based dashboard page with stat cards and widget grid",
+      "description": "Build the standalone DashboardComponent served at /dashboard, reached via the app sidebar's \"Dashboard\" link and as the default landing route after a successful login at /login. On load the page calls dashboardService.getSummary() -> GET /api/dashboard/summary and renders stat cards (Customers, Active Jobs, Staff), a role-based widget grid, a top header with user menu and tenant name indicator, and the sidebar navigation, using structural SCSS on the bootstrap grid with no Tailwind. The layout follows the approved /dashboard design.",
+      "acceptanceCriteria": [
+        "The page is served at /dashboard (the route registered in the shared router by STORY-dashboard-002); entry points are the app sidebar's \"Dashboard\" routerLink and the default landing route after a successful login at /login.",
+        "On load the component calls dashboardService.getSummary() -> GET /api/dashboard/summary and the three stat cards render data.customerCount, data.activeJobCount, and data.staffCount verbatim — no hardcoded, mocked, or placeholder values remain after the request completes.",
+        "While the summary request is in flight, the stat cards and widget grid area show loading placeholders; no partial or stale numbers render.",
+        "When the request fails, the page shows an inline error banner containing the backend message from the {success, message, data} envelope — never a raw stack trace, raw JSON body, or Prisma error text (sec-006).",
+        "Role-based widget grid: SUPER_ADMIN/OFFICE_ADMIN sessions render the full grid including the staff-metrics widgets (staffByRole, recentCustomers); Staff-role sessions render only the widgets backed by the Staff payload (activeJobs, counts) — the grid renders exactly what the API returned for the caller's role.",
+        "The top header shows the tenant name indicator and a user menu displaying the signed-in user's full name with a \"Profile\" routerLink to /profile.",
+        "The sidebar navigation renders routerLinks \"Dashboard\" -> /dashboard (visually marked active when the current route is /dashboard), \"Staff\" -> /staff, and \"Profile\" -> /profile.",
+        "The UI matches the approved design for /dashboard (sidebar navigation, stat cards, role-based widget grid, top header with user menu, tenant name indicator); a Playwright spec in e2e/tests/dashboard.spec.ts covers the Admin grid rendering live API values, the Staff-scoped grid, and the error banner on a failed GET /api/dashboard/summary, and component unit tests cover role switching and the loading state."
+      ],
+      "priority": 420,
+      "passes": false,
+      "dependsOn": [
+        "STORY-dashboard-001",
+        "STORY-dashboard-002"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Dashboard",
+          "route": "/dashboard",
+          "htmlFile": "designs/dashboard.html",
+          "screenshotFile": "designs/dashboard.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-verify-dashboard-001",
+      "title": "Verify dashboard page wiring to summary endpoint end to end",
+      "description": "Prove that the /dashboard page (DashboardComponent, apps/web) is genuinely connected to GET /api/dashboard/summary (dashboard.controller.ts, apps/api). A Playwright end-to-end spec asserts the route resolves for an authenticated session, the summary request fires with the Bearer token and its envelope renders into the stat cards, the Admin and Staff sessions render their respective role-conditional payloads, and the auth contract holds across a full page reload.",
+      "acceptanceCriteria": [
+        "Playwright spec in e2e/tests/verify-dashboard.spec.ts: booting the app with a stored Admin session and visiting /dashboard resolves to the dashboard page — not a 404, a blank screen, or a redirect loop.",
+        "On page load, exactly one GET /api/dashboard/summary network request fires carrying the Bearer access token (assert the exact method + path and the Authorization header), and the stat cards display the response data.customerCount / activeJobCount / staffCount values verbatim — proving DashboardComponent at /dashboard is connected to the endpoint in dashboard.controller.ts.",
+        "The Admin session renders the full widget grid including the staff-metrics widgets; a Staff-role session renders only the Staff-scoped payload (activeJobs + counts, no staff metrics) — proving the endpoint's role-conditional payload drives the UI rather than hardcoded content.",
+        "When the summary request is intercepted via page.route to return a 500 {success, message, data} envelope, the inline error banner shows the backend message text and no raw stack or raw JSON body renders (sec-006).",
+        "Auth persistence (sec-004): with a stored session, a full page reload of /dashboard leaves the user authenticated — tokens are rehydrated from storage on startup, there is no redirect back to /login, and no second login request fires (no double-login).",
+        "Unauthenticated: visiting /dashboard with no stored session redirects to /login; after a successful login, /dashboard is reachable and renders the stat cards from GET /api/dashboard/summary."
+      ],
+      "priority": 430,
+      "passes": false,
+      "dependsOn": [
+        "STORY-dashboard-001",
+        "STORY-dashboard-003"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Dashboard",
+          "route": "/dashboard",
+          "htmlFile": "designs/dashboard.html",
+          "screenshotFile": "designs/dashboard.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-jobs-001",
+      "title": "Implement POST /api/jobs with manual unique alphanumeric job code",
+      "description": "Express route POST /api/jobs behind the existing JWT auth middleware, creating a tenant-scoped Job with a caller-supplied alphanumeric jobCode. The code is validated to [A-Za-z0-9]{1,32} and its in-tenant uniqueness is enforced before the insert commits, so a collision returns the standard 400 envelope rather than a raw error. Consumed by the Add Job modal on /jobs via jobsApi.createJob() from the jobs domain service.",
+      "acceptanceCriteria": [
+        "POST /api/jobs with a valid Bearer token and body { jobCode: 'NM2026001', name: 'Freight to Rotterdam', customerId: <uuid> } returns 201 { success: true, message: 'Job created', data: { job } } and persists the Job with status 'OPEN', auto-incremented jobSequence, and createdById equal to the authenticated user id (sec-005 ownership binding).",
+        "A jobCode containing a hyphen, space, or exceeding 32 characters (e.g. 'NM-2026 001!') returns 400 { success: false, message } naming the alphanumeric bounds rule, and no Job row is inserted.",
+        "Creating a second job with the same jobCode in the same tenant (Prisma P2002) returns 400 { success: false, message: 'Job code already exists' } — never a raw 500 or stack trace (sec-006 P2002→400 mapping).",
+        "A request without a valid Bearer token returns 401; a CUSTOMER-role user returns 403 — only SUPER_ADMIN, OFFICE_ADMIN, STAFF, SALES_PERSON, PRICING_COURIER, PRICING_AIR_SEA, CS_COURIER, and CS_AIR_SEA may create jobs (sec-004 role guards).",
+        "A customerId belonging to another tenant is rejected with 400 { success: false, message } and no row is created (tenant isolation).",
+        "Integration tests POST /api/jobs with a valid payload (assert 201 and the { success, message, data.job } shape) and with a duplicate jobCode (assert 400 envelope with no stack text in the body)."
+      ],
+      "priority": 440,
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-jobs-002",
+      "title": "Implement GET /api/jobs/:jobCode job header detail endpoint",
+      "description": "Express route GET /api/jobs/:jobCode resolving a job by its unique code within the caller's tenant and returning the header data the workspace breadcrumb needs (job fields plus customer companyName). The response uses the uniform { success, message, data } envelope; unknown or cross-tenant codes return 404. Consumed by the JobsWorkspaceComponent header at /jobs-workspace/:jobCode via jobsApi.getJobByCode().",
+      "acceptanceCriteria": [
+        "GET /api/jobs/:jobCode for a job in the caller's tenant returns 200 { success: true, message: 'Job loaded', data: { job: { id, jobCode, name, status, isConfidential, jobSequence, customer: { id, companyName } } } }.",
+        "An unknown jobCode returns 404 { success: false, message: 'Job not found' } without revealing other tenants' codes in the body.",
+        "An unauthenticated request returns 401; a CUSTOMER user whose TenantUser.customerId does not match the job's customer returns 403, while staff/admin roles receive 200 (sec-004 role containment).",
+        "Integration tests: GET /api/jobs/<seeded code> asserts 200 and the data.job shape including customer.companyName; GET with an unseeded code asserts 404; GET without a token asserts 401."
+      ],
+      "priority": 450,
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-jobs-003",
+      "title": "Implement GET /api/folders/:jobId recursive folder tree endpoint",
+      "description": "Express route GET /api/folders/:jobId returning the complete nested JobFolder tree for a job (recursive via parentId) plus root-level files, all tenant-scoped. Each folder node carries its files with exact sizeBytes and mimeType so the Angular service can hold the entire workspace in memory without further calls. Consumed by the /jobs-workspace/:jobCode tree and table panels via jobsApi.getFolderTree().",
+      "acceptanceCriteria": [
+        "For a job with root → child → grandchild folders and files at each level, GET /api/folders/:jobId returns 200 { success: true, message: 'Folder tree loaded', data: { folders: [...], rootFiles: [...] } } with correct nesting depth and per-node fileCount matching the actual JobFile rows for that folder.",
+        "Every file entry includes exactly the persisted name, sizeBytes, and mimeType — no recomputation of these values in the API or the client.",
+        "A jobId that does not exist or belongs to another tenant returns 404 { success: false, message }; an unauthenticated request returns 401 (no tenant-crossing leak).",
+        "A CUSTOMER user may only fetch the tree of jobs whose customer matches their TenantUser.customerId; any other job returns 403.",
+        "All timestamps (e.g. file uploadedAt) serialize as ISO-8601 UTC with millisecond precision from the @db.Timestamptz(3) columns.",
+        "Unit tests build the nested tree from flat seeded rows (assert parent/child links and fileCount) and assert the builder terminates safely on malformed or cyclic parentId data instead of looping forever."
+      ],
+      "priority": 460,
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-jobs-004",
+      "title": "Implement POST /api/upload Azure Blob multipart file upload",
+      "description": "Express route POST /api/upload accepting multipart/form-data (fields: file, jobId, optional folderId, optional createFolderName) and streaming the file to Azure Blob Storage (configured via AZURE_STORAGE_ACCOUNT and AZURE_STORAGE_KEY env vars) before persisting a JobFile row. All blob processing happens inside the Node API boundary — the client sends the raw multipart body and never constructs blob URLs. With createFolderName and no file part, a new JobFolder is created under folderId (or the job root) instead, supporting the New Folder control. Consumed by the Upload File and New Folder controls on /jobs-workspace/:jobCode via jobsApi.uploadFile().",
+      "acceptanceCriteria": [
+        "POST /api/upload with a 1 KB text file and a valid jobId returns 201 { success: true, message: 'File uploaded', data: { file: { id, name, sizeBytes, mimeType, blobUrl, folderId } } }, stores the bytes in the Azure Blob container, and persists a JobFile with exact sizeBytes, mimeType, and createdById set from the JWT subject (sec-005 ownership binding).",
+        "A provided folderId is stored on the JobFile; an omitted folderId stores null (job root); a folderId that does not belong to jobId returns 400 { success: false, message }.",
+        "createFolderName with no file part creates a JobFolder (folderSequence = max+1 within the job, folderCode derived from jobCode + sequence) and returns 201 { success: true, message: 'Folder created', data: { folder } } — the contract behind the New Folder control.",
+        "A request with no file part and no createFolderName, an empty file, or a file over 25 MB returns 400/413 { success: false, message } with no raw error leak (sec-006).",
+        "blobUrl is always generated server-side from the Azure SDK result; a client-supplied blobUrl field is ignored (no client-side blob processing per section mustNotInclude).",
+        "Unauthenticated requests return 401; a CUSTOMER-role user returns 403 — uploads are restricted to staff/admin roles (sec-004).",
+        "Integration tests upload a small file (assert 201 + data.file shape, JobFile row persisted with correct sizeBytes/mimeType) and assert the missing-file and oversized-file error envelopes."
+      ],
+      "priority": 470,
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "effort": "high",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-jobs-005",
+      "title": "Create jobsApi service module and register workspace route",
+      "description": "Angular 17 standalone service web/src/services/jobsApi.ts — the single jobs-domain API module — wrapping all four endpoints with typed payloads, plus registration of the /jobs-workspace/:jobCode route (rendering JobsWorkspaceComponent) in the app router and the RBAC guard allowlist. A placeholder JobsWorkspaceComponent shell is created here so the route resolves before the layout story fills in the panels.",
+      "acceptanceCriteria": [
+        "jobsApi methods map exactly: createJob(payload) → POST /api/jobs, getJobByCode(code) → GET /api/jobs/:jobCode, getFolderTree(jobId) → GET /api/folders/:jobId, uploadFile(file, jobId, folderId?, createFolderName?) → POST /api/upload as multipart/form-data. Unit tests spy HttpClient and assert the exact method and path for each call.",
+        "The app router registers path 'jobs-workspace/:jobCode' rendering JobsWorkspaceComponent (not a 404 or dashboard component), and the guard allowlist uses prefix matching so a role permitted on '/jobs-workspace' covers the parameterized route and any subpaths.",
+        "Unit test: the RBAC guard allows a STAFF-role session on /jobs-workspace/ABC123 and redirects an unauthenticated session to /login.",
+        "All jobsApi requests attach Authorization: Bearer <accessToken> via the shared HTTP interceptor, and on a 401 the interceptor refreshes via the token storage and replays the request exactly once (sec-004 RxJS interceptor replay constraint) — unit-tested with a mocked 401-then-200 exchange."
+      ],
+      "priority": 480,
+      "passes": false,
+      "dependsOn": [
+        "STORY-jobs-001",
+        "STORY-jobs-002",
+        "STORY-jobs-003",
+        "STORY-jobs-004"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-jobs-006",
+      "title": "Build 3-panel JobsWorkspaceComponent tree table and inspector",
+      "description": "JobsWorkspaceComponent served at /jobs-workspace/:jobCode (route registered in STORY-jobs-005) implementing the approved 3-column workspace: left recursive folder tree, center file table, right detail inspector, built on the bootstrap grid (no Tailwind). The tree and table render from the single getFolderTree() payload held in Angular in-memory state; the entry point is the job row click on /jobs. UI matches the approved design for /jobs-workspace/:jobCode.",
+      "acceptanceCriteria": [
+        "Visiting /jobs-workspace/:jobCode renders JobsWorkspaceComponent via the shared router (not a 404 or blank); a jobCode with no job (404 from GET /api/jobs/:jobCode) renders an inline 'Job not found' banner; an unauthenticated visit redirects to /login via the guard.",
+        "UI matches the approved design for /jobs-workspace/:jobCode — 3-column bootstrap grid (tree | table | inspector) with no clipping overflow at 1280px and 1440px widths, and a job header/breadcrumb showing the job name and customer companyName.",
+        "The left tree renders the full recursive hierarchy from getFolderTree(); expanding, collapsing, or clicking a folder node updates the center table to that node's files (root selection lists rootFiles) using only in-memory state — no second HTTP call on selection.",
+        "The center table displays, per file row, exactly name, sizeBytes (human-formatted, e.g. '1.2 MB'), and mimeType as returned by the API.",
+        "Selecting a file or folder row updates the right inspector with dynamic counts computed in Angular from the tree state: folder → file count + child folder count; file → sizeBytes + mimeType.",
+        "Unit tests (component + tree-state service): selecting a child folder binds its files to the table, and the inspector count computation matches fixture-tree expectations.",
+        "Playwright spec e2e/tests/jobs-workspace-layout.spec.ts: with a seeded job (two-level folders + files), visit /jobs-workspace/<code>, expand a folder node, select it, and assert the table rows and inspector counts render."
+      ],
+      "priority": 490,
+      "passes": false,
+      "dependsOn": [
+        "STORY-jobs-005"
+      ],
+      "notes": "",
+      "effort": "high",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-jobs-007",
+      "title": "Wire Upload File and New Folder controls to API",
+      "description": "Adds the Upload File and New Folder controls on /jobs-workspace/:jobCode (JobsWorkspaceComponent from STORY-jobs-006), wired to jobsApi.uploadFile() → POST /api/upload. Both controls show disabled/loading states while in flight, surface backend error messages from the uniform envelope, and refetch the folder tree on success so the new file or folder node appears immediately.",
+      "acceptanceCriteria": [
+        "The 'Upload File' button opens a file picker; on selection it calls jobsApi.uploadFile(file, jobId, selectedFolderId) → POST /api/upload multipart, and the button is disabled with a spinner while the request is in flight, re-enabled after.",
+        "Upload success (201) shows the toast 'File uploaded', refetches GET /api/folders/:jobId, and the new file row appears in the center table with its sizeBytes and mimeType.",
+        "Upload failure (400/403/413) renders an inline error banner containing the backend message from the { success, message } envelope — never a swallowed rejection or raw stack (sec-006).",
+        "The 'New Folder' button reveals a name input; submitting calls jobsApi.uploadFile(undefined, jobId, selectedFolderId, name) → POST /api/upload with createFolderName, shows toast 'Folder created', refetches the tree so the new node is visible; an empty name shows inline validation and issues no request.",
+        "No client-side blob processing: the raw File is sent as-is via multipart (no base64 encoding, resizing, or local size computation in Angular — sizeBytes comes from the API response).",
+        "Unit tests (component with mocked jobsApi): upload success updates the table state, upload error sets the banner text to the backend message, and an empty folder name prevents the request call.",
+        "Playwright spec e2e/tests/jobs-workspace-upload.spec.ts: choose a file via the file chooser, assert the network request POST /api/upload fires (multipart), the success toast appears, and the uploaded file row renders in the table."
+      ],
+      "priority": 500,
+      "passes": false,
+      "dependsOn": [
+        "STORY-jobs-004",
+        "STORY-jobs-006"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-verify-jobs-001",
+      "title": "Verify jobs workspace pages are wired to endpoints",
+      "description": "End-to-end verification that the /jobs-workspace/:jobCode frontend (JobsWorkspaceComponent) is actually connected to the backend: the folder tree renders from GET /api/folders/:jobId, the Upload File control issues a real POST /api/upload, the New Folder control creates a node, and the /jobs row-click entry lands on the workspace. Playwright-only story proving the wiring across both sides.",
+      "acceptanceCriteria": [
+        "Playwright spec e2e/tests/jobs-workspace-wiring.spec.ts seeds a job with a nested folder and file via the API, visits /jobs-workspace/<jobCode>, and asserts the tree renders the folder and the center table shows the seeded file with its exact sizeBytes and mimeType — proving GET /api/folders/:jobId is consumed and rendered.",
+        "Entry point: clicking the job row on /jobs navigates to /jobs-workspace/<jobCode> and the workspace page renders JobsWorkspaceComponent (no dead link, no wrong-component route).",
+        "Clicking 'Upload File' and choosing a file asserts the network request POST /api/upload (multipart) fires, the response is 201, the 'File uploaded' toast renders, and the new file row appears after the tree refetch.",
+        "Submitting 'New Folder' with a name asserts POST /api/upload with createFolderName fires and the new folder node appears in the left tree.",
+        "Error path: uploading with a session lacking the role (CUSTOMER) renders the backend error message in the banner — not a raw stack or a silent failure (sec-006)."
+      ],
+      "priority": 510,
+      "passes": false,
+      "dependsOn": [
+        "STORY-jobs-004",
+        "STORY-jobs-007"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-smoke-001",
+      "title": "Smoke test full app routes and session contract",
+      "description": "Phase-final Playwright smoke test proving the whole NextMove app boots and is usable end-to-end as one product: every route in the built inventory renders its intended page, the navigation shell links work, and the full auth session contract holds. Depends on the last story of every feature area (dashboard and jobs).",
+      "acceptanceCriteria": [
+        "Playwright walks the complete route inventory — /login, /dashboard, /jobs, /jobs-workspace/<seeded jobCode> — and asserts each renders its own page (login form, dashboard stat cards, jobs table, workspace 3-panel layout), not a 404, blank screen, redirect loop, or wrong component.",
+        "The sidebar navigation contains links to the major pages (Dashboard, Jobs, Staff); clicking each lands on the correct route (/dashboard, /jobs, /staff) with no dead links.",
+        "Full session contract in one script (sec-004 dual-token contract): log in at /login → access+refresh tokens stored → navigate to protected /dashboard → RELOAD the page → still authenticated with no redirect to /login (tokens rehydrated on startup) → logout → /dashboard now redirects to /login.",
+        "Primary user flow in one uninterrupted script: login → dashboard renders → open /jobs → click a job row → /jobs-workspace/<code> renders and the folder tree loads from GET /api/folders/:jobId with the seeded file visible in the table.",
+        "No console errors on any route visit: the spec asserts zero error-level console entries across the entire walk."
+      ],
+      "priority": 520,
+      "passes": false,
+      "dependsOn": [
+        "STORY-verify-dashboard-001",
+        "STORY-verify-jobs-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-auth-001",
+      "title": "Implement auth login refresh logout and me endpoints",
+      "description": "Add auth.controller.ts and the auth router to the Express API (apps/api) exposing POST /api/auth/login, POST /api/auth/refresh, POST /api/auth/logout, and GET /api/auth/me, implementing the sec-004 dual-token contract. Login validates email + passwordHash against the User model and issues an access token (JWT_ACCESS_SECRET, 15m) plus a server-persisted RefreshToken (JWT_REFRESH_SECRET, 14d) with rotation; refresh validates the stored token, rotates it, and returns a new pair; logout revokes the refresh token; me returns the caller's profile from the token identity.",
+      "acceptanceCriteria": [
+        "POST /api/auth/login with valid email + password returns 200 { success: true, message, data: { accessToken, refreshToken, user: { id, email, username, firstName, lastName, role, tenantId } } }; the access token expires in 15 minutes and the refresh token in 14 days, both signed with their distinct secrets (sec-004).",
+        "POST /api/auth/login with an unknown email or wrong password returns 401 { success: false, message: 'Invalid credentials', data: null }; unknown emails run a constant-time comparison against a dummy hash so response timing does not reveal whether an account exists.",
+        "POST /api/auth/refresh with a valid, unexpired, server-stored refresh token returns 200 with a new accessToken + rotated refreshToken; the old refresh token row is invalidated in the same transaction and can never be reused.",
+        "POST /api/auth/refresh with an already-rotated, revoked, expired, or unknown refresh token returns 401 and revokes the whole token family (reuse detection), never a raw 500.",
+        "POST /api/auth/logout revokes the presented refresh token and returns 200 { success: true, message: 'Logged out', data: null }; calling it twice still returns 200.",
+        "GET /api/auth/me with a valid access token returns 200 with the caller's user profile including role and tenantId; missing/invalid tokens return 401 with the uniform envelope.",
+        "All responses use the uniform { success, message, data } envelope (sec-006); every Prisma/validation failure maps to a 400/401 envelope with no raw stack traces.",
+        "Integration tests in apps/api/src/auth/auth.controller.test.ts cover login success/failure, refresh rotation + reuse detection, logout revocation, and me (Jest + supertest against a seeded user)."
+      ],
+      "priority": 530,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-007",
+        "STORY-data-003"
+      ],
+      "notes": "",
+      "effort": "high",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        },
+        {
+          "pageName": "Staff Directory",
+          "route": "/staff",
+          "htmlFile": "designs/staff.html",
+          "screenshotFile": "designs/staff.png"
+        },
+        {
+          "pageName": "Profile",
+          "route": "/profile",
+          "htmlFile": "designs/profile.html",
+          "screenshotFile": "designs/profile.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-router-001",
+      "title": "Create shared router config with RBAC guard and living route inventory",
+      "description": "Create the single shared Angular router config apps/web/src/app/app.routes.ts with the RBAC AuthGuard enforcing the sec-004 role matrices on every protected route. The guard validates the localized .data.roles array on router transitions with PREFIX matching (a role allowed on /customers may open /customers/:id), redirects unauthenticated sessions to /login, and acts as the living route inventory: every route known at this point maps to its exact component. Later feature stories register their routes and components in this same file — never a second router.",
+      "acceptanceCriteria": [
+        "apps/web/src/app/app.routes.ts exists as the single router config; a unit test asserts no second router module and no duplicate route registrations exist anywhere in apps/web.",
+        "AuthGuard enforces prefix-matching role checks: a route with data.roles ['STAFF'] permits /jobs and /jobs-workspace/:jobCode for a STAFF session, while a route restricted to ['SUPER_ADMIN','OFFICE_ADMIN'] denies a SALES_PERSON session and redirects.",
+        "The guard reads the authenticated user role from the localized token payload; a session with no token or an expired token is redirected to /login with the return URL preserved and restored after login.",
+        "The initial route inventory registers: /login (LoginComponent, public), /dashboard (DashboardComponent), /customers (CustomersComponent), /customers/:id (CustomerDetailComponent), /jobs (JobsListComponent placeholder), /jobs-workspace/:jobCode (JobsWorkspaceComponent), /staff (StaffComponent placeholder), /profile (ProfileComponent placeholder), and a wildcard 404 route rendering the design-system 404 page (STORY-design-003).",
+        "Every protected route appears in the guard allowlist; a route registered in the router but missing from the allowlist fails a completeness unit test in router-guard.spec.ts.",
+        "Karma unit tests cover unauthenticated redirect to /login, role-deny redirect, prefix-match allowance, and the route-inventory completeness check."
+      ],
+      "priority": 540,
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-004",
+        "STORY-design-003"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        },
+        {
+          "pageName": "Staff Directory",
+          "route": "/staff",
+          "htmlFile": "designs/staff.html",
+          "screenshotFile": "designs/staff.png"
+        },
+        {
+          "pageName": "Profile",
+          "route": "/profile",
+          "htmlFile": "designs/profile.html",
+          "screenshotFile": "designs/profile.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-auth-002",
+      "title": "Build login page with token storage and session redirect",
+      "description": "Build LoginComponent at /login using the AuthShell design (STORY-design-002): email + password form with client-side validation, loading state, and inline server-error display. On success the page stores the access + refresh tokens in secure storage (nm_access_token / nm_refresh_token per sec-004), redirects to /dashboard, and the AuthGuard reads the stored role for route protection.",
+      "acceptanceCriteria": [
+        "/login renders LoginComponent inside the AuthShell with email + password fields, proper labels, and aria attributes per the project accessibility baseline.",
+        "Empty email/password or a malformed email shows inline field errors and fires no request; the submit button is disabled with a loading state while the request is in flight.",
+        "On success the access + refresh tokens are stored under nm_access_token / nm_refresh_token in secure storage and the router navigates to /dashboard.",
+        "A 401 'Invalid credentials' response renders the backend message verbatim in the error banner (sec-006 envelope) with no raw stack or raw JSON body.",
+        "An already-authenticated session visiting /login is redirected to /dashboard without a second login or token overwrite.",
+        "The login request flows through the shared HttpClient but is exempt from the 401 refresh-replay interceptor to avoid a redirect loop on failed credentials.",
+        "Karma unit tests cover validation, success storage + redirect, and server-error rendering."
+      ],
+      "priority": 550,
+      "passes": false,
+      "dependsOn": [
+        "STORY-auth-001",
+        "STORY-router-001",
+        "STORY-design-002"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        },
+        {
+          "pageName": "Staff Directory",
+          "route": "/staff",
+          "htmlFile": "designs/staff.html",
+          "screenshotFile": "designs/staff.png"
+        },
+        {
+          "pageName": "Profile",
+          "route": "/profile",
+          "htmlFile": "designs/profile.html",
+          "screenshotFile": "designs/profile.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-staff-001",
+      "title": "Implement GET api staff directory endpoint",
+      "description": "Add GET /api/staff to the Express API returning the tenant's staff directory (TenantUser rows with role != CUSTOMER) with server-side pagination, optional role filter, and search — all scoped to the caller's tenantId. This powers the /staff page table and provides the data contract behind the dashboard staffByRole widgets.",
+      "acceptanceCriteria": [
+        "GET /api/staff?page=1&pageSize=25 with a valid Bearer access token returns 200 { success: true, message, data: { items: StaffDto[], total, page, pageSize } } where StaffDto = { id, firstName, lastName, email, role } resolved through TenantUser.userId.",
+        "Only TenantUser rows with role != CUSTOMER and tenantId equal to the token's tenant are returned; a staff member of a second tenant never appears in the response.",
+        "An optional role query param filters by exact Role enum value (e.g. ?role=SALES_PERSON); an invalid role value returns 400 with a message naming the offending field.",
+        "An optional search param does a case-insensitive substring match on firstName, lastName, or email; pagination defaults to page=1 pageSize=25 and clamps pageSize to 100 without an error.",
+        "A CUSTOMER-role token receives 403 (the staff directory is admin/staff-only); a missing or invalid token receives 401 with the uniform envelope.",
+        "All responses use the uniform envelope (sec-006); Prisma errors including P2002 map to 400-safe responses with no raw stack trace; unit tests cover tenant scoping, role filtering, search, and pagination in staff.service.test.ts."
+      ],
+      "priority": 560,
+      "passes": false,
+      "dependsOn": [
+        "STORY-auth-001",
+        "STORY-data-002"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Dashboard",
+          "route": "/dashboard",
+          "htmlFile": "designs/dashboard.html",
+          "screenshotFile": "designs/dashboard.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-staff-002",
+      "title": "Build staff directory page with role filter",
+      "description": "Build StaffComponent at /staff (route registered in STORY-router-001): a paginated staff table rendered from staffApi.listStaff() → GET /api/staff with a role filter dropdown and search bar, role badge styling per the design system, and loading/empty/error states. The sidebar 'Staff' link (STORY-dashboard-003) navigates here.",
+      "acceptanceCriteria": [
+        "/staff renders StaffComponent via the shared router (not a 404 or wrong component); the sidebar 'Staff' link on /dashboard navigates here.",
+        "On load the page calls staffApi.listStaff({ page, pageSize, search, role }) → GET /api/staff with the Bearer token and renders one row per staff member: full name, email, and role badge.",
+        "The role filter dropdown sends ?role= and resets to page 1; the search bar sends search= with debounced refetch; Prev/Next pagination buttons change the page param and refetch.",
+        "Loading placeholders render while the request is in flight; on 4xx/5xx the envelope message renders in an inline error banner — never a raw stack or raw JSON body (sec-006).",
+        "The page matches the approved design for /staff (table, role badges, filter bar, shared layout shell with sidebar).",
+        "Karma unit tests cover row rendering from a mocked listStaff response, the role-filter param, and the error banner state."
+      ],
+      "priority": 570,
+      "passes": false,
+      "dependsOn": [
+        "STORY-staff-001",
+        "STORY-router-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Dashboard",
+          "route": "/dashboard",
+          "htmlFile": "designs/dashboard.html",
+          "screenshotFile": "designs/dashboard.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-profile-001",
+      "title": "Build profile page from authenticated user payload",
+      "description": "Build ProfileComponent at /profile (route registered in STORY-router-001): displays the signed-in user's identity from GET /api/auth/me — full name, email, username, role, and tenant indicator — with the header user-menu 'Profile' link (STORY-dashboard-003) navigating here.",
+      "acceptanceCriteria": [
+        "/profile renders ProfileComponent via the shared router; the header user-menu 'Profile' link navigates here.",
+        "On load the page calls authApi.me() → GET /api/auth/me and renders firstName, lastName, email, username, and role; a loading state shows while the request is in flight.",
+        "A 401 (expired session) triggers the shared interceptor refresh-replay exactly once; if the refresh fails the user is redirected to /login.",
+        "The page shows the tenant name indicator consistent with the dashboard header.",
+        "The layout matches the approved design for /profile (identity card inside the shared layout shell).",
+        "Karma unit tests cover rendering from the me() payload and the 401 → redirect path."
+      ],
+      "priority": 580,
+      "passes": false,
+      "dependsOn": [
+        "STORY-auth-001",
+        "STORY-router-001",
+        "STORY-dashboard-003"
+      ],
+      "notes": "",
+      "effort": "low",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        },
+        {
+          "pageName": "Staff Directory",
+          "route": "/staff",
+          "htmlFile": "designs/staff.html",
+          "screenshotFile": "designs/staff.png"
+        },
+        {
+          "pageName": "Profile",
+          "route": "/profile",
+          "htmlFile": "designs/profile.html",
+          "screenshotFile": "designs/profile.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-jobs-list-001",
+      "title": "Implement GET api jobs list endpoint",
+      "description": "Add GET /api/jobs to the Express API returning the tenant's jobs with server-side pagination, optional customerId filter, optional status filter, and jobCode/name search — the data contract for the /jobs page table and the Add Job modal's refresh.",
+      "acceptanceCriteria": [
+        "GET /api/jobs?page=1&pageSize=25 with a valid token returns 200 { success: true, message, data: { items: JobListItemDto[], total, page, pageSize } } where JobListItemDto = { id, jobCode, name, status, customer: { id, companyName }, createdAt }.",
+        "Only jobs with tenantId equal to the token's tenant are returned; a ?customerId= filter restricts to that tenant's customer and a customerId from another tenant returns 400.",
+        "An optional ?status= filter matches the Job status enum (OPEN is the documented default active state); an invalid status value returns 400 with a message naming the offending field.",
+        "An optional search param does a case-insensitive substring match on jobCode or name; pagination defaults to page=1 pageSize=25 and clamps pageSize to 100 without an error.",
+        "A CUSTOMER-role token only sees jobs whose customer matches their TenantUser.customerId (ownership isolation); staff/admin roles see the full tenant set.",
+        "All responses use the uniform envelope (sec-006) with no raw Prisma stack traces; unit tests cover tenant scoping, filters, search, pagination, and CUSTOMER ownership in jobs.service.test.ts."
+      ],
+      "priority": 590,
+      "passes": false,
+      "dependsOn": [
+        "STORY-auth-001",
+        "STORY-jobs-001",
+        "STORY-data-004"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-jobs-list-002",
+      "title": "Build jobs list page with add job modal and customer prefill",
+      "description": "Build JobsListComponent at /jobs (route registered in STORY-router-001): a paginated jobs table with search + status filter, an 'Add Job' button opening the modal wired to jobsApi.createJob() → POST /api/jobs (STORY-jobs-001), and row-click navigation to /jobs-workspace/:jobCode (entry point for STORY-jobs-006). It is also the landing target of the 'Jobs' anchors on /customers and /customers/:id (href=/jobs?customerId=<id>), which pre-fills the customerId filter.",
+      "acceptanceCriteria": [
+        "/jobs renders JobsListComponent via the shared router; clicking a job row navigates to /jobs-workspace/:jobCode in the same tab and renders the workspace.",
+        "The page renders one row per job — jobCode, name, status badge, customer companyName — from jobsApi.listJobs({ page, pageSize, search, status, customerId }) → GET /api/jobs.",
+        "The 'Jobs' anchors from /customers and /customers/:id (href=/jobs?customerId=<id>) land here with the customerId filter pre-applied and the table filtered to that customer's jobs.",
+        "The 'Add Job' button opens the modal (alphanumeric jobCode, name, customer selector); submitting calls jobsApi.createJob() → POST /api/jobs, shows 'Job created', closes the modal, and refetches page 1.",
+        "A duplicate jobCode 400 renders the backend message ('Job code already exists') in the modal error banner; a non-alphanumeric jobCode shows field-level validation before any request fires.",
+        "Loading, empty, and error states render per the accessibility baseline; the table matches the approved design for /jobs.",
+        "Karma unit tests cover row rendering, customerId pre-fill from query params, and create-modal validation + success refetch."
+      ],
+      "priority": 600,
+      "passes": false,
+      "dependsOn": [
+        "STORY-jobs-list-001",
+        "STORY-jobs-005",
+        "STORY-router-001",
+        "STORY-customer-006"
+      ],
+      "notes": "",
+      "effort": "high",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-seed-001",
+      "title": "Create baseline seed script covering every schema table",
+      "description": "Create prisma/seed.ts in apps/api populating every schema table with deterministic baseline data: one Tenant, admin + staff users with bcrypt-hashed passwords, TenantUser memberships for every Role, Customers with a sales person, CustomerDocuments, Jobs spanning multiple statuses, nested JobFolders with JobFiles (exact sizeBytes/mimeType), and RefreshToken rows — so integration tests, verify specs, and the smoke test can rely on stable seeded fixtures.",
+      "acceptanceCriteria": [
+        "prisma/seed.ts runs via npx prisma db seed and is idempotent: re-running upserts by unique keys and never duplicates rows.",
+        "The seed creates exactly one Tenant, one SUPER_ADMIN user, one OFFICE_ADMIN user, one user per staff role (STAFF, SALES_PERSON, PRICING_COURIER, PRICING_AIR_SEA, CS_COURIER, CS_AIR_SEA), and one CUSTOMER user.",
+        "All seeded passwords are bcrypt-hashed with cost >= 10 and the script throws when NODE_ENV === 'production' (platform convention).",
+        "The seed creates at least 3 Customers (one with a sales person assigned) and one CustomerDocument per seeded customer.",
+        "The seed creates at least 5 Jobs with unique alphanumeric jobCodes spanning OPEN and closed statuses, at least one linked to each of two customers.",
+        "At least one job has a two-level nested JobFolder tree with JobFiles carrying exact sizeBytes and mimeType values consumed by GET /api/folders/:jobId.",
+        "A seeded RefreshToken row exists for at least one user so refresh-rotation integration tests can run without an API login.",
+        "Every table in the schema (Tenant, User, TenantUser, Customer, CustomerDocument, Job, JobFolder, JobFile, RefreshToken) receives at least one row; a post-seed verification query asserts a non-zero count per table."
+      ],
+      "priority": 610,
+      "passes": false,
+      "dependsOn": [
+        "STORY-data-006",
+        "STORY-setup-003"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-verify-auth-001",
+      "title": "Verify login flow and session contract end to end",
+      "description": "Playwright end-to-end verification proving the /login page (LoginComponent) is genuinely wired to POST /api/auth/login and the sec-004 dual-token session contract: login stores both tokens, the AuthGuard admits protected routes, reloads stay authenticated, logout clears storage, and an invalid login shows the backend error.",
+      "acceptanceCriteria": [
+        "Spec e2e/tests/verify-auth.spec.ts: visiting /login renders the login form; submitting seeded credentials fires POST /api/auth/login and lands on /dashboard.",
+        "A full page reload of /dashboard stays authenticated (tokens rehydrated from storage, no redirect to /login) — proving the dual-token session contract.",
+        "Submitting wrong credentials renders 'Invalid credentials' from the 401 envelope, stays on /login, and produces no error-level console entries.",
+        "Logout clears both tokens and redirects to /login; back-navigation to /dashboard redirects to /login again.",
+        "Visiting a protected route with no session redirects to /login with the return URL preserved; after login the original route renders.",
+        "The spec runs as one runnable Playwright file with zero skipped checks and asserts zero error-level console entries across the whole walk."
+      ],
+      "priority": 620,
+      "passes": false,
+      "dependsOn": [
+        "STORY-auth-002",
+        "STORY-seed-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Login",
+          "route": "/login",
+          "htmlFile": "designs/login.html",
+          "screenshotFile": "designs/login.png"
+        },
+        {
+          "pageName": "Force Password Change",
+          "route": "/change-password",
+          "htmlFile": "designs/change-password.html",
+          "screenshotFile": "designs/change-password.png"
+        },
+        {
+          "pageName": "Staff Directory",
+          "route": "/staff",
+          "htmlFile": "designs/staff.html",
+          "screenshotFile": "designs/staff.png"
+        },
+        {
+          "pageName": "Profile",
+          "route": "/profile",
+          "htmlFile": "designs/profile.html",
+          "screenshotFile": "designs/profile.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-verify-staff-001",
+      "title": "Verify staff page wiring to directory endpoint",
+      "description": "Playwright verification that /staff (StaffComponent) renders real data from GET /api/staff: the table rows reflect seeded staff, the role filter narrows results, the sidebar 'Staff' link navigates correctly, and a CUSTOMER-role session cannot see the directory.",
+      "acceptanceCriteria": [
+        "Spec e2e/tests/verify-staff.spec.ts logs in as an admin against the seeded tenant and asserts /staff renders one row per seeded non-CUSTOMER TenantUser from a real GET /api/staff request.",
+        "Selecting the SALES_PERSON role filter refetches with ?role=SALES_PERSON and narrows the table to sales people only.",
+        "The sidebar 'Staff' link navigates from /dashboard to /staff and the page renders inside the shared layout shell.",
+        "A CUSTOMER-role session visiting /staff is redirected by the guard or renders the 403 envelope message — no staff data leaks.",
+        "The spec asserts zero error-level console entries."
+      ],
+      "priority": 630,
+      "passes": false,
+      "dependsOn": [
+        "STORY-staff-002",
+        "STORY-seed-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Dashboard",
+          "route": "/dashboard",
+          "htmlFile": "designs/dashboard.html",
+          "screenshotFile": "designs/dashboard.png"
+        }
+      ]
+    },
+    {
+      "id": "STORY-verify-jobslist-001",
+      "title": "Verify jobs list page wiring end to end",
+      "description": "Playwright verification that /jobs (JobsListComponent) is wired to GET /api/jobs and POST /api/jobs: seeded jobs render, the customerId pre-fill from /customers works, the Add Job modal creates a job, and row-click reaches the workspace.",
+      "acceptanceCriteria": [
+        "Spec e2e/tests/verify-jobs-list.spec.ts seeds jobs via the API, logs in, and asserts /jobs renders one row per seeded job with jobCode and status badge from a real GET /api/jobs request.",
+        "Clicking the 'Jobs' anchor on /customers (href=/jobs?customerId=<id>) lands on /jobs with the table filtered to that customer's jobs.",
+        "The Add Job modal creates a job (POST /api/jobs fires, 'Job created' toast renders, the new row appears after the refetch); a duplicate jobCode shows the backend 400 message in the modal.",
+        "Clicking a job row navigates to /jobs-workspace/<jobCode> and the workspace 3-panel layout renders.",
+        "The spec asserts zero error-level console entries."
+      ],
+      "priority": 640,
+      "passes": false,
+      "dependsOn": [
+        "STORY-jobs-list-002",
+        "STORY-seed-001"
+      ],
+      "notes": "",
+      "effort": "medium",
+      "model": "deepseek",
+      "designRefs": [
+        {
+          "pageName": "Jobs List",
+          "route": "/jobs",
+          "htmlFile": "designs/jobs.html",
+          "screenshotFile": "designs/jobs.png"
+        },
+        {
+          "pageName": "Job Workspace",
+          "route": "/jobs-workspace/:jobCode",
+          "htmlFile": "designs/jobs-workspace-jobcode.html",
+          "screenshotFile": "designs/jobs-workspace-jobcode.png"
+        }
+      ]
+    }
+  ]
+}

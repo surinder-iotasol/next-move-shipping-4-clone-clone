@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - B2B Enterprise Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#302f39",
+                    "surface-container": "#f0ecf8",
+                    "surface-bright": "#fcf8ff",
+                    "primary-container": "#473bce",
+                    "outline-variant": "#c7c4d7",
+                    "secondary": "#5a5894",
+                    "on-background": "#1b1b23",
+                    "surface-container-high": "#eae6f3",
+                    "tertiary": "#6d2700",
+                    "secondary-fixed": "#e3dfff",
+                    "on-secondary-fixed": "#16124c",
+                    "surface": "#fcf8ff",
+                    "tertiary-container": "#933700",
+                    "surface-dim": "#dcd8e4",
+                    "secondary-container": "#bebafe",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "on-tertiary-fixed": "#360f00",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#42407a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#c4c0ff",
+                    "primary": "#2e19b7",
+                    "surface-container-highest": "#e4e1ed",
+                    "surface-container-low": "#f6f2fe",
+                    "outline": "#777586",
+                    "surface-variant": "#e4e1ed",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffdbcd",
+                    "primary-fixed": "#e3dfff",
+                    "on-secondary-container": "#4b4883",
+                    "surface-tint": "#5147d8",
+                    "on-tertiary-container": "#ffb99c",
+                    "on-primary-fixed-variant": "#3829c0",
+                    "inverse-primary": "#c4c0ff",
+                    "inverse-on-surface": "#f3effb",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#110068",
+                    "on-error": "#ffffff",
+                    "background": "#fcf8ff",
+                    "secondary-fixed-dim": "#c4c0ff",
+                    "on-primary-container": "#c7c3ff",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#464554",
+                    "on-surface": "#1b1b23",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#ffb596"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Inter"
+                    ],
+                    "display": [
+                            "Inter"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {}
+    },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="h-full bg-background text-on-background antialiased flex flex-col justify-center items-center relative overflow-hidden">
+<!-- Background Animation -->
+<div class="absolute inset-0 z-0">
+<!-- STITCH_SHADER_START:ANIMATION_2 class="absolute inset-0 w-full h-full opacity-30" -->
+<div class="absolute inset-0 w-full h-full opacity-30" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Create organic movement using sine waves
+    float noise1 = sin(uv.x * 3.0 + u_time * 0.5) * 0.5 + 0.5;
+    float noise2 = sin(uv.y * 2.0 - u_time * 0.3) * 0.5 + 0.5;
+    
+    // Base color (Light background)
+    vec3 color1 = vec3(1.0, 1.0, 1.0); 
+    // Primary Ashbyhq Purple (#473bce)
+    vec3 color2 = vec3(0.278, 0.231, 0.808); 
+    // Accent Blue (#0000ee)
+    vec3 color3 = vec3(0.0, 0.0, 0.933);
+    
+    // Mix colors based on noise and position
+    float mixFactor1 = smoothstep(0.3, 0.7, noise1 * noise2 + uv.x * 0.2);
+    float mixFactor2 = smoothstep(0.4, 0.8, noise2 * 0.8 + uv.y * 0.3);
+    
+    vec3 finalColor = mix(color1, color2, mixFactor1 * 0.15); // Subtle purple
+    finalColor = mix(finalColor, color3, mixFactor2 * 0.1);    // Subtle blue accent
+    
+    gl_FragColor = vec4(finalColor, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+</div>
+<!-- Main Content -->
+<main class="relative z-10 w-full max-w-md px-4 sm:px-6">
+<!-- Logo/Branding -->
+<div class="text-center mb-8">
+<h1 class="text-3xl font-black text-primary tracking-tight">B2B Enterprise Portal</h1>
+<p class="text-on-surface-variant mt-2 text-sm font-medium">Secure Access Node</p>
+</div>
+<!-- Login Card -->
+<div class="bg-surface-container-lowest shadow-xl rounded-xl p-8 border border-outline-variant/30 backdrop-blur-sm bg-white/90">
+<h2 class="text-xl font-bold text-on-surface mb-6">Sign In to Continue</h2>
+<!-- Error Banner (Hidden by default) -->
+<div class="hidden mb-6 p-4 rounded-lg bg-error-container text-on-error-container text-sm font-medium flex items-center gap-3" id="error-banner">
+<span class="material-symbols-outlined shrink-0" data-icon="error" style="font-variation-settings: 'FILL' 1;">error</span>
+<p>Invalid credentials provided. Please check your username and password and try again.</p>
+</div>
+<form action="#" class="space-y-6" method="POST">
+<!-- Email Field -->
+<div>
+<label class="block text-sm font-semibold leading-6 text-on-surface" for="email">Email / Username</label>
+<div class="mt-2 relative rounded-md shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="mail">mail</span>
+</div>
+<input class="block w-full rounded-lg border-0 py-3 pl-10 text-on-surface shadow-sm ring-1 ring-inset ring-outline-variant placeholder:text-outline focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 bg-surface-bright" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<div class="flex items-center justify-between">
+<label class="block text-sm font-semibold leading-6 text-on-surface" for="password">Password</label>
+<div class="text-sm">
+<a class="font-semibold text-primary hover:text-primary-container transition-colors" href="#">Forgot password?</a>
+</div>
+</div>
+<div class="mt-2 relative rounded-md shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+</div>
+<input class="block w-full rounded-lg border-0 py-3 pl-10 text-on-surface shadow-sm ring-1 ring-inset ring-outline-variant placeholder:text-outline focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 bg-surface-bright" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<!-- Submit Button -->
+<div>
+<!-- Replaced generic color class with inline style for the requested accent #0000ee, but using Tailwind primary class as base to stick to system where possible, overriding bg just for this specific prompt requirement -->
+<button class="flex w-full justify-center items-center gap-2 rounded-lg px-3 py-3 text-sm font-bold leading-6 text-white shadow-sm hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-all active:scale-95" style="background-color: #0000ee;" type="submit">
+                        Sign In
+                        <span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- Quick Links -->
+<div class="mt-8 pt-6 border-t border-outline-variant flex flex-col gap-3 text-center text-sm">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="/dashboard">Go to Dashboard (Mock)</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="/force-password-change">Force Password Change</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-medium" href="/not-found">Simulate Not Found</a>
+</div>
+</div>
+</main>
+<!-- Optional: Micro-interaction script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('form');
+            const errorBanner = document.getElementById('error-banner');
+            const emailInput = document.getElementById('email');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Simulate an error for demonstration purposes if email is 'error@demo.com'
+                if(emailInput.value === 'error@demo.com') {
+                    errorBanner.classList.remove('hidden');
+                    errorBanner.classList.add('animate-pulse');
+                    setTimeout(() => errorBanner.classList.remove('animate-pulse'), 1000);
+                } else {
+                    errorBanner.classList.add('hidden');
+                    // In a real app, you would submit or redirect here
+                    console.log('Login successful');
+                }
+            });
+        });
+    </script>
+</body></html>

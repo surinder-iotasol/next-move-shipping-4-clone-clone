@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Customer Directory - B2B Enterprise Portal</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#302f39",
+                    "surface-container": "#f0ecf8",
+                    "surface-bright": "#fcf8ff",
+                    "primary-container": "#473bce",
+                    "outline-variant": "#c7c4d7",
+                    "secondary": "#5a5894",
+                    "on-background": "#1b1b23",
+                    "surface-container-high": "#eae6f3",
+                    "tertiary": "#6d2700",
+                    "secondary-fixed": "#e3dfff",
+                    "on-secondary-fixed": "#16124c",
+                    "surface": "#fcf8ff",
+                    "tertiary-container": "#933700",
+                    "surface-dim": "#dcd8e4",
+                    "secondary-container": "#bebafe",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "on-tertiary-fixed": "#360f00",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#42407a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#c4c0ff",
+                    "primary": "#2e19b7",
+                    "surface-container-highest": "#e4e1ed",
+                    "surface-container-low": "#f6f2fe",
+                    "outline": "#777586",
+                    "surface-variant": "#e4e1ed",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed": "#ffdbcd",
+                    "primary-fixed": "#e3dfff",
+                    "on-secondary-container": "#4b4883",
+                    "surface-tint": "#5147d8",
+                    "on-tertiary-container": "#ffb99c",
+                    "on-primary-fixed-variant": "#3829c0",
+                    "inverse-primary": "#c4c0ff",
+                    "inverse-on-surface": "#f3effb",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#110068",
+                    "on-error": "#ffffff",
+                    "background": "#fcf8ff",
+                    "secondary-fixed-dim": "#c4c0ff",
+                    "on-primary-container": "#c7c3ff",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#464554",
+                    "on-surface": "#1b1b23",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#ffb596"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Inter", "sans-serif"
+                    ],
+                    "display": [
+                            "Inter", "sans-serif"
+                    ],
+                    "body": [
+                            "Inter", "sans-serif"
+                    ],
+                    "label": [
+                            "Inter", "sans-serif"
+                    ]
+            },
+            "fontSize": {}
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="h-screen w-64 fixed left-0 top-0 flex flex-col py-4 border-r border-outline-variant bg-surface-container-low z-40 hidden md:flex">
+<!-- Header -->
+<div class="px-6 mb-8 flex items-center gap-4">
+<img class="w-10 h-10 rounded-lg object-cover bg-surface-container-highest" data-alt="A polished, modern corporate logo for 'Acme Corp', featuring crisp geometric shapes in deep primary blue and pristine white, conveying a sense of enterprise reliability and technical sophistication in a well-lit studio environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq5NzfTQXgIEfkZWwuAQtdGyl3JzoipgtCOvVvuE2tqSd1W7-PsG5MP-qOmwH9rHbzwGREaWeUkj25zuWTNGJV3PHXyvLt3VDFyGvOzmrJalJ8TpP9UFgt2zhLXqJbkKxXC7UUUlJm5nrsTOe-hjGUTOjEDUEC85WOYn-iGfujvlTQbLfsQVpkmvfgXGxhXGUfeuSVM2zBX9JTGMFafnGRwNlDzK8YAWFqzeTc5DltAk0UWq9rUozeLig25bzBDjVEfhQ1yLWsjQQ"/>
+<div>
+<div class="text-lg font-bold text-on-surface font-headline">Acme Corp</div>
+<div class="text-xs text-on-surface-variant font-label">Standard Tenant</div>
+</div>
+</div>
+<!-- Main Navigation -->
+<div class="flex-1 overflow-y-auto px-2">
+<!-- Dashboard (Inactive) -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 font-label text-label-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Customer Directory (Active) -->
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container font-bold rounded-lg px-4 py-3 mx-2 my-1 font-label text-label-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span>Customer Directory</span>
+</a>
+<!-- Jobs List (Inactive) -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 font-label text-label-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span>Jobs List</span>
+</a>
+<!-- Staff Directory (Inactive) -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 font-label text-label-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span>Staff Directory</span>
+</a>
+</div>
+<!-- Footer Navigation -->
+<div class="mt-auto pt-4 border-t border-outline-variant px-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 font-label text-label-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg px-4 py-3 mx-2 my-1 font-label text-label-lg transition-all scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center w-full px-6 py-2 sticky top-0 bg-surface-container-lowest z-50 border-b border-outline-variant shadow-sm h-16">
+<!-- Left: Brand & Search -->
+<div class="flex items-center gap-8 flex-1">
+<div class="text-xl font-black text-primary font-headline whitespace-nowrap">
+                    B2B Enterprise Portal
+                </div>
+<!-- Search Bar -->
+<div class="relative w-full max-w-md hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface pl-10 pr-4 py-2 rounded-full border-none focus:ring-2 focus:ring-primary text-sm font-body" placeholder="Search across portal..." type="text"/>
+</div>
+</div>
+<!-- Right: Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary font-label text-sm px-4 py-2 rounded-full hover:bg-surface-tint active:opacity-80 transition-all font-medium whitespace-nowrap hidden sm:block shadow-sm">
+                    Create New
+                </button>
+<div class="flex items-center gap-2 border-l border-outline-variant pl-4 ml-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="ml-2 rounded-full overflow-hidden border-2 border-transparent hover:border-primary-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+<img alt="User profile photo" class="w-8 h-8 object-cover" data-alt="A professional headshot of an executive user, well-lit with soft natural light, smiling subtly, wearing modern business casual attire against a clean, bright minimalist background. The style is premium corporate photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPE1dSOJoQPAX39hKbgO-fz8a7VHPvzqgeYtt3mmhewKlzeu2y7u_eaPZqC1x2Ls4RNB4RFn9nk_LevMAXzTGHvNMOdtettk-F7F5FB_HG0YAdr1Cq8b6hYWqu9uc39WPvbQuQAYYaYVzeZ2XDrnr3niaZjKwd8SOW40aI0yGUkLnwKIfPFcXramKsZwVj0hsp64JM-gzUNJU4uUZyIzRHPNZ7VkRxYmjO6loF7qyBJ-qbmIF47SyN4z0oRWgCxIxVMEDzyqQEFJk"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 p-6 md:p-8 lg:p-10 max-w-7xl mx-auto w-full flex flex-col">
+<!-- Page Header & Actions -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-headline font-bold text-on-background tracking-tight">Customer Directory</h1>
+<p class="text-on-surface-variant font-body mt-1">Manage and view all registered enterprise clients.</p>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<!-- Local Search/Filter -->
+<div class="relative flex-1 sm:w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full bg-surface-container-lowest text-on-surface pl-9 pr-4 py-2.5 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-sm font-body shadow-sm transition-all" placeholder="Find customer..." type="text"/>
+</div>
+<button class="flex items-center justify-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-lg font-label font-medium hover:bg-surface-tint active:scale-95 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+<span class="hidden sm:inline">Add Customer</span>
+</button>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm flex flex-col flex-1 overflow-hidden">
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse whitespace-nowrap">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-low text-on-surface-variant font-label text-sm uppercase tracking-wider">
+<th class="px-6 py-4 font-semibold">Name</th>
+<th class="px-6 py-4 font-semibold">ID</th>
+<th class="px-6 py-4 font-semibold">Status</th>
+<th class="px-6 py-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body text-sm text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs">G</div>
+<a class="font-medium text-primary hover:underline underline-offset-2" href="#">Global Industries Ltd.</a>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-mono text-xs">CUST-8923</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container text-on-secondary-container">
+                                        Active
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-error hover:bg-error-container rounded-full transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" title="Delete Customer">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold text-xs">S</div>
+<a class="font-medium text-primary hover:underline underline-offset-2" href="#">Synergy Tech Partners</a>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-mono text-xs">CUST-7741</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container text-on-secondary-container">
+                                        Active
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-error hover:bg-error-container rounded-full transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" title="Delete Customer">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center font-bold text-xs">V</div>
+<a class="font-medium text-primary hover:underline underline-offset-2" href="#">Vanguard Solutions</a>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-mono text-xs">CUST-6522</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-variant text-on-surface-variant">
+                                        Pending
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-error hover:bg-error-container rounded-full transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" title="Delete Customer">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs">A</div>
+<a class="font-medium text-primary hover:underline underline-offset-2" href="#">Apex Manufacturing</a>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-mono text-xs">CUST-1094</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-container text-on-error-container">
+                                        Suspended
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-error hover:bg-error-container rounded-full transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" title="Delete Customer">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs">N</div>
+<a class="font-medium text-primary hover:underline underline-offset-2" href="#">Nexus Group Holdings</a>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-mono text-xs">CUST-4431</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container text-on-secondary-container">
+                                        Active
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-outline hover:text-error hover:bg-error-container rounded-full transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" title="Delete Customer">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="border-t border-outline-variant bg-surface-container-lowest px-6 py-4 flex items-center justify-between mt-auto">
+<div class="text-sm text-on-surface-variant font-body">
+                        Showing <span class="font-medium text-on-surface">1</span> to <span class="font-medium text-on-surface">5</span> of <span class="font-medium text-on-surface">24</span> results
+                    </div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 border border-outline-variant rounded text-sm font-medium text-outline cursor-not-allowed bg-surface-container-lowest" disabled="">Previous</button>
+<button class="px-3 py-1.5 border border-outline-variant rounded text-sm font-medium text-on-surface hover:bg-surface-container transition-colors bg-surface-container-lowest">Next</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

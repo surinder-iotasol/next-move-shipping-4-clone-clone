@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface-container-low text-on-surface" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Acme Corp Dashboard - B2B Enterprise Portal</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config injected from Brand Anchors -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#302f39",
+                      "surface-container": "#f0ecf8",
+                      "surface-bright": "#fcf8ff",
+                      "primary-container": "#473bce",
+                      "outline-variant": "#c7c4d7",
+                      "secondary": "#5a5894",
+                      "on-background": "#1b1b23",
+                      "surface-container-high": "#eae6f3",
+                      "tertiary": "#6d2700",
+                      "secondary-fixed": "#e3dfff",
+                      "on-secondary-fixed": "#16124c",
+                      "surface": "#fcf8ff",
+                      "tertiary-container": "#933700",
+                      "surface-dim": "#dcd8e4",
+                      "secondary-container": "#bebafe",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "on-tertiary-fixed": "#360f00",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#42407a",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed-dim": "#c4c0ff",
+                      "primary": "#2e19b7",
+                      "surface-container-highest": "#e4e1ed",
+                      "surface-container-low": "#f6f2fe",
+                      "outline": "#777586",
+                      "surface-variant": "#e4e1ed",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed": "#ffdbcd",
+                      "primary-fixed": "#e3dfff",
+                      "on-secondary-container": "#4b4883",
+                      "surface-tint": "#5147d8",
+                      "on-tertiary-container": "#ffb99c",
+                      "on-primary-fixed-variant": "#3829c0",
+                      "inverse-primary": "#c4c0ff",
+                      "inverse-on-surface": "#f3effb",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed": "#110068",
+                      "on-error": "#ffffff",
+                      "background": "#fcf8ff",
+                      "secondary-fixed-dim": "#c4c0ff",
+                      "on-primary-container": "#c7c3ff",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#464554",
+                      "on-surface": "#1b1b23",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#ffb596"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": [
+                              "Inter"
+                      ],
+                      "display": [
+                              "Inter"
+                      ],
+                      "body": [
+                              "Inter"
+                      ],
+                      "label": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {}
+      },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
+    </style>
+</head>
+<body class="h-full flex font-body antialiased">
+<!-- SideNavBar (Hidden on Mobile) -->
+<aside class="hidden md:flex flex-col h-full py-4 border-r border-outline-variant bg-surface-container-low dark:bg-surface-dim h-screen w-64 fixed left-0 top-0">
+<!-- Header -->
+<div class="px-6 pb-6 flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xl overflow-hidden shrink-0">
+<img alt="Tenant Logo" class="w-full h-full object-cover" data-alt="A clean, minimalist logo for a B2B enterprise software company called Acme Corp. High-key lighting, bright light mode background, vector art style with deep blacks and sharp edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi9qPnUR_ICPIAINbG9L-k_kMyrmg4QTMevriID-stxch8F9owvTquKC3q-oJWf2efolyYPKwHseBZoMk5rHZhcFP4xn3-jON-uekmdXuo_OaQUBRVmUCSMYeFNzMgaUcGiHrKWMW1EBpKDuz31l5ZaD1wTIddAUKKxPqeIkOBXTS8bAuBBUdNzu0XukcDddjuoIEOX24SXMkUeKs7Z4r3XyDsZVbODuT_fgLYzUUoYRoMVd1eBXC0u49hvh9dd8LhsPlRTdjAJKM"/>
+</div>
+<div>
+<h2 class="text-lg font-bold text-on-surface dark:text-inverse-on-surface">Acme Corp</h2>
+<p class="text-xs text-on-surface-variant dark:text-surface-variant">Standard Tenant</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 overflow-y-auto px-2 space-y-1 font-label text-label-lg">
+<a class="flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-lg bg-primary-container text-on-primary-container dark:bg-primary-fixed-dim dark:text-on-primary-fixed font-bold hover:bg-surface-container-highest dark:hover:bg-inverse-surface transition-all scale-95 active:scale-90 transition-transform" href="/dashboard">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard" data-weight="fill">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface transition-all scale-95 active:scale-90 transition-transform" href="/customer-directory">
+<span class="material-symbols-outlined text-lg" data-icon="group" data-weight="fill">group</span>
+<span>Customer Directory</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface transition-all scale-95 active:scale-90 transition-transform" href="/jobs-list">
+<span class="material-symbols-outlined text-lg" data-icon="work" data-weight="fill">work</span>
+<span>Jobs List</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface transition-all scale-95 active:scale-90 transition-transform" href="/staff-directory">
+<span class="material-symbols-outlined text-lg" data-icon="badge" data-weight="fill">badge</span>
+<span>Staff Directory</span>
+</a>
+</nav>
+<!-- Footer Navigation -->
+<div class="px-2 pt-4 border-t border-outline-variant dark:border-outline">
+<a class="flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface transition-all scale-95 active:scale-90 transition-transform" href="/settings">
+<span class="material-symbols-outlined text-lg" data-icon="settings" data-weight="fill">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface transition-all scale-95 active:scale-90 transition-transform" href="/support">
+<span class="material-symbols-outlined text-lg" data-icon="contact_support" data-weight="fill">contact_support</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen bg-background">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-6 py-2 sticky top-0 bg-white z-50 docked full-width top-0 z-40 bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm font-body text-label-md">
+<!-- Left Side: Brand/Search -->
+<div class="flex items-center space-x-6">
+<!-- Mobile Menu Button (Visible only on mobile) -->
+<button class="md:hidden p-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors focus:outline-none">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-xl font-black text-primary dark:text-primary-fixed hidden sm:block">
+                    B2B Enterprise Portal
+                </div>
+<div class="relative max-w-md w-full ml-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">search</span>
+<input class="w-full bg-surface-container dark:bg-surface-variant text-on-surface placeholder:text-on-surface-variant pl-10 pr-4 py-2 border-none rounded-full focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Right Side: Actions & Profile -->
+<div class="flex items-center space-x-2 sm:space-x-4">
+<button class="p-2 rounded-full text-on-surface-variant dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-surface-variant/10 transition-colors cursor-pointer active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="notifications" data-weight="fill">notifications</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant dark:text-surface-variant hover:bg-surface-container dark:hover:bg-on-surface-variant/10 transition-colors cursor-pointer active:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="help" data-weight="fill">help</span>
+</button>
+<button class="hidden sm:flex items-center space-x-2 px-4 py-2 bg-primary text-on-primary rounded-full font-medium hover:bg-primary/90 transition-colors cursor-pointer active:opacity-80 transition-opacity ml-2">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>Create New</span>
+</button>
+<div class="h-8 w-px bg-outline-variant dark:bg-outline mx-2 hidden sm:block"></div>
+<a class="w-10 h-10 rounded-full border border-outline-variant dark:border-outline overflow-hidden hover:bg-surface-container dark:hover:bg-on-surface-variant/10 transition-colors cursor-pointer active:opacity-80 transition-opacity shrink-0" href="/profile">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="Professional headshot of an executive in a bright, modern office space. High-key lighting, bright white and deep blue tones, clean corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3CIAuUn5DTvClc3rQPu_9oKfXeZlD5HkBkfBKXIcgT265fPym2qN6QOGp7r8rw6MU2rV4f-9OVGD_QhEWUX5orEqXS_8njMSu7JFfafJxz-7Md1nxFJhIJFF5FibBtTAcV2ZnImU4NPtkjXB1PsCu82FRIRulY30X2bGtRIHyaLQ1zu8sfjaCU81GLEVDzrHaDyX-nTmksMqGGpPF0rHkvKD24epi1uzhJgoGojrUQrk4C77U8BGc6TsKi54IQ_umHKNcwLuB_lk"/>
+</a>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-y-auto p-6 lg:p-10 space-y-8">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between space-y-4 sm:space-y-0">
+<div>
+<h1 class="text-3xl font-headline font-bold text-on-surface">Dashboard Overview</h1>
+<p class="text-on-surface-variant mt-1">Welcome back to Acme Corp. Here is what's happening today.</p>
+</div>
+<div class="flex items-center space-x-3">
+<select class="bg-surface-container border-none rounded-lg text-sm font-medium py-2 pl-3 pr-8 focus:ring-2 focus:ring-primary cursor-pointer text-on-surface">
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>This Quarter</option>
+</select>
+</div>
+</div>
+<!-- Bento Grid: Stat Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-container text-on-primary-container rounded-lg">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="flex items-center text-sm font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_up</span>
+                            +12.5%
+                        </span>
+</div>
+<div>
+<p class="text-sm font-medium text-on-surface-variant mb-1">Total Customers</p>
+<h3 class="text-3xl font-bold font-display text-on-surface">2,405</h3>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="material-symbols-outlined">work</span>
+</div>
+<span class="flex items-center text-sm font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_up</span>
+                            +8.2%
+                        </span>
+</div>
+<div>
+<p class="text-sm font-medium text-on-surface-variant mb-1">Active Jobs</p>
+<h3 class="text-3xl font-bold font-display text-on-surface">184</h3>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col justify-between hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary-container text-on-tertiary-container rounded-lg">
+<span class="material-symbols-outlined">badge</span>
+</div>
+<span class="flex items-center text-sm font-semibold text-rose-600 bg-rose-50 px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_down</span>
+                            -2.1%
+                        </span>
+</div>
+<div>
+<p class="text-sm font-medium text-on-surface-variant mb-1">Active Staff</p>
+<h3 class="text-3xl font-bold font-display text-on-surface">42</h3>
+</div>
+</div>
+</div>
+<!-- Bento Grid: Charts & Complex Widgets -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Trend Chart (Takes 2 columns on lg) -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-bold text-on-surface">Revenue Trend</h3>
+<button class="text-primary text-sm font-medium hover:underline">View Full Report</button>
+</div>
+<!-- Simulated Area Chart -->
+<div class="flex-1 relative w-full h-64 rounded-lg bg-surface-container overflow-hidden">
+<!-- Abstract representation of a chart using Tailwind patterns/gradients for demo -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+<svg class="absolute bottom-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,100 L0,70 Q25,40 50,60 T100,20 L100,100 Z" fill="rgba(71, 59, 206, 0.3)"></path>
+<path d="M0,70 Q25,40 50,60 T100,20" fill="none" stroke="#473bce" stroke-width="2"></path>
+</svg>
+<!-- Grid lines -->
+<div class="absolute inset-0 flex flex-col justify-between py-4 pointer-events-none opacity-20">
+<div class="w-full h-px bg-outline"></div>
+<div class="w-full h-px bg-outline"></div>
+<div class="w-full h-px bg-outline"></div>
+<div class="w-full h-px bg-outline"></div>
+</div>
+</div>
+</div>
+<!-- Distribution Donut Chart (Takes 1 column) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-6 flex flex-col">
+<h3 class="text-lg font-bold text-on-surface mb-6">Job Distribution</h3>
+<div class="flex-1 flex flex-col items-center justify-center">
+<!-- Simulated Donut Chart using CSS -->
+<div class="relative w-48 h-48 rounded-full flex items-center justify-center mb-6" style="background: conic-gradient(#473bce 0% 45%, #933700 45% 75%, #5a5894 75% 100%);">
+<!-- Donut Hole -->
+<div class="w-32 h-32 bg-surface-container-lowest rounded-full flex items-center justify-center shadow-inner">
+<div class="text-center">
+<span class="block text-2xl font-bold text-on-surface">184</span>
+<span class="block text-xs text-on-surface-variant uppercase tracking-wider">Total</span>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="w-full space-y-3 mt-auto">
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center">
+<div class="w-3 h-3 rounded-full bg-primary-container mr-2"></div>
+<span class="text-on-surface">Maintenance</span>
+</div>
+<span class="font-medium">45%</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center">
+<div class="w-3 h-3 rounded-full bg-tertiary-container mr-2"></div>
+<span class="text-on-surface">Installation</span>
+</div>
+<span class="font-medium">30%</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center">
+<div class="w-3 h-3 rounded-full bg-secondary mr-2"></div>
+<span class="text-on-surface">Consulting</span>
+</div>
+<span class="font-medium">25%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity Widget (Role-based focus) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+<h3 class="text-lg font-bold text-on-surface">Recent Activity</h3>
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<ul class="divide-y divide-outline-variant">
+<li class="p-4 hover:bg-surface-container-low transition-colors flex items-start space-x-4">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+</div>
+<div class="flex-1">
+<p class="text-sm text-on-surface"><span class="font-bold">Job #4092</span> marked as complete by <span class="font-medium text-primary">Sarah Jenkins</span>.</p>
+<p class="text-xs text-on-surface-variant mt-1">10 minutes ago • Maintenance</p>
+</div>
+</li>
+<li class="p-4 hover:bg-surface-container-low transition-colors flex items-start space-x-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<div class="flex-1">
+<p class="text-sm text-on-surface">New customer <span class="font-bold">TechFlow Inc.</span> onboarded.</p>
+<p class="text-xs text-on-surface-variant mt-1">2 hours ago • Sales Dept</p>
+</div>
+</li>
+<li class="p-4 hover:bg-surface-container-low transition-colors flex items-start space-x-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex-1">
+<p class="text-sm text-on-surface">SLA warning on <span class="font-bold">Job #4095</span>. Escalation required.</p>
+<p class="text-xs text-on-surface-variant mt-1">4 hours ago • System Alert</p>
+</div>
+</li>
+</ul>
+<div class="px-6 py-3 border-t border-outline-variant bg-surface-bright text-center">
+<button class="text-sm font-medium text-primary hover:text-primary-fixed-dim transition-colors">View All Activity</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -38,6 +38,55 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Create root package.json with workspace config",
+      "description": "Create the root package.json for the NextMove monorepo declaring name nextmove, private true, workspaces over apps/*, packageManager npm@10, engines.node 22.x.",
+      "acceptanceCriteria": [
+        "Root package.json exists with name nextmove, private true, workspaces array containing apps/*, packageManager npm@10, engines.node 22.x",
+        "File parses as valid JSON via node JSON.parse"
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Add turbo 2.x with turbo run scripts",
+      "description": "Add turbo 2.x to devDependencies in the root package.json and define build, test, lint scripts delegating to turbo run.",
+      "acceptanceCriteria": [
+        "devDependencies pin turbo 2.x (e.g. ^2.5.0)",
+        "scripts define build, test, lint as turbo run build, turbo run test, turbo run lint"
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Commit root package.json scaffold to git",
+      "description": "Commit the scaffolded root package.json to the existing git repository so the scaffold is tracked history.",
+      "acceptanceCriteria": [
+        "git status shows no uncommitted changes to package.json with git commands exiting 0",
+        "git log includes a commit touching the root package.json"
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Verify Root package.json Workspace Declaration",
       "description": "Verify the committed root package.json declares the NextMove monorepo: name nextmove, private true, workspaces apps/*, packageManager npm@10, engines node 22.x. Fix only if a field is missing or wrong.",
       "acceptanceCriteria": [

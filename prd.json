@@ -38,6 +38,55 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Verify root package.json workspace config",
+      "description": "Verify the committed root package.json declares name nextmove, private true, workspaces apps/*, packageManager npm@10, and engines.node 22.x. Update and commit the file only if a field is missing or wrong.",
+      "acceptanceCriteria": [
+        "Root package.json contains name nextmove, private true, workspaces [\"apps/*\"], packageManager npm@10, and engines.node 22.x.",
+        "Any corrections made are committed to the existing git repository with git commands exiting 0."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "root package.json already committed at 6cc5d66; verify only, fix if drifted.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify turbo 2.x devDependency",
+      "description": "Verify root package.json devDependencies pin turbo 2.x and that npm install resolves a working turbo binary. Add the dependency and commit if missing.",
+      "acceptanceCriteria": [
+        "devDependencies contains turbo with a 2.x semver range.",
+        "npm install exits 0 and node_modules/.bin/turbo --version reports a 2.x version."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "turbo ^2.5.0 already declared in committed package.json; verify resolution works.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify turbo run scripts",
+      "description": "Verify root package.json scripts define build, test, lint as turbo run build, turbo run test, turbo run lint. Update and commit if any script is missing or wrong.",
+      "acceptanceCriteria": [
+        "scripts.build, scripts.test, scripts.lint are exactly turbo run build, turbo run test, turbo run lint.",
+        "Final package.json state is committed with git commands exiting 0."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "scripts already present in committed package.json; verify only.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Root package.json With Monorepo Workspaces",
       "description": "Create the root package.json for the NextMove monorepo with name nextmove, private true, workspaces array apps/*, packageManager pinned to npm@10, engines node 22.x.",
       "acceptanceCriteria": [

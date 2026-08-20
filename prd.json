@@ -38,6 +38,69 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Create Root NextMove package.json",
+      "description": "Create the root package.json declaring name nextmove, private true, npm workspaces over apps/*, packageManager pinned to npm@10, and engines.node 22.x.",
+      "acceptanceCriteria": [
+        "Root package.json exists with name nextmove, private true, and workspaces array containing apps/*",
+        "packageManager is pinned to npm@10 and engines.node is 22.x"
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "model": "deepseek",
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Pin turbo 2.x devDependency",
+      "description": "Add turbo 2.x to the root package.json devDependencies so the monorepo pins a turbo major version.",
+      "acceptanceCriteria": [
+        "Root package.json devDependencies pin turbo 2.x (e.g. ^2.5.0)"
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "model": "deepseek",
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Add turbo run scripts",
+      "description": "Add build, test, and lint scripts to the root package.json that delegate to turbo run.",
+      "acceptanceCriteria": [
+        "scripts.build, scripts.test, scripts.lint equal turbo run build, turbo run test, turbo run lint"
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "model": "deepseek",
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Commit scaffold files to git",
+      "description": "Commit the root package.json scaffold files to the existing git repository.",
+      "acceptanceCriteria": [
+        "Scaffold files are committed to the existing git repository with git commands exiting 0"
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "model": "deepseek",
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Create Root NextMove package.json With npm Workspaces",
       "description": "Create the root package.json for the NextMove monorepo declaring name nextmove, private true, workspaces over apps/*, packageManager pinned to npm@10, and engines.node 22.x.",
       "acceptanceCriteria": [

@@ -38,6 +38,89 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Verify Root package.json Workspaces Fields",
+      "description": "Read-only verification of the committed root package.json: confirm name is nextmove, private is true, workspaces contains apps/*, and the existing test suite passes.",
+      "acceptanceCriteria": [
+        "Root package.json parses as valid JSON with name nextmove, private true, and workspaces equal to [\"apps/*\"].",
+        "node --test test/package.test.cjs exits 0 with all tests passing."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Work already committed in 6cc5d66; this story verifies only, no new files expected.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify packageManager npm@10 Pin",
+      "description": "Confirm package.json pins packageManager to npm@10 and that the active npm CLI reports a 10.x major version satisfying the pin.",
+      "acceptanceCriteria": [
+        "packageManager field in root package.json equals npm@10.",
+        "npm --version reports a 10.x version."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Read-only check; the pin was committed in 6cc5d66.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify Node 22.x Engines Field",
+      "description": "Confirm package.json declares engines.node as 22.x and that the active Node runtime satisfies that range.",
+      "acceptanceCriteria": [
+        "engines.node in root package.json equals 22.x.",
+        "node --version reports an active 22.x runtime."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Read-only check; the engines field was committed in 6cc5d66.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Verify turbo 2.x DevDependency With Scripts",
+      "description": "Confirm devDependencies pins turbo to a 2.x range, installed turbo resolves to 2.x, and scripts build, test, lint invoke turbo run.",
+      "acceptanceCriteria": [
+        "devDependencies.turbo matches a 2.x semver range and node_modules/turbo resolves to a 2.x version.",
+        "scripts build, test, lint equal turbo run build, turbo run test, turbo run lint respectively."
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "notes": "turbo 2.10.11 already installed and committed; verify only.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ae",
+      "title": "Restore Story Completion Marker",
+      "description": "Restore the missing .story-updates/STORY-setup-001a.passed marker file and commit it with an explicit pathspec so git commands exit 0.",
+      "acceptanceCriteria": [
+        ".story-updates/STORY-setup-001a.passed exists in the working tree.",
+        "git add with an explicit pathspec for the marker, followed by git commit, exits 0 and commits only that file."
+      ],
+      "priority": 60.5,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ad"
+      ],
+      "notes": "Previous attempt was killed with exit 143 before the marker commit; this is the only uncommitted gap.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Verify base root package.json with workspaces",
       "description": "Verify the committed root package.json declares name nextmove, private true, workspaces containing apps/*, and parses as valid JSON in the existing git repository.",
       "acceptanceCriteria": [

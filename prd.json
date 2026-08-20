@@ -38,6 +38,93 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Verify root package.json workspace manifest",
+      "description": "Add or ensure passing node:test assertions in test/package.test.cjs covering the root package.json identity, workspaces array, and pinned npm and Node engine fields.",
+      "acceptanceCriteria": [
+        "test/package.test.cjs contains passing assertions that package.json has name nextmove, private true, and workspaces including apps/*.",
+        "test/package.test.cjs contains passing assertions that packageManager is npm@10 and engines.node is 22.x.",
+        "Running node test/package.test.cjs exits with code 0."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify turbo 2.x devDependency pin",
+      "description": "Add or ensure a passing node:test assertion that the root package.json pins turbo as a 2.x devDependency.",
+      "acceptanceCriteria": [
+        "test/package.test.cjs contains a passing assertion that devDependencies.turbo is ^2.5.0 and matches the 2.x range.",
+        "Running node test/package.test.cjs exits with code 0."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify turbo run build, test, lint scripts",
+      "description": "Add or ensure passing node:test assertions that the root package.json build, test, lint scripts run the matching turbo commands.",
+      "acceptanceCriteria": [
+        "test/package.test.cjs contains passing assertions that scripts.build, scripts.test, scripts.lint equal turbo run build, turbo run test, turbo run lint.",
+        "npm pkg get scripts prints the three turbo run entries.",
+        "Running node test/package.test.cjs exits with code 0."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Wire npm test to node test runner",
+      "description": "Modify root package.json so npm test runs the node:test suite with node --test while keeping the three turbo run scripts intact.",
+      "acceptanceCriteria": [
+        "Root package.json scripts.test is node --test and npm test exits with code 0.",
+        "Root package.json scripts.build and scripts.lint remain turbo run build and turbo run lint.",
+        "The package.json change is committed with a git commit exiting 0."
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ae",
+      "title": "Verify committed root manifest state",
+      "description": "Verify the committed monorepo root state: tracked scaffold files, lockfile turbo entry matching package.json, Node 22 runtime, git commands exiting 0.",
+      "acceptanceCriteria": [
+        "git ls-files lists package.json, package-lock.json, test/package.test.cjs and each git status command exits 0.",
+        "package-lock.json contains a node_modules/turbo entry with version 2.x matching package.json devDependencies.",
+        "node --version reports 22.x, satisfying the engines.node requirement."
+      ],
+      "priority": 60.5,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ad"
+      ],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Verify Root package.json Workspaces Fields",
       "description": "Read-only verification of the committed root package.json: confirm name is nextmove, private is true, workspaces contains apps/*, and the existing test suite passes.",
       "acceptanceCriteria": [

@@ -38,6 +38,55 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Verify Root package.json Workspace Declaration",
+      "description": "Verify the root package.json declares name nextmove, private true, workspaces apps/*, packageManager npm@10, engines.node 22.x. Already committed in 6cc5d66; verify only, edit only if a field differs.",
+      "acceptanceCriteria": [
+        "Root package.json contains name nextmove, private true, workspaces array with apps/*",
+        "packageManager is npm@10 and engines.node is 22.x"
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Work already committed in 6cc5d66. Verify only, no re-creation, no sub-agents, finish in under 15 minutes.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify Root package.json Turbo Scripts",
+      "description": "Verify the root package.json pins turbo 2.x in devDependencies and defines build, test, lint scripts as turbo run commands. Already committed in 6cc5d66; verify only.",
+      "acceptanceCriteria": [
+        "devDependencies pins turbo to a 2.x version",
+        "scripts build, test, lint equal turbo run build, turbo run test, turbo run lint"
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Work already committed in 6cc5d66. Verify only, edit only if a field differs, no sub-agents.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify Scaffold Committed To Git",
+      "description": "Verify the scaffold files are committed to the git repository. Already committed in 6cc5d66; run read-only git status and git log checks, committing only if a story file is uncommitted.",
+      "acceptanceCriteria": [
+        "git log --oneline shows the commit adding package.json exists",
+        "git status --short shows no uncommitted changes to package.json, package-lock.json, or test/package.test.cjs"
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Scaffold already committed in 6cc5d66. Read-only git verification, no sub-agents, no npm install.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Create Base Root package.json With Workspaces",
       "description": "Create the root package.json for the NextMove monorepo with name nextmove, private true, workspaces containing apps/*, packageManager pinned to npm@10, and engines.node set to 22.x.",
       "acceptanceCriteria": [

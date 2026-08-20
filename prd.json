@@ -33,7 +33,73 @@
       "effort": "low",
       "passes": true,
       "dependsOn": [],
-      "notes": "auto-split into 3 sub-stories",
+      "notes": "auto-split into 4 sub-stories",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Verify Root package.json Identity Fields",
+      "description": "Verify the committed root package.json declares name nextmove, private true, workspaces apps/*, packageManager npm@10, engines.node 22.x, fixing it only if anything differs.",
+      "acceptanceCriteria": [
+        "Root package.json contains name nextmove, private true, workspaces [\"apps/*\"].",
+        "Root package.json pins packageManager npm@10 and engines.node 22.x."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Work committed in 6cc5d66; verification only, no duplicate creation.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify Root turbo Dependency",
+      "description": "Verify the root package.json pins turbo 2.x in devDependencies as committed, adjusting only if the pin is missing or wrong.",
+      "acceptanceCriteria": [
+        "devDependencies contains turbo with a 2.x version pin."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Work committed in 6cc5d66; verification only, no duplicate creation.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify Root turbo run Scripts",
+      "description": "Verify the root package.json scripts define build, test, lint as turbo run build, turbo run test, turbo run lint, fixing only if absent.",
+      "acceptanceCriteria": [
+        "scripts.build is turbo run build.",
+        "scripts.test is turbo run test.",
+        "scripts.lint is turbo run lint."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Work committed in 6cc5d66; verification only, no duplicate creation.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Verify Scaffold Committed to Git",
+      "description": "Verify the scaffold files are committed to the existing git repository with git commands exiting 0, committing any uncommitted scaffold changes.",
+      "acceptanceCriteria": [
+        "git status shows package.json tracked with no uncommitted changes.",
+        "git log and git diff --cached exit 0 confirming the scaffold is committed."
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "notes": "package.json committed in 6cc5d66; verification only, no duplicate creation.",
       "model": "deepseek"
     },
     {

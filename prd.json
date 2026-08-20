@@ -38,6 +38,74 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Scaffold root package.json with base fields",
+      "description": "Create root package.json with name nextmove, private true, workspaces apps/*, packageManager npm@10, and engines.node 22.x.",
+      "acceptanceCriteria": [
+        "Root package.json exists at the repo root with name nextmove and private true.",
+        "workspaces array contains apps/*, packageManager is npm@10, and engines.node is 22.x.",
+        "Root package.json parses as valid JSON."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Add turbo devDependency to root package.json",
+      "description": "Add turbo with a 2.x version range to devDependencies in the root package.json.",
+      "acceptanceCriteria": [
+        "devDependencies contains turbo pinned to a 2.x semver range.",
+        "Root package.json still parses as valid JSON after the change."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Add turbo run scripts to root package.json",
+      "description": "Add build, test, and lint npm scripts to the root package.json, each invoking turbo run with the matching task name.",
+      "acceptanceCriteria": [
+        "scripts.build is exactly turbo run build.",
+        "scripts.test is exactly turbo run test.",
+        "scripts.lint is exactly turbo run lint."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Commit scaffolded root package.json",
+      "description": "Commit the scaffolded root package.json to the existing git repository.",
+      "acceptanceCriteria": [
+        "git add and git commit exit 0 and include package.json.",
+        "git log shows the new commit containing the root package.json."
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "notes": "",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Verify committed package.json identity fields",
       "description": "Confirm the committed root package.json declares name nextmove, private true, workspaces containing apps/* by reading the file and asserting each field. No new files; the manifest was committed in 6cc5d66.",
       "acceptanceCriteria": [

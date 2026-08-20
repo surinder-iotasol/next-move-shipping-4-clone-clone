@@ -1,10 +1,32 @@
-Ralph Summary - Thu Aug 20 11:13:33 PM AEST 2026
+Ralph Summary - Fri Aug 21 01:42:45 AM AEST 2026
 Mode: fresh-context | Context: 200K (default) | Effort: medium | Cost: ~$1.50
-Iterations: 15 | Stories: 2/128 | Runtime: 2h 33m
+Iterations: 15 | Stories: 2/150 | Runtime: 2h 28m
 Models: Opus=15 Sonnet=0 Haiku=0 | Quota pauses: 0 (0m)
-Auto-splits: 6 | Smart saves: 0 | Idle kills: 0
+Auto-splits: 7 | Smart saves: 0 | Idle kills: 8
 [done] STORY-setup-001: Initialize Turborepo Monorepo Workspace And Git
 [done] STORY-setup-001a: Create Root NextMove package.json With Workspaces
+[todo] STORY-setup-001aa: Create root package.json with workspace config
+[todo] STORY-setup-001ab: Add turbo 2.x with turbo run scripts
+[todo] STORY-setup-001ac: Commit root package.json scaffold to git
+[todo] STORY-setup-001aa: Verify Root package.json Workspace Declaration
+[todo] STORY-setup-001ab: Verify Turbo 2.x devDependency With turbo run Scripts
+[todo] STORY-setup-001ac: Verify Installed Turbo 2.x Version From Lockfile
+[todo] STORY-setup-001aa: Verify Root package.json Workspace Declaration
+[todo] STORY-setup-001ab: Verify Root package.json Turbo Scripts
+[todo] STORY-setup-001ac: Verify Scaffold Committed To Git
+[todo] STORY-setup-001aa: Create Base Root package.json With Workspaces
+[todo] STORY-setup-001ab: Add Turbo DevDependency With Run Scripts
+[todo] STORY-setup-001ac: Commit Root package.json Scaffold To Git
+[todo] STORY-setup-001aa: Verify Root package.json Identity Fields
+[todo] STORY-setup-001ab: Verify Root turbo Dependency
+[todo] STORY-setup-001ac: Verify Root turbo run Scripts
+[todo] STORY-setup-001ad: Verify Scaffold Committed to Git
+[todo] STORY-setup-001aa: Create root package.json with workspace fields
+[todo] STORY-setup-001ab: Add turbo devDependency with run scripts
+[todo] STORY-setup-001ac: Commit NextMove scaffold to git
+[todo] STORY-setup-001aa: Create Root NextMove package.json Workspace Manifest
+[todo] STORY-setup-001ab: Add Turbo DevDependency to Root package.json
+[todo] STORY-setup-001ac: Verify Scaffold Commit in Git
 [todo] STORY-setup-001aa: Create Root NextMove package.json
 [todo] STORY-setup-001ab: Pin turbo 2.x devDependency
 [todo] STORY-setup-001ac: Add turbo run scripts

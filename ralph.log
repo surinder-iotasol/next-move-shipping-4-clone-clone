@@ -1734,3 +1734,470 @@
 [2026-08-21 00:11:08] [INFO] Model: deepseek for story: STORY-setup-001a
 [2026-08-21 00:11:08] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787235068.log)
 [2026-08-21 00:11:08] [INFO] Live activity stream started (sidecar pid 2910527)
+[2026-08-21 00:15:16] [INFO] Completion marker detected for story STORY-setup-001a (.passed/.done)
+[2026-08-21 00:15:19] [INFO] Interactive session ID: 67afb397-940f-4ce5-94e2-143d2927c1f0
+[2026-08-21 00:15:19] [INFO] Story log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787235068.log
+[2026-08-21 00:15:19] [INFO] Processing story markers via backend script...
+[2026-08-21 00:15:19] [WARN] Partial progress on STORY-setup-001a (commits made, prd.json not updated)
+[2026-08-21 00:15:19] [INFO] Partial progress 1 of 3 before split — agent may finish next iteration
+[2026-08-21 00:15:25] [INFO] Effective model=deepseek → using provider 'claude'
+[2026-08-21 00:15:25] [INFO] Model: deepseek for story: STORY-setup-001a
+[2026-08-21 00:15:25] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787235325.log)
+[2026-08-21 00:15:25] [INFO] Live activity stream started (sidecar pid 2927369)
+[2026-08-21 00:25:25] [WARN] No file activity for 600s. Task appears stuck. Killing.
+[2026-08-21 00:25:28] [INFO] Claude process 2927358 exited; checking sentinel
+[2026-08-21 00:25:28] [INFO] Interactive session ID: ab6a81bd-1a07-403a-b401-5eed150244ce
+[2026-08-21 00:25:28] [INFO] Story log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787235325.log
+[2026-08-21 00:25:28] [WARN] Iteration 8 timed out after 600:7200s
+[2026-08-21 00:25:28] [WARN] No progress in iteration 8 (consecutive: 1)
+[2026-08-21 00:25:28] [WARN] Story STORY-setup-001a failed (attempt 1 of 2 before split)
+[2026-08-21 00:25:33] [INFO] Effective model=deepseek → using provider 'claude'
+[2026-08-21 00:25:33] [INFO] Model: deepseek for story: STORY-setup-001a
+[2026-08-21 00:25:33] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787235933.log)
+[2026-08-21 00:25:33] [INFO] Live activity stream started (sidecar pid 2961650)
+[2026-08-21 00:35:34] [WARN] No file activity for 601s. Task appears stuck. Killing.
+[2026-08-21 00:35:34] [INFO] Claude process 2961433 exited; checking sentinel
+[2026-08-21 00:35:34] [INFO] Interactive session ID: 69bf30a8-3e01-4286-840f-c9813d569d40
+[2026-08-21 00:35:35] [INFO] Story log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787235933.log
+[2026-08-21 00:35:35] [WARN] Iteration 9 timed out after 600:7200s
+[2026-08-21 00:35:35] [WARN] No progress in iteration 9 (consecutive: 2)
+[2026-08-21 00:35:35] [WARN] Story STORY-setup-001a failed (attempt 2 of 2 before split)
+[2026-08-21 00:35:35] [INFO] Story STORY-setup-001a failed 2 times. Attempting auto-split...
+[2026-08-21 00:35:35] [INFO] Auto-splitting story STORY-setup-001a: Create Root NextMove package.json With Workspaces
+[2026-08-21 00:38:11] [SUCCESS] Split STORY-setup-001a into 3 sub-stories
+[2026-08-21 00:38:11] [INFO]   -> STORY-setup-001aa: Create Base Root package.json With Workspaces
+[2026-08-21 00:38:11] [INFO]   -> STORY-setup-001ab: Add Turbo DevDependency With Run Scripts
+[2026-08-21 00:38:11] [INFO]   -> STORY-setup-001ac: Commit Root package.json Scaffold To Git
+[2026-08-21 00:38:11] [SUCCESS] Auto-split successful. Next iteration will work on first sub-story.
+[2026-08-21 00:38:11] [INFO] NOTIFICATION [split]: Split STORY-setup-001a into sub-stories
+[2026-08-21 00:38:16] [INFO] Effective model=deepseek → using provider 'claude'
+[2026-08-21 00:38:16] [INFO] Model: deepseek for story: STORY-setup-001a
+[2026-08-21 00:38:16] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787236696.log)
+[2026-08-21 00:38:16] [INFO] Live activity stream started (sidecar pid 3021126)
+[2026-08-21 00:48:16] [WARN] No file activity for 600s. Task appears stuck. Killing.
+[2026-08-21 00:48:17] [INFO] Claude process 3021108 exited; checking sentinel
+[2026-08-21 00:48:17] [INFO] Interactive session ID: 9cefc1cc-3295-4f2b-8fac-a112dc7bc8b3
+[2026-08-21 00:48:17] [INFO] Story log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787236696.log
+[2026-08-21 00:48:17] [WARN] Iteration 10 timed out after 600:7200s
+[2026-08-21 00:48:17] [WARN] No progress in iteration 10 (consecutive: 1)
+[2026-08-21 00:48:17] [WARN] Story STORY-setup-001a failed (attempt 1 of 2 before split)
+[2026-08-21 00:48:22] [INFO] Effective model=deepseek → using provider 'claude'
+[2026-08-21 00:48:22] [INFO] Model: deepseek for story: STORY-setup-001a
+[2026-08-21 00:48:22] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787237302.log)
+[2026-08-21 00:48:23] [INFO] Live activity stream started (sidecar pid 3063246)
+[2026-08-21 00:58:18] [INFO] Completion marker detected for story STORY-setup-001a (.passed/.done)
+[2026-08-21 00:58:20] [INFO] Interactive session ID: 681c89b4-fb9f-4fac-9e19-2a78fa4e57c8
+[2026-08-21 00:58:20] [INFO] Story log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787237302.log
+[2026-08-21 00:58:20] [INFO] Processing story markers via backend script...
+[2026-08-21 00:58:21] [WARN] No progress in iteration 11 (consecutive: 2)
+[2026-08-21 00:58:21] [WARN] Story STORY-setup-001a failed (attempt 2 of 2 before split)
+[2026-08-21 00:58:21] [INFO] Story STORY-setup-001a failed 2 times. Attempting auto-split...
+[2026-08-21 00:58:21] [INFO] Auto-splitting story STORY-setup-001a: Create Root NextMove package.json With Workspaces
+[2026-08-21 01:04:19] [SUCCESS] Split STORY-setup-001a into 3 sub-stories
+[2026-08-21 01:04:19] [INFO]   -> STORY-setup-001aa: Verify Root package.json Workspace Declaration
+[2026-08-21 01:04:19] [INFO]   -> STORY-setup-001ab: Verify Root package.json Turbo Scripts
+[2026-08-21 01:04:19] [INFO]   -> STORY-setup-001ac: Verify Scaffold Committed To Git
+[2026-08-21 01:04:19] [SUCCESS] Auto-split successful. Next iteration will work on first sub-story.
+[2026-08-21 01:04:19] [INFO] NOTIFICATION [split]: Split STORY-setup-001a into sub-stories
+[2026-08-21 01:04:24] [INFO] Effective model=deepseek → using provider 'claude'
+[2026-08-21 01:04:25] [INFO] Model: deepseek for story: STORY-setup-001a
+[2026-08-21 01:04:25] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787238265.log)
+[2026-08-21 01:04:25] [INFO] Live activity stream started (sidecar pid 3119782)
+[2026-08-21 01:13:14] [INFO] Completion marker detected for story STORY-setup-001a (.passed/.done)
+[2026-08-21 01:13:16] [INFO] Interactive session ID: c86862be-36a3-4bf0-9eff-f70d5cffd3d4
+[2026-08-21 01:13:16] [INFO] Story log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787238265.log
+[2026-08-21 01:13:16] [INFO] Processing story markers via backend script...
+[2026-08-21 01:13:17] [WARN] No progress in iteration 12 (consecutive: 1)
+[2026-08-21 01:13:17] [WARN] Story STORY-setup-001a failed (attempt 1 of 2 before split)
+[2026-08-21 01:13:22] [INFO] Effective model=deepseek → using provider 'claude'
+[2026-08-21 01:13:22] [INFO] Model: deepseek for story: STORY-setup-001a
+[2026-08-21 01:13:22] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787238802.log)
+[2026-08-21 01:13:23] [INFO] Live activity stream started (sidecar pid 3147304)
+[2026-08-21 01:20:15] [INFO] Completion marker detected for story STORY-setup-001a (.passed/.done)
+[2026-08-21 01:20:18] [INFO] Interactive session ID: 8bee9595-7feb-4785-adab-ee01ed5e6582
+[2026-08-21 01:20:18] [INFO] Story log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787238802.log
+[2026-08-21 01:20:18] [INFO] Processing story markers via backend script...
+[2026-08-21 01:20:18] [WARN] No progress in iteration 13 (consecutive: 2)
+[2026-08-21 01:20:18] [WARN] Story STORY-setup-001a failed (attempt 2 of 2 before split)
+[2026-08-21 01:20:18] [INFO] Story STORY-setup-001a failed 2 times. Attempting auto-split...
+[2026-08-21 01:20:18] [INFO] Auto-splitting story STORY-setup-001a: Create Root NextMove package.json With Workspaces
+[2026-08-21 01:25:02] [SUCCESS] Split STORY-setup-001a into 3 sub-stories
+[2026-08-21 01:25:02] [INFO]   -> STORY-setup-001aa: Verify Root package.json Workspace Declaration
+[2026-08-21 01:25:02] [INFO]   -> STORY-setup-001ab: Verify Turbo 2.x devDependency With turbo run Scripts
+[2026-08-21 01:25:02] [INFO]   -> STORY-setup-001ac: Verify Installed Turbo 2.x Version From Lockfile
+[2026-08-21 01:25:02] [SUCCESS] Auto-split successful. Next iteration will work on first sub-story.
+[2026-08-21 01:25:02] [INFO] NOTIFICATION [split]: Split STORY-setup-001a into sub-stories
+[2026-08-21 01:25:07] [INFO] Effective model=deepseek → using provider 'claude'
+[2026-08-21 01:25:07] [INFO] Model: deepseek for story: STORY-setup-001a
+[2026-08-21 01:25:08] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787239508.log)
+[2026-08-21 01:25:08] [INFO] Live activity stream started (sidecar pid 3187704)
+[2026-08-21 01:31:16] [INFO] Completion marker detected for story STORY-setup-001a (.passed/.done)
+[2026-08-21 01:31:19] [INFO] Interactive session ID: 798b6d95-6aa0-4a75-965d-90de91fd0403
+[2026-08-21 01:31:19] [INFO] Story log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787239508.log
+[2026-08-21 01:31:19] [INFO] Processing story markers via backend script...
+[2026-08-21 01:31:20] [WARN] No progress in iteration 14 (consecutive: 1)
+[2026-08-21 01:31:20] [WARN] Story STORY-setup-001a failed (attempt 1 of 2 before split)
+[2026-08-21 01:31:25] [INFO] Effective model=deepseek → using provider 'claude'
+[2026-08-21 01:31:25] [INFO] Model: deepseek for story: STORY-setup-001a
+[2026-08-21 01:31:25] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787239885.log)
+[2026-08-21 01:31:25] [INFO] Live activity stream started (sidecar pid 3209066)
+[2026-08-21 01:40:10] [INFO] Completion marker detected for story STORY-setup-001a (.passed/.done)
+[2026-08-21 01:40:12] [INFO] Interactive session ID: a43cfa15-6a09-4e2c-a980-4ebf962d7f30
+[2026-08-21 01:40:13] [INFO] Story log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787239885.log
+[2026-08-21 01:40:13] [INFO] Processing story markers via backend script...
+[2026-08-21 01:40:13] [WARN] No progress in iteration 15 (consecutive: 2)
+[2026-08-21 01:40:13] [WARN] Story STORY-setup-001a failed (attempt 2 of 2 before split)
+[2026-08-21 01:40:13] [INFO] Story STORY-setup-001a failed 2 times. Attempting auto-split...
+[2026-08-21 01:40:13] [INFO] Auto-splitting story STORY-setup-001a: Create Root NextMove package.json With Workspaces
+[2026-08-21 01:42:45] [SUCCESS] Split STORY-setup-001a into 3 sub-stories
+[2026-08-21 01:42:45] [INFO]   -> STORY-setup-001aa: Create root package.json with workspace config
+[2026-08-21 01:42:45] [INFO]   -> STORY-setup-001ab: Add turbo 2.x with turbo run scripts
+[2026-08-21 01:42:45] [INFO]   -> STORY-setup-001ac: Commit root package.json scaffold to git
+[2026-08-21 01:42:45] [SUCCESS] Auto-split successful. Next iteration will work on first sub-story.
+[2026-08-21 01:42:45] [INFO] NOTIFICATION [split]: Split STORY-setup-001a into sub-stories
+[2026-08-21 01:42:45] [ERROR] Reached max total failures (15). Stopping.
+[2026-08-21 01:42:45] [ERROR] Loop ended with 148 stories still pending — exiting 1 so the backend marks the build FAILED and the watchdog resumes it
+[2026-08-21 01:43:31] [SUCCESS] Synced full .claude ECC bundle into /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.claude
+[2026-08-21 01:43:31] [SUCCESS] ECC detected: 67 agent(s) at /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.claude/agents
+[2026-08-21 01:43:31] [INFO] Pre-flight story size validation...
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001aa] (score: 0/4): Create root package.json with workspace config
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ab] (score: 0/4): Add turbo 2.x with turbo run scripts
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ac] (score: 0/4): Commit root package.json scaffold to git
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify Root package.json Workspace Declaration
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify Turbo 2.x devDependency With turbo run Scripts
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify Installed Turbo 2.x Version From Lockfile
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify Root package.json Workspace Declaration
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify Root package.json Turbo Scripts
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify Scaffold Committed To Git
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001aa] (score: 0/4): Create Base Root package.json With Workspaces
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ab] (score: 0/4): Add Turbo DevDependency With Run Scripts
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ac] (score: 0/4): Commit Root package.json Scaffold To Git
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify Root package.json Identity Fields
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify Root turbo Dependency
+[2026-08-21 01:43:31] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify Root turbo run Scripts
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ad] (score: 0/4): Verify Scaffold Committed to Git
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001aa] (score: 0/4): Create root package.json with workspace fields
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ab] (score: 0/4): Add turbo devDependency with run scripts
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ac] (score: 3/4): Commit NextMove scaffold to git
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001aa] (score: 0/4): Create Root NextMove package.json Workspace Manifest
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ab] (score: 0/4): Add Turbo DevDependency to Root package.json
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify Scaffold Commit in Git
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001aa] (score: 0/4): Create Root NextMove package.json
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ab] (score: 0/4): Pin turbo 2.x devDependency
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ac] (score: 0/4): Add turbo run scripts
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ad] (score: 0/4): Commit scaffold files to git
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001aa] (score: 0/4): Create Root NextMove package.json With npm Workspaces
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ab] (score: 0/4): Add Turbo 2.x devDependency to Root package.json
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ac] (score: 0/4): Add Turbo Run Scripts to Root package.json
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ad] (score: 0/4): Commit NextMove Scaffold Files to Git
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001aa] (score: 0/4): Scaffold root package.json with base fields
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ab] (score: 0/4): Add turbo devDependency to root package.json
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ac] (score: 0/4): Add turbo run scripts to root package.json
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ad] (score: 0/4): Commit scaffolded root package.json
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify committed package.json identity fields
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify committed toolchain version pins
+[2026-08-21 01:43:32] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify committed turbo dependency wiring
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ad] (score: 0/4): Verify scaffold files are committed
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify root package.json identity
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify workspaces declaration
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify toolchain pins
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ad] (score: 0/4): Verify turbo devDependency wiring
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ae] (score: 0/4): Verify scaffold committed to git
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify root package.json identity fields
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ab] (score: 2/4): Pin npm and Node 22 in root package.json
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ac] (score: 0/4): Add turbo 2.x devDependency with turbo run scripts
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ad] (score: 0/4): Commit scaffold files to git repository
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify Committed Root package.json Manifest
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify turbo 2.x DevDependency In package.json
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify turbo run Scripts In package.json
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ad] (score: 0/4): Restore Story Completion Marker File
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ae] (score: 3/4): Verify Committed Scaffold State In Git
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify root package.json workspace manifest
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify turbo 2.x devDependency pin
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify turbo run build, test, lint scripts
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ad] (score: 0/4): Wire npm test to node test runner
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ae] (score: 0/4): Verify committed root manifest state
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify Root package.json Workspaces Fields
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify packageManager npm@10 Pin
+[2026-08-21 01:43:33] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify Node 22.x Engines Field
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ad] (score: 3/4): Verify turbo 2.x DevDependency With Scripts
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ae] (score: 0/4): Restore Story Completion Marker
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify base root package.json with workspaces
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify npm@10 packageManager pin in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify Node 22.x engines field in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ad] (score: 0/4): Verify turbo 2.x devDependency pin in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ae] (score: 3/4): Verify committed turbo run scripts in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify base root package.json with workspaces
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify npm@10 packageManager pin in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify Node 22.x engines field in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ad] (score: 0/4): Verify turbo 2.x devDependency in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ae] (score: 3/4): Verify turbo run scripts in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001aa] (score: 0/4): Verify base root package.json with workspaces
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ab] (score: 0/4): Verify npm@10 packageManager pin in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ac] (score: 0/4): Verify Node 22.x engines field in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ad] (score: 0/4): Verify turbo 2.x devDependency in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ae] (score: 3/4): Verify turbo run scripts in package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001aa] (score: 0/4): Create root package.json with npm workspaces
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ab] (score: 0/4): Pin npm@10 packageManager in root package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ac] (score: 0/4): Set Node 22.x engines in root package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ad] (score: 0/4): Add turbo 2.x devDependency to root package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001ae] (score: 0/4): Define turbo run scripts in root package.json
+[2026-08-21 01:43:34] [INFO] OK [STORY-setup-001b] (score: 0/4): Define Turborepo Pipeline in turbo.json
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-001c] (score: 0/4): Add Root README for NextMove
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-001d] (score: 0/4): Add Root .editorconfig for NextMove
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-001a] (score: 0/4): Create Root NextMove package.json With Workspaces
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-001b] (score: 0/4): Define Turborepo Pipeline in turbo.json
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-001c] (score: 0/4): Add Root README for NextMove
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-001d] (score: 0/4): Add Root .editorconfig for NextMove
+[2026-08-21 01:43:35] [WARN] OVERSIZED [STORY-setup-002] (score: 7/4): Scaffold Express TypeScript API Under Apps Api
+[2026-08-21 01:43:35] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:35] [INFO]     - Mixes scaffolding with feature work
+[2026-08-21 01:43:35] [WARN] OVERSIZED [STORY-setup-003] (score: 4/4): Install Backend Runtime ORM And Auth Dependencies
+[2026-08-21 01:43:35] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:35] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-004] (score: 3/4): Scaffold Angular 17 Standalone Web App
+[2026-08-21 01:43:35] [WARN] OVERSIZED [STORY-setup-005] (score: 4/4): Install Frontend Dependencies And Wire Bootstrap Grid
+[2026-08-21 01:43:35] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:35] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:35] [WARN] OVERSIZED [STORY-setup-006] (score: 6/4): Initialize Prisma Schema And PostgreSQL Migration Baseline
+[2026-08-21 01:43:35] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:35] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:35] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:35] [WARN] OVERSIZED [STORY-setup-007] (score: 7/4): Wire JWT Dual Token Bootstrap And Guard Middleware
+[2026-08-21 01:43:35] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:35] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:35] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-008] (score: 1/4): Wire Structured JSON Request Logging With Baseline Fields
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-009] (score: 3/4): Wire Jest And Karma Test Frameworks Across Apps
+[2026-08-21 01:43:35] [WARN] OVERSIZED [STORY-setup-010] (score: 7/4): Create CI Pipeline With Lint Build Test Stages
+[2026-08-21 01:43:35] [INFO]     - 4 acceptance criteria (max 3)
+[2026-08-21 01:43:35] [INFO]     - Contains 'full/complete/entire' — likely too broad
+[2026-08-21 01:43:35] [INFO]     - Mixes scaffolding with feature work
+[2026-08-21 01:43:35] [WARN] OVERSIZED [STORY-setup-011] (score: 8/4): Add ESLint And Prettier Linting And Formatting
+[2026-08-21 01:43:35] [INFO]     - 4 acceptance criteria (max 3)
+[2026-08-21 01:43:35] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:35] [INFO]     - Mixes scaffolding with feature work
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-012] (score: 1/4): Create Environment Template Listing Every Required Variable
+[2026-08-21 01:43:35] [INFO] OK [STORY-setup-013] (score: 3/4): Wire Azure Blob Storage Client Factory
+[2026-08-21 01:43:35] [WARN] OVERSIZED [STORY-setup-014] (score: 5/4): Configure Vercel SPA Fallback And Production Build
+[2026-08-21 01:43:35] [INFO]     - 4 acceptance criteria (max 3)
+[2026-08-21 01:43:35] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:35] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:35] [WARN] OVERSIZED [STORY-data-001] (score: 10/4): Define Tenant And User Models In Prisma Schema
+[2026-08-21 01:43:35] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:35] [INFO]     - Description is 69 words (max 50)
+[2026-08-21 01:43:35] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:35] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-data-002] (score: 10/4): Define TenantUser Role Enum And Customer Models
+[2026-08-21 01:43:36] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 63 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-data-003] (score: 6/4): Define RefreshToken Model For Dual Token Rotation
+[2026-08-21 01:43:36] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 53 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-data-004] (score: 4/4): Define Job Model With Sequence And Status
+[2026-08-21 01:43:36] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-data-005] (score: 4/4): Define Recursive JobFolder And JobFile Models
+[2026-08-21 01:43:36] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-data-006] (score: 11/4): Run Full Schema Migration And Constraint Verification
+[2026-08-21 01:43:36] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 57 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [INFO]     - Contains 'full/complete/entire' — likely too broad
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-design-001] (score: 10/4): Establish Global SCSS Design Tokens And Frosted-Glass Theme
+[2026-08-21 01:43:36] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 92 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:36] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-design-002] (score: 6/4): Build Reusable Auth-Shell Component With Animated Mesh Gradient
+[2026-08-21 01:43:36] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 87 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-design-003] (score: 7/4): Build 404 Not-Found Page With Mesh-Gradient Background
+[2026-08-21 01:43:36] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 75 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-design-004] (score: 6/4): Configure SweetAlert2 Themed Overrides For Thematic Blending
+[2026-08-21 01:43:36] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 65 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-design-005] (score: 5/4): Configure Global Ng-Select AppendTo-Body Dropdown Behavior
+[2026-08-21 01:43:36] [INFO]     - 4 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 62 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-customer-001] (score: 8/4): Implement Customer List Endpoint With Server-Side Pagination
+[2026-08-21 01:43:36] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 91 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-customer-002] (score: 14/4): Implement Customer Detail Fetch Endpoint With Ownership Isolation
+[2026-08-21 01:43:36] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 66 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [INFO]     - Contains 'full/complete/entire' — likely too broad
+[2026-08-21 01:43:36] [INFO]     - Mixes scaffolding with feature work
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-customer-003] (score: 11/4): Implement Customer Create Endpoint With Sales Person Resolution
+[2026-08-21 01:43:36] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 102 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [INFO]     - Mixes scaffolding with feature work
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-customer-004] (score: 7/4): Implement Customer Update Endpoint With Partial Patch Validation
+[2026-08-21 01:43:36] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 91 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-customer-005] (score: 7/4): Implement Customer Delete Endpoint With Job Conflict Check
+[2026-08-21 01:43:36] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 86 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-customer-006] (score: 14/4): Build Customer Directory Page With Paginated Table And Search
+[2026-08-21 01:43:36] [INFO]     - 8 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 93 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [INFO]     - Mixes scaffolding with feature work
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-customer-007] (score: 11/4): Build Add Customer Modal With Create Endpoint Binding
+[2026-08-21 01:43:36] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 75 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:36] [INFO]     - Mixes scaffolding with feature work
+[2026-08-21 01:43:36] [WARN] OVERSIZED [STORY-customer-008] (score: 9/4): Build Delete Customer Row Action With Conflict Display
+[2026-08-21 01:43:36] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:36] [INFO]     - Description is 64 words (max 50)
+[2026-08-21 01:43:36] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-customer-009] (score: 10/4): Build Customer Detail Page With Edit And Save Flow
+[2026-08-21 01:43:37] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 122 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-verify-customers-001] (score: 14/4): Verify Customer Directory And Detail End-To-End Wiring
+[2026-08-21 01:43:37] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 92 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Contains 'full/complete/entire' — likely too broad
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-dashboard-001] (score: 14/4): Implement tenant-scoped GET /api/dashboard/summary aggregation endpoint
+[2026-08-21 01:43:37] [INFO]     - 8 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 74 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - 4 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Contains 'full/complete/entire' — likely too broad
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-dashboard-002] (score: 11/4): Create dashboard API service and register /dashboard route
+[2026-08-21 01:43:37] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 61 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Mixes scaffolding with feature work
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-dashboard-003] (score: 12/4): Build role-based dashboard page with stat cards and widget grid
+[2026-08-21 01:43:37] [INFO]     - 8 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 78 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-verify-dashboard-001] (score: 10/4): Verify dashboard page wiring to summary endpoint end to end
+[2026-08-21 01:43:37] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 63 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Contains 'full/complete/entire' — likely too broad
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-jobs-001] (score: 7/4): Implement POST /api/jobs with manual unique alphanumeric job code
+[2026-08-21 01:43:37] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 63 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-jobs-002] (score: 6/4): Implement GET /api/jobs/:jobCode job header detail endpoint
+[2026-08-21 01:43:37] [INFO]     - 4 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 55 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-jobs-003] (score: 10/4): Implement GET /api/folders/:jobId recursive folder tree endpoint
+[2026-08-21 01:43:37] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 56 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Contains 'full/complete/entire' — likely too broad
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-jobs-004] (score: 9/4): Implement POST /api/upload Azure Blob multipart file upload
+[2026-08-21 01:43:37] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 91 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Marked as high effort
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-jobs-005] (score: 7/4): Create jobsApi service module and register workspace route
+[2026-08-21 01:43:37] [INFO]     - 4 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 55 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-jobs-006] (score: 11/4): Build 3-panel JobsWorkspaceComponent tree table and inspector
+[2026-08-21 01:43:37] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 62 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Marked as high effort
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-jobs-007] (score: 10/4): Wire Upload File and New Folder controls to API
+[2026-08-21 01:43:37] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 51 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-verify-jobs-001] (score: 6/4): Verify jobs workspace pages are wired to endpoints
+[2026-08-21 01:43:37] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 53 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-smoke-001] (score: 11/4): Smoke test full app routes and session contract
+[2026-08-21 01:43:37] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 51 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Contains 'full/complete/entire' — likely too broad
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-auth-001] (score: 13/4): Implement auth login refresh logout and me endpoints
+[2026-08-21 01:43:37] [INFO]     - 8 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 76 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Marked as high effort
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-router-001] (score: 12/4): Create shared router config with RBAC guard and living route inventory
+[2026-08-21 01:43:37] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 82 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:37] [INFO]     - Mixes scaffolding with feature work
+[2026-08-21 01:43:37] [WARN] OVERSIZED [STORY-auth-002] (score: 10/4): Build login page with token storage and session redirect
+[2026-08-21 01:43:37] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:37] [INFO]     - Description is 53 words (max 50)
+[2026-08-21 01:43:37] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:37] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [WARN] OVERSIZED [STORY-staff-001] (score: 6/4): Implement GET api staff directory endpoint
+[2026-08-21 01:43:38] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:38] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [WARN] OVERSIZED [STORY-staff-002] (score: 5/4): Build staff directory page with role filter
+[2026-08-21 01:43:38] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:38] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [WARN] OVERSIZED [STORY-profile-001] (score: 9/4): Build profile page from authenticated user payload
+[2026-08-21 01:43:38] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:38] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [INFO]     - Contains 'full/complete/entire' — likely too broad
+[2026-08-21 01:43:38] [WARN] OVERSIZED [STORY-jobs-list-001] (score: 5/4): Implement GET api jobs list endpoint
+[2026-08-21 01:43:38] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:38] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [WARN] OVERSIZED [STORY-jobs-list-002] (score: 11/4): Build jobs list page with add job modal and customer prefill
+[2026-08-21 01:43:38] [INFO]     - 7 acceptance criteria (max 3)
+[2026-08-21 01:43:38] [INFO]     - Description is 60 words (max 50)
+[2026-08-21 01:43:38] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:38] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [INFO]     - Marked as high effort
+[2026-08-21 01:43:38] [WARN] OVERSIZED [STORY-seed-001] (score: 10/4): Create baseline seed script covering every schema table
+[2026-08-21 01:43:38] [INFO]     - 8 acceptance criteria (max 3)
+[2026-08-21 01:43:38] [INFO]     - Description is 61 words (max 50)
+[2026-08-21 01:43:38] [INFO]     - 3 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [WARN] OVERSIZED [STORY-verify-auth-001] (score: 7/4): Verify login flow and session contract end to end
+[2026-08-21 01:43:38] [INFO]     - 6 acceptance criteria (max 3)
+[2026-08-21 01:43:38] [INFO]     - Title contains 'and' connecting multiple concerns
+[2026-08-21 01:43:38] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [WARN] OVERSIZED [STORY-verify-staff-001] (score: 4/4): Verify staff page wiring to directory endpoint
+[2026-08-21 01:43:38] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:38] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [WARN] OVERSIZED [STORY-verify-jobslist-001] (score: 4/4): Verify jobs list page wiring end to end
+[2026-08-21 01:43:38] [INFO]     - 5 acceptance criteria (max 3)
+[2026-08-21 01:43:38] [INFO]     - 2 different concern types (component/hook/API/DB)
+[2026-08-21 01:43:38] [WARN] Found 54 oversized story(ies): STORY-setup-002 STORY-setup-003 STORY-setup-005 STORY-setup-006 STORY-setup-007 STORY-setup-010 STORY-setup-011 STORY-setup-014 STORY-data-001 STORY-data-002 STORY-data-003 STORY-data-004 STORY-data-005 STORY-data-006 STORY-design-001 STORY-design-002 STORY-design-003 STORY-design-004 STORY-design-005 STORY-customer-001 STORY-customer-002 STORY-customer-003 STORY-customer-004 STORY-customer-005 STORY-customer-006 STORY-customer-007 STORY-customer-008 STORY-customer-009 STORY-verify-customers-001 STORY-dashboard-001 STORY-dashboard-002 STORY-dashboard-003 STORY-verify-dashboard-001 STORY-jobs-001 STORY-jobs-002 STORY-jobs-003 STORY-jobs-004 STORY-jobs-005 STORY-jobs-006 STORY-jobs-007 STORY-verify-jobs-001 STORY-smoke-001 STORY-auth-001 STORY-router-001 STORY-auth-002 STORY-staff-001 STORY-staff-002 STORY-profile-001 STORY-jobs-list-001 STORY-jobs-list-002 STORY-seed-001 STORY-verify-auth-001 STORY-verify-staff-001 STORY-verify-jobslist-001
+[2026-08-21 01:43:38] [INFO] Pre-flight auto-split is off (default). Stories run as-is; failure-based split still runs after 2 attempts (and on error-loop / iteration budget).
+[2026-08-21 01:43:38] [INFO] Starting Ralph - Tool: claude | Mode: fresh-context | Context: 200K | Model: auto | Effort: medium | Max: 500 iterations
+[2026-08-21 01:43:39] [INFO] Effective model=deepseek → using provider 'claude'
+[2026-08-21 01:43:39] [INFO] Model: deepseek for story: STORY-setup-001a
+[2026-08-21 01:43:39] [INFO] Spawning interactive session for story: STORY-setup-001a (log: /home/nitin-sharma/ralph-workspaces/6896163a-932b-4b96-bfe9-cdbb022c3538/c7df6267-784a-460a-addd-6d781a21b6f5/.ralph/logs/story-STORY-setup-001a-1787240619.log)
+[2026-08-21 01:43:39] [INFO] Live activity stream started (sidecar pid 3290879)

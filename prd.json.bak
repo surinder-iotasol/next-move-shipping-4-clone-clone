@@ -38,6 +38,219 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Verify Root package.json Workspace Declaration",
+      "description": "Verify the committed root package.json declares the NextMove monorepo: name nextmove, private true, workspaces apps/*, packageManager npm@10, engines node 22.x. Fix only if a field is missing or wrong.",
+      "acceptanceCriteria": [
+        "Node assertions on package.json confirm name nextmove, private true, workspaces contains apps/*, packageManager npm@10, engines.node 22.x, exiting 0",
+        "git ls-files shows package.json tracked and git status --porcelain package.json is empty"
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Manifest fields already committed in 6cc5d66; this is a verification gate. model inherited: deepseek",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify Turbo 2.x devDependency With turbo run Scripts",
+      "description": "Verify the committed root package.json pins turbo 2.x in devDependencies and defines build, test, lint scripts as turbo run commands. Fix only if missing or wrong.",
+      "acceptanceCriteria": [
+        "npm pkg get devDependencies.turbo exits 0 and outputs a 2.x range",
+        "npm pkg get scripts shows build, test, lint exactly as turbo run build, turbo run test, turbo run lint",
+        "package.json stays committed clean after verification"
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Already satisfied by commit 6cc5d66; verification gate only. model inherited: deepseek",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify Installed Turbo 2.x Version From Lockfile",
+      "description": "Verify turbo 2.x is actually installed from the committed lockfile and that package-lock.json is tracked with no pending changes.",
+      "acceptanceCriteria": [
+        "npm ls turbo --depth=0 exits 0 and reports a 2.x version matching the lockfile entry",
+        "package-lock.json is tracked and git status --porcelain package-lock.json is empty"
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Lockfile already pins turbo 2.10.11 and is committed; verification gate only. model inherited: deepseek",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Verify Root package.json Workspace Declaration",
+      "description": "Verify the root package.json declares name nextmove, private true, workspaces apps/*, packageManager npm@10, engines.node 22.x. Already committed in 6cc5d66; verify only, edit only if a field differs.",
+      "acceptanceCriteria": [
+        "Root package.json contains name nextmove, private true, workspaces array with apps/*",
+        "packageManager is npm@10 and engines.node is 22.x"
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Work already committed in 6cc5d66. Verify only, no re-creation, no sub-agents, finish in under 15 minutes.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify Root package.json Turbo Scripts",
+      "description": "Verify the root package.json pins turbo 2.x in devDependencies and defines build, test, lint scripts as turbo run commands. Already committed in 6cc5d66; verify only.",
+      "acceptanceCriteria": [
+        "devDependencies pins turbo to a 2.x version",
+        "scripts build, test, lint equal turbo run build, turbo run test, turbo run lint"
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Work already committed in 6cc5d66. Verify only, edit only if a field differs, no sub-agents.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify Scaffold Committed To Git",
+      "description": "Verify the scaffold files are committed to the git repository. Already committed in 6cc5d66; run read-only git status and git log checks, committing only if a story file is uncommitted.",
+      "acceptanceCriteria": [
+        "git log --oneline shows the commit adding package.json exists",
+        "git status --short shows no uncommitted changes to package.json, package-lock.json, or test/package.test.cjs"
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Scaffold already committed in 6cc5d66. Read-only git verification, no sub-agents, no npm install.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Create Base Root package.json With Workspaces",
+      "description": "Create the root package.json for the NextMove monorepo with name nextmove, private true, workspaces containing apps/*, packageManager pinned to npm@10, and engines.node set to 22.x.",
+      "acceptanceCriteria": [
+        "Root package.json exists with name nextmove and private true.",
+        "workspaces array contains apps/*, packageManager is npm@10, and engines.node is 22.x."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "model": "deepseek",
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Add Turbo DevDependency With Run Scripts",
+      "description": "Add turbo 2.x as a devDependency to the root package.json and define build, test, and lint scripts that invoke turbo run.",
+      "acceptanceCriteria": [
+        "devDependencies pin turbo 2.x.",
+        "scripts define build, test, and lint as turbo run build, turbo run test, turbo run lint."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "model": "deepseek",
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Commit Root package.json Scaffold To Git",
+      "description": "Commit the scaffolded root package.json to the existing git repository so the scaffold is persisted with git commands exiting 0.",
+      "acceptanceCriteria": [
+        "Scaffold files are committed to the existing git repository with git commands exiting 0."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "model": "deepseek",
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Verify Root package.json Identity Fields",
+      "description": "Verify the committed root package.json declares name nextmove, private true, workspaces apps/*, packageManager npm@10, engines.node 22.x, fixing it only if anything differs.",
+      "acceptanceCriteria": [
+        "Root package.json contains name nextmove, private true, workspaces [\"apps/*\"].",
+        "Root package.json pins packageManager npm@10 and engines.node 22.x."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Work committed in 6cc5d66; verification only, no duplicate creation.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Verify Root turbo Dependency",
+      "description": "Verify the root package.json pins turbo 2.x in devDependencies as committed, adjusting only if the pin is missing or wrong.",
+      "acceptanceCriteria": [
+        "devDependencies contains turbo with a 2.x version pin."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Work committed in 6cc5d66; verification only, no duplicate creation.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Verify Root turbo run Scripts",
+      "description": "Verify the root package.json scripts define build, test, lint as turbo run build, turbo run test, turbo run lint, fixing only if absent.",
+      "acceptanceCriteria": [
+        "scripts.build is turbo run build.",
+        "scripts.test is turbo run test.",
+        "scripts.lint is turbo run lint."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Work committed in 6cc5d66; verification only, no duplicate creation.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Verify Scaffold Committed to Git",
+      "description": "Verify the scaffold files are committed to the existing git repository with git commands exiting 0, committing any uncommitted scaffold changes.",
+      "acceptanceCriteria": [
+        "git status shows package.json tracked with no uncommitted changes.",
+        "git log and git diff --cached exit 0 confirming the scaffold is committed."
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "notes": "package.json committed in 6cc5d66; verification only, no duplicate creation.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Create root package.json with workspace fields",
       "description": "Create the root package.json for the NextMove monorepo with name, private flag, apps/* workspaces, npm@10 packageManager, and Node 22.x engines.",
       "acceptanceCriteria": [

@@ -33,8 +33,70 @@
       "effort": "low",
       "passes": true,
       "dependsOn": [],
-      "notes": "auto-split into 5 sub-stories",
+      "notes": "auto-split into 4 sub-stories",
       "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
+      "title": "Verify root package.json identity fields",
+      "description": "Confirm the committed root package.json declares name nextmove, private true, and workspaces array containing apps/* exactly.",
+      "acceptanceCriteria": [
+        "Root package.json parses as valid JSON with name set to nextmove and private set to true.",
+        "workspaces array contains exactly the entry apps/* with no other workspace globs."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Pin npm and Node 22 in root package.json",
+      "description": "Verify the committed root package.json pins packageManager to npm@10 and engines.node to 22.x.",
+      "acceptanceCriteria": [
+        "packageManager field is exactly npm@10.",
+        "engines.node field is 22.x."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Add turbo 2.x devDependency with turbo run scripts",
+      "description": "Verify the committed root package.json pins turbo 2.x in devDependencies and defines build, test, lint scripts as turbo run commands.",
+      "acceptanceCriteria": [
+        "devDependencies includes turbo with a caret range resolving to 2.x, e.g. ^2.5.0.",
+        "scripts build, test, and lint are exactly turbo run build, turbo run test, turbo run lint."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "STORY-setup-001ad",
+      "title": "Commit scaffold files to git repository",
+      "description": "Ensure the root scaffold file is committed to the existing git repository with git commands exiting 0.",
+      "acceptanceCriteria": [
+        "git status reports no uncommitted changes to root package.json.",
+        "git log shows a commit containing package.json and git commands exit 0."
+      ],
+      "priority": 60.4,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ac"
+      ],
+      "notes": ""
     },
     {
       "id": "STORY-setup-001aa",

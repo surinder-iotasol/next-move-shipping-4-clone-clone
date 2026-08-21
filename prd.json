@@ -38,6 +38,55 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Create Root package.json metadata",
+      "description": "Create the root package.json declaring name nextmove, private true, workspaces array with apps/*, packageManager pinned npm@10, and engines.node 22.x.",
+      "acceptanceCriteria": [
+        "Root package.json has name nextmove and private true.",
+        "workspaces array contains apps/*.",
+        "packageManager pins npm@10 and engines.node is 22.x."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Foundational metadata for NextMove monorepo."
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Add turbo devDependency and scripts",
+      "description": "Add turbo 2.x devDependency and define build, test, and lint scripts as turbo run commands on the root package.json.",
+      "acceptanceCriteria": [
+        "devDependencies pin turbo 2.x.",
+        "scripts define build and test and lint as turbo run equivalents.",
+        "package.json remains valid JSON."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Builds on the created root package.json."
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Commit scaffold to git repository",
+      "description": "Commit the root package.json to the existing git repository using git commands that exit 0.",
+      "acceptanceCriteria": [
+        "package.json is staged with git add.",
+        "git commit exits 0.",
+        "git log shows the commit."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Scaffolding commit is separate from feature work."
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Verify root package.json workspace config",
       "description": "Verify the committed root package.json declares name nextmove, private true, workspaces apps/*, packageManager npm@10, and engines.node 22.x. Update and commit the file only if a field is missing or wrong.",
       "acceptanceCriteria": [

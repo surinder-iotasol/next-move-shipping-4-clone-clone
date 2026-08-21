@@ -1654,9 +1654,9 @@
         "The scaffold files are committed to the existing git repository with git commands exiting 0."
       ],
       "priority": 60,
-      "passes": false,
+      "passes": true,
       "dependsOn": [],
-      "notes": "",
+      "notes": "auto-split into 3 sub-stories",
       "effort": "low",
       "model": "deepseek"
     },

@@ -38,6 +38,55 @@
     },
     {
       "id": "STORY-setup-001aa",
+      "title": "Create Root NextMove package.json Scaffold",
+      "description": "Create the root package.json declaring name nextmove, private true, workspaces apps/*, packageManager pinned to npm@10, and engines.node 22.x.",
+      "acceptanceCriteria": [
+        "Root package.json exists with name nextmove, private true, workspaces array containing apps/*.",
+        "packageManager pinned to npm@10 and engines.node set to 22.x."
+      ],
+      "priority": 60.1,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [],
+      "notes": "Foundation scaffold for the monorepo.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ab",
+      "title": "Add Turbo Dependency And Scripts",
+      "description": "Builds on the root package.json by pinning turbo 2.x under devDependencies and defining build, test, and lint scripts as turbo run commands.",
+      "acceptanceCriteria": [
+        "devDependencies pin turbo 2.x.",
+        "scripts define build, test, and lint as turbo run build, turbo run test, and turbo run lint."
+      ],
+      "priority": 60.2,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001aa"
+      ],
+      "notes": "Feature layer added on top of the scaffold.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001ac",
+      "title": "Commit Scaffold And Features To Git",
+      "description": "Commit the newly created root package.json and its turbo configuration to the existing git repository.",
+      "acceptanceCriteria": [
+        "The root package.json is staged and committed.",
+        "git commands exit 0 with a successful commit."
+      ],
+      "priority": 60.3,
+      "effort": "low",
+      "passes": false,
+      "dependsOn": [
+        "STORY-setup-001ab"
+      ],
+      "notes": "Scaffolding commit kept separate from feature work.",
+      "model": "deepseek"
+    },
+    {
+      "id": "STORY-setup-001aa",
       "title": "Create Root package.json metadata",
       "description": "Create the root package.json declaring name nextmove, private true, workspaces array with apps/*, packageManager pinned npm@10, and engines.node 22.x.",
       "acceptanceCriteria": [
